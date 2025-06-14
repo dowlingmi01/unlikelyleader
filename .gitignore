@@ -1,7 +1,44 @@
-# Local Netlify folder
-node_modules
-.next
-out
+# Node modules
+node_modules/
+
+# Next.js build output
+.next/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS junk files
 .DS_Store
-.env*
-.netlify
+Thumbs.db
+
+# Optional editor configs
+.vscode/
+.idea/
+*.swp
+
+# Testing coverage
+coverage/
+
+# Netlify
+.netlify/
+
+# Local Supabase dev configs (if using Supabase CLI)
+supabase/.temp/
+supabase/migrations/.temp/
+
+# Generated PDF reports (if stored locally)
+*.pdf
+
+# Mac extended attributes
+*.DS_Store
