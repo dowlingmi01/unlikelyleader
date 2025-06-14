@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unlikely Leader Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #27b06c;
+      --accent: #3D476B;
+      --background: #F0F2EB;
+      --text: #333333;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .question {
+      background: white;
+      padding: 16px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      margin-bottom: 24px;
+    }
+
+    .question strong {
+      display: block;
+      margin-bottom: 12px; /* adds spacing between question and first answer */
+    }
+
+    .question label {
+      display: block;
+      margin-bottom: 4px;   /* tighter spacing between answer options */
+      line-height: 1.1;     /* optional: reduce if options wrap too tall */
+    }
+
+    .submit-btn, .nav-btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 6px;
+      font-weight: 600;
+      margin: 10px 5px;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .submit-btn:hover, .nav-btn:hover {
+      background-color: #219a5f;
+      transform: translateY(-2px);
+    }
+
+    .results {
+      margin-top: 30px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .email-section {
+      margin-top: 20px;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Unlikely Leader Quiz</h1>
+  <div id="progressContainer" style="width: 100%; background-color: #ddd; border-radius: 4px; margin-bottom: 20px; overflow: hidden;"><div id="progressBar" style="height: 12px; width: 0%; background-color: #27b06c; transition: width 0.4s;"></div></div><form id="quizForm">
+    <div id="quizPages"></div>
+    <div>
+      <button type="button" class="nav-btn" id="backBtn">Back</button>
+      <button type="button" class="nav-btn" id="nextBtn">Next</button>
+      <button type="submit" class="submit-btn" id="submitBtn" style="display: none;">See My Results</button>
+    </div>
+  </form>
+  <div class="results" id="results"></div>
+
+  <script>
+    const questionsData = [
+      "In a group setting, I’m most likely to...",
+      "When stress hits, my natural response is to...",
+      "I feel most confident when I...",
+      "People often come to me for...",
+      "My leadership style could be described as...",
+      "When it comes to decision-making, I tend to...",
+      "If there’s tension in a room, I usually...",
+      "I believe the most powerful kind of leadership is...",
+      "I sometimes feel underestimated because...",
+      "When I think about my future as a leader, I feel...",
+      "When leading others, I believe trust is built by...",
+      "The best leadership decisions are often made...",
+      "My presence as a leader is most felt when I...",
+      "I define authenticity in leadership as...",
+      "I connect most deeply with leaders who...",
+      "When it comes to how I lead, I often feel:",
+      "Others often expect me to lead by:",
+      "I most admire leaders who:",
+      "If I’m honest, I sometimes feel overlooked because:",
+      "My leadership instinct is to:"
+    ];
+
+    const answerOptions = [
+      [ // Question 1
+        "A. Keep things grounded and make sure everyone stays calm",
+        "B. Listen carefully and offer a perspective others may not have considered",
+        "C. Notice who hasn’t spoken and draw them in",
+        "D. Keep the team on track with a clear sense of direction",
+        "E. Stay quiet but speak up when something really matters"
+      ],
+      [ // Question 2
+        "A. Stay steady and offer reassurance to others",
+        "B. Take a step back and reflect before reacting",
+        "C. Check in on how others are feeling",
+        "D. Focus on what needs to get done and make a plan",
+        "E. Feel the intensity, but push through with quiet determination"
+      ],
+      [ // Question 3
+        "A. Help others feel safe and secure",
+        "B. Notice something others didn’t see coming",
+        "C. Create a moment of connection or understanding",
+        "D. Solve a complex problem or make a thoughtful decision",
+        "E. Take a stand for something I believe in, even if it's hard"
+      ],
+      [ // Question 4
+        "A. Stability during chaotic times",
+        "B. Advice when they want to understand something deeper",
+        "C. Emotional support or a compassionate ear",
+        "D. Clarity and structure",
+        "E. Moral guidance or encouragement when they’re feeling lost" 
+      ],
+      [ // Question 5
+        "A. Calm and dependable ",
+        "B. Quietly insightful",
+        "C. Empathetic and inclusive",
+        "D. Intentional and strategic ",
+        "E. Purposeful and principled"
+      ],
+      [ // Question 6
+        "A. Help others feel comfortable with the choice",
+        "B. Weigh all perspectives before moving forward ",
+        "C. Consider how it will affect people personally",
+        "D. Map out the risks and next steps clearly",
+        "E. Choose what feels most aligned with my values"
+      ],
+      [ // Question 7
+        "A. Keep my voice steady and lower the temperature",
+        "B. Watch for subtle cues others might miss ",
+        "C. Try to bring people together through understanding",
+        "D. Offer a plan to move forward constructively",
+        "E. Name the truth that’s going unspoken"
+      ],
+      [ // Question 8
+        "A. Calm under pressure",
+        "B. Intellectually and emotionally aware",
+        "C. Deeply human and compassionate",
+        "D. Clear-headed and purposeful ",
+        "E. Values-driven and quietly bold"
+      ],
+      [ // Question 9
+        "A. I don’t make a big deal of my contributions",
+        "B. I observe more than I speak",
+        "C. I prioritize people over performance",
+        "D. I don’t push for credit—I just get things done",
+        "E. I’m driven by quiet conviction, not visibility"
+      ],
+      [ // Question 10
+        "A. Ready to offer calm in the chaos",
+        "B. Excited to lead through insight and reflection",
+        "C. Eager to create meaningful relationships and impact",
+        "D. Motivated to lead with clarity and direction",
+        "E. Called to lead with heart, even if it’s not flashy"
+      ],
+      [ // Question 11
+        "A. Being consistent and emotionally grounded",
+        "B. Making space for others’ voices to be heard",
+        "C. Following through on quiet commitments and earning respect over time",
+        "D. Asking thoughtful questions that show you’re listening",
+        "E. Showing up as my whole self, not just my role"
+      ],
+      [ // Question 12
+        "A. With awareness of how they’ll affect others emotionally ",
+        "B. By tuning into your instincts as well as the data",
+        "C. Through small experiments that reveal what actually works",
+        "D. After pausing to reflect—not react—especially under pressure ",
+        "E. By asking: does this reflect who I am and what I stand for?"
+      ],
+      [ // Question 13
+        "A. Help people feel seen and understood ",
+        "B. Offer a perspective that shifts how others see the problem",
+        "C. Quietly guide the conversation in a more thoughtful direction",
+        "D. Steady the group with calm and focus when emotions run high",
+        "E. Show courage by being transparent and real"
+      ],
+      [ // Question 14
+        "A. Staying grounded in your values, even under pressure",
+        "B. Being honest about your doubts and limitations",
+        "C. Leading in alignment with your actions, not just your words",
+        "D. Letting people see who you are, even if you don’t have it all figured outg",
+        "E. Leading in a way that reflects your character, not just your role"
+      ],
+      [ // Question 15
+        "A. Are quietly strong and deeply human",
+        "B. Lead by example, not ego",
+        "C. Make room for others to shine instead of seeking the spotlight",
+        "D. Earn trust by listening first and acting second",
+        "E. Are vulnerable enough to admit they don’t have all the answers"
+      ],
+      [
+        "A. Like I need to be more visible to be taken seriously", // T
+        "B. Like I downplay my strengths because they’re not the 'typical' leadership traits", // U
+        "C. Comfortable in my style, even if it’s different from the norm", // U
+        "D. Pressured to be more assertive or vocal than I naturally am", // T
+        "E. Like I’m still figuring out what kind of leader I want to be" // Neutral
+      ],
+      [
+        "A. Taking charge and being decisive", // T
+        "B. Listening and supporting the group", // U
+        "C. Providing emotional stability and encouragement", // U
+        "D. Setting goals and holding others accountable" // T
+        "E. Explaining ideas with clarity and logic", // Neutral
+      ],
+      [
+        "A. Speak with authority and inspire through presence", // T
+        "B. Lead with empathy, even when it’s difficult", // U
+        "C. Work behind the scenes to elevate others"
+        "D. Make bold moves and take clear control", // T
+        "E. Adapt my style based on what the situation or team needs" // Neutral
+      ],
+      [
+        "A. I speak up early to make sure my ideas are heard", // T
+        "B. I prefer to let others speak first", // U
+        "C. I’m not flashy or outspoken in meetings", // U
+        "D. I’m comfortable taking the lead in group settings", // T
+        "E. None of these—I feel seen and heard" // Neutral
+      ],
+      [
+        "A. Step in and organize others quickly", // T
+        "B. Hold space and reflect before acting", // U
+        "C. Provide calm and emotional steadiness", // U
+        "D. Share a plan and set direction", // T
+        "E. Encourage others to speak up first" // U
+      ],
+
+    ];
+    const spectrumMap = { A: 1, B: 1, C: 0, D: 0, E: 1 };
+    const archetypeMap = { A: 'Steady Anchor', B: 'Insightful Observer', C: 'Rational Bridge', D: 'Quiet Strategist', E: 'Humble Fire' };
+
+    const quizPages = document.getElementById("quizPages");
+    for (let i = 0; i < questionsData.length; i++) {
+      const pageDiv = document.createElement("div");
+      pageDiv.className = "page";
+      if (i === 0) pageDiv.classList.add("active");
+
+      const qDiv = document.createElement("div");
+      qDiv.className = "question";
+      qDiv.innerHTML = `<strong>${questionsData[i]}</strong><br>` +
+        answerOptions[i].map(opt => {
+          const val = opt.charAt(0);
+          return `<label><input type="radio" name="q${i + 1}" value="${val}"> ${opt}</label>`;
+        }).join("");
+
+      pageDiv.appendChild(qDiv);
+      quizPages.appendChild(pageDiv);
+    }
+
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.page');
+    const backBtn = document.getElementById("backBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function showPage(index) {
+      pages.forEach((p, i) => {
+        p.classList.toggle("active", i === index);
+      });
+      backBtn.style.display = index > 0 ? "inline-block" : "none";
+      nextBtn.style.display = index < pages.length - 1 ? "inline-block" : "none";
+      submitBtn.style.display = index === pages.length - 1 ? "inline-block" : "none";
+    }
+
+      nextBtn.onclick = () => {
+      const selected = document.querySelector(`input[name='q${currentPage + 1}']:checked`);
+      if (!selected) {
+        alert("Please select an answer to continue.");
+        return;
+      }
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    };
+      backBtn.onclick = () => {
+        if (currentPage > 0) {
+          currentPage--;
+          showPage(currentPage);
+        }
+    };
+
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      let spectrumScore = 0;
+      let modifierScore = 0;
+
+      const archetypeTally = {
+        'Steady Anchor': 0,
+        'Insightful Observer': 0,
+        'Rational Bridge': 0,
+        'Quiet Strategist': 0,
+        'Humble Fire': 0
+      };
+
+      // Scoring the main 15 questions
+      for (let i = 1; i <= 15; i++) {
+        const selected = document.querySelector(`input[name='q${i}']:checked`);
+        if (!selected) {
+          alert(`Please answer Question ${i}`);
+          return;
+        }
+        const val = selected.value;
+        spectrumScore += spectrumMap[val];
+        archetypeTally[archetypeMap[val]]++;
+      }
+
+      // Scoring the final 5 reflection questions for the modifier score
+      for (let i = 16; i <= 20; i++) {
+        const selected = document.querySelector(`input[name='q${i}']:checked`);
+        if (!selected) {
+          alert(`Please answer Question ${i}`);
+          return;
+        }
+        const val = selected.value;
+        // Adjusted: A/D typically traditional (+1), B/C typically unlikely (-1), E is neutral (0)
+        if (val === 'A' || val === 'D') {
+          modifierScore += 1;
+        } else if (val === 'B' || val === 'C') {
+          modifierScore -= 1;
+        } else {
+          modifierScore += 0;
+        }
+      }
+
+      const totalScore = spectrumScore + modifierScore;
+
+      let spectrumType = totalScore <= -3 ? "Traditional-Aligned" :
+                         totalScore <= -1 ? "Leaning Traditional" :
+                         totalScore === 0 ? "Integrated Blend" :
+                         totalScore <= 3 ? "Leaning Unlikely" : "Unlikely-Aligned";
+
+      let dominantArchetype = Object.entries(archetypeTally).sort((a, b) => b[1] - a[1])[0][0];
+
+      // Save to localStorage
+      localStorage.setItem("spectrumScore", spectrumScore);
+      localStorage.setItem("modifierScore", modifierScore);
+      localStorage.setItem("totalScore", totalScore);
+      localStorage.setItem("spectrumType", spectrumType);
+      localStorage.setItem("dominantArchetype", dominantArchetype);
+
+      window.location.href = "results.html";
+    });
+
+
+    showPage(currentPage);
+
+    function updateProgressBar() {
+      const percent = Math.round(((currentPage + 1) / pages.length) * 100);
+      document.getElementById("progressBar").style.width = percent + "%";
+    }
+
+    // Hook into existing functions
+    const originalShowPage = showPage;
+    showPage = function(index) {
+      originalShowPage(index);
+      updateProgressBar();
+    };
+
+    updateProgressBar(); // initial call
+  </script>
+</body>
+</html>

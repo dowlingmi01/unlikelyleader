@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Netlify Function Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #F0F2EB;
+      padding: 40px;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 1rem;
+      margin-top: 10px;
+      width: 300px;
+      max-width: 90%;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test Netlify Function: <code>submitEmail</code></h1>
+  <p>Enter a test email and check the function log in Netlify.</p>
+  <input type="email" id="emailInput" placeholder="you@example.com" required />
+  <br />
+  <button onclick="submitTest()">Submit</button>
+  <div class="result" id="resultDisplay"></div>
+
+  <script>
+    function submitTest() {
+      const email = document.getElementById("emailInput").value;
+      const resultDisplay = document.getElementById("resultDisplay");
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        resultDisplay.textContent = "Please enter a valid email address.";
+        resultDisplay.style.color = "red";
+        return;
+      }
+
+      fetch("/.netlify/functions/submitEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          archetype: "Test Archetype",
+          spectrum: "Test Spectrum"
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        resultDisplay.textContent = "✅ Success: " + (data.message || "Email sent.");
+        resultDisplay.style.color = "green";
+      })
+      .catch(err => {
+        console.error(err);
+        resultDisplay.textContent = "❌ Error: Could not contact function.";
+        resultDisplay.style.color = "red";
+      });
+    }
+  </script>
+</body>
+</html>
+`

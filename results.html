@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Quiz Results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #27b06c;
+      --accent: #3D476B;
+      --background: #F0F2EB;
+      --text: #333333;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .hero {
+      text-align: center;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      color: var(--primary);
+    }
+
+    .hero .archetype {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .tagline {
+      font-size: 1.1rem;
+      color: var(--text);
+      margin-top: 8px;
+    }
+
+    .spectrum-type {
+      font-size: 1rem;
+      margin-top: 12px;
+      color: var(--accent);
+    }
+
+    .email-cta {
+      background: white;
+      padding: 24px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+      text-align: center;
+    }
+
+    .email-cta h2 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .email-cta input[type="email"] {
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .email-cta button {
+      background-color: var(--primary);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 600;
+    }
+
+    .email-cta button:hover {
+      background-color: #219a5f;
+    }
+
+    .spectrum-bar-container {
+      background-color: #ddd;
+      border-radius: 8px;
+      height: 16px;
+      width: 100%;
+      margin-top: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .spectrum-bar {
+      height: 100%;
+      background-color: var(--primary);
+      transition: width 0.4s ease;
+    }
+
+    .spectrum-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-top: 6px;
+      color: var(--accent);
+    }
+
+    .score-display {
+      font-size: 0.9rem;
+      margin-top: 8px;
+      color: #555;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>You are a <span class="archetype" id="archetype">...</span></h1>
+    <p id="archetypeDescription" style="margin-top: 12px; font-size: 1rem; color: #555;"></p>
+    <div id="archetypeStrengths" style="margin-top: 12px;">
+      <h3 style="font-size: 1.1rem; color: var(--accent); margin-bottom: 6px;">Key Strengths:</h3>
+      <ul id="strengthList" style="padding-left: 20px; color: #444;"></ul>
+    </div>
+    <p class="tagline" id="tagline"></p>
+    <div class="spectrum-type" id="spectrumType">Leadership Spectrum: ...</div>
+    <p id="spectrumDescription" style="margin-top: 16px; font-size: 1rem; color: #555;"></p>
+  </div>
+
+  <div class="email-cta">
+    <h2>Want Your Full Archetype Report?</h2>
+    <p>Enter your email to receive a personalized PDF with deeper insights into your leadership style.</p>
+    <input type="email" id="emailInput" placeholder="Enter your email">
+    <br>
+    <button onclick="submitEmail()">Send My Report</button>
+  </div>
+
+  <script type="module">
+    import { supabase } from './lib/supabase.js';
+
+    const spectrumType = localStorage.getItem("spectrumType") || "Unknown";
+    const spectrumScore = parseInt(localStorage.getItem("spectrumScore") || 0);
+    const modifierScore = parseInt(localStorage.getItem("modifierScore") || 0);
+    const totalScore = parseInt(localStorage.getItem("totalScore") || 0);
+    const dominantArchetype = localStorage.getItem("dominantArchetype") || "Unclear";
+    const email = localStorage.getItem("submittedEmail") || "";
+    const answers = JSON.parse(localStorage.getItem("quizAnswers") || "{}");
+
+    document.getElementById("archetype").innerText = dominantArchetype;
+    document.getElementById("spectrumType").innerText = "Leadership Spectrum: " + spectrumType;
+
+    const spectrumDescriptions = {
+      "Unlikely-Aligned": "You lean deeply into the qualities often overlooked in conventional leadership models. You lead with presence, thoughtfulness, and emotional awareness. Rather than commanding attention, you earn trust by how you show up—grounded, intentional, and aligned with your values. Your leadership may not always be loud, but it is deeply felt by those around you.",
+      "Leaning Unlikely": "Your leadership style reflects a strong alignment with Unlikely Leader traits, though you occasionally adapt to more traditional expectations. You value authenticity, listening, and principled decision-making, but you also recognize when visibility and action are necessary. You’re learning to blend quiet influence with strategic action in ways that feel true to who you are.",
+
+      "Integrated Blend": "You balance Unlikely and Traditional leadership tendencies with ease. You can lead from the front when needed, but you’re equally comfortable guiding from behind the scenes. You value both clarity and curiosity, results and relationships. Your style is adaptable—you meet the moment by drawing from a broad, authentic leadership toolkit.",
+
+      "Leaning Traditional": "You tend to lead through more traditional behaviors—clarity, control, and decisiveness—yet you're starting to integrate quieter forms of leadership into your approach. While you may naturally step into visible roles, you're also learning the power of listening, empathy, and leading with vulnerability. Your growth lies in trusting that not all leadership needs to be performative to be powerful.",
+
+      "Traditional-Aligned": "You gravitate toward classic leadership traits: boldness, visibility, and decisiveness. You’re often seen as someone who takes charge, rallies others, and moves things forward. While this can be highly effective, your opportunity may be to create more space for reflection, inclusion, and quieter forms of influence. Expanding your style can deepen your impact and foster greater trust across diverse teams."
+    };
+
+    const archetypeTaglines = {
+      "Steady Anchor": "Your calm consistency builds trust and safety.",
+      "Insightful Observer": "You lead by seeing what others miss.",
+      "Rational Bridge": "You unite logic and empathy in every decision.",
+      "Quiet Strategist": "You lead with clarity, foresight, and quiet conviction.",
+      "Humble Fire": "You embody purpose, heart, and authentic courage."
+    };
+
+    const archetypeDescriptions = {
+      "Steady Anchor": {
+        description: "You are the calm in the storm. You lead with steadiness, reliability, and quiet presence. In tense or uncertain moments, others look to you for reassurance, groundedness, and clarity.",
+        strengths: [
+          "Emotional steadiness",
+          "Trust-building through consistency",
+          "Grounded under pressure",
+          "Supportive and calming presence"
+        ]
+      },
+      "Insightful Observer": {
+        description: "You lead by seeing what others don’t. With a deep capacity for reflection and perception, you bring nuance, wisdom, and unexpected insight to complex problems or dynamics.",
+        strengths: [
+          "Deep listening",
+          "Subtle but powerful insights",
+          "Ability to spot patterns and blind spots",
+          "Wisdom beyond surface-level analysis"
+        ]
+      },
+      "Rational Bridge": {
+        description: "You blend logic and empathy—serving as the thoughtful connector between strategy and people. You bring clarity to conflict and are often the person who can help others find common ground.",
+        strengths: [
+          "Balanced, thoughtful decision-making",
+          "Bridging opposing views",
+          "Clear communicator with depth",
+          "Respected for fairness and reason"
+        ]
+      },
+      "Quiet Strategist": {
+        description: "You lead with focus, foresight, and intentionality. Your power lies in seeing the big picture and calmly guiding others toward it, often without the need for attention or fanfare.",
+        strengths: [
+          "Vision with precision",
+          "Tactical thinking without ego",
+          "Calm execution under pressure",
+          "Intentional, long-term orientation"
+        ]
+      },
+      "Humble Fire": {
+        description: "You lead from purpose and principle, fueled by a quiet but unshakable conviction. You don’t seek attention—you seek meaning. Your strength lies in authenticity, courage, and values-driven action.",
+        strengths: [
+          "Purpose-driven leadership",
+          "Courage to act from values",
+          "Quiet confidence and heart",
+          "Inspiring without performance"
+        ]
+      }    
+    };
+
+    document.getElementById("tagline").innerText =
+      archetypeTaglines[dominantArchetype] || "Your quiet strength is your greatest asset.";
+
+    const archetypeData = archetypeDescriptions[dominantArchetype];
+    if (archetypeData) {
+      document.getElementById("archetypeDescription").innerText = archetypeData.description;
+      archetypeData.strengths.forEach(strength => {
+        const li = document.createElement("li");
+        li.innerText = strength;
+        document.getElementById("strengthList").appendChild(li);
+      });
+    }
+
+    document.getElementById("spectrumDescription").innerText =
+      spectrumDescriptions[spectrumType] || "";
+
+    const barPercent = ((totalScore + 5) / 10) * 100;
+    const spectrumHTML = `
+      <div class="score-display">Score: ${totalScore} (Quiz: ${spectrumScore}, Reflection: ${modifierScore})</div>
+      <div class="spectrum-bar-container">
+        <div class="spectrum-bar" style="width: ${barPercent}%;"></div>
+      </div>
+      <div class="spectrum-labels">
+        <span>Traditional-Aligned</span>
+        <span>Integrated Blend</span>
+        <span>Unlikely-Aligned</span>
+      </div>
+    `;
+    document.getElementById("spectrumType").insertAdjacentHTML("afterend", spectrumHTML);
+
+    if (!localStorage.getItem("supabaseSubmitted")) {
+      const submitToSupabase = async () => {
+        const { error } = await supabase.from('quiz_responses').insert([{
+          email,
+          answers,
+          dominant_archetype: dominantArchetype,
+          spectrum_type: spectrumType,
+          spectrum_score: spectrumScore,
+          modifier_score: modifierScore,
+          total_score: totalScore
+        }]);
+        if (!error) {
+          console.log("Saved to Supabase.");
+          localStorage.setItem("supabaseSubmitted", "true");
+        } else {
+          console.error("Supabase error:", error);
+        }
+      };
+      submitToSupabase();
+    }
+
+    window.submitEmail = () => {
+      const input = document.getElementById("emailInput").value;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+      localStorage.setItem("submittedEmail", input);
+      fetch("/.netlify/functions/submitEmail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: input,
+          archetype: dominantArchetype,
+          spectrum: spectrumType,
+          spectrumScore,
+          modifierScore,
+          totalScore
+        })
+      })
+      .then(res => res.json())
+      .then(() => alert("Thanks! Your full report will be emailed to: " + input))
+      .catch(err => {
+        alert("Oops! Something went wrong.");
+        console.error(err);
+      });
+    };
+  </script>
+</body>
+</html>
