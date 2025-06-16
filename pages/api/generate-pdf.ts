@@ -42,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       let line = '';
       for (const word of words) {
         const testLine = line + word + ' ';
-        const { width: testWidth } = font.widthOfTextAtSize(testLine, 12);
+        const testWidth = font.widthOfTextAtSize(testLine, 12);
         if (testWidth > 480) {
           y -= lineHeight;
           page.drawText(line, { x: marginLeft, y, size: 12, font });

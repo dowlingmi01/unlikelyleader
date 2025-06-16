@@ -6,7 +6,13 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
-const archetypeDescriptions: Record<string, { description: string; strengths: string[] }> = {
+const archetypeDescriptions: Record<string, {
+  description: string;
+  strengths: string[];
+  watchOuts: string[];
+  actions: string[];
+  affirmations: string[];
+}> = {
   'Steady Anchor': {
     description: 'You are the calm in the storm...',
     strengths: [
