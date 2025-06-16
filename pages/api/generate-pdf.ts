@@ -4,38 +4,93 @@ import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const { name, archetype, affirmations = [] } = req.body;
+    const {
+      name = 'Reader',
+      archetype,
+      description,
+      strengths = [],
+      watchOuts = [],
+      actions = [],
+      affirmations = [],
+    } = req.body;
 
     const pdfDoc = await PDFDocument.create();
     const page = pdfDoc.addPage([600, 800]);
-
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
     const { width, height } = page.getSize();
 
     let y = height - 50;
-    const lineHeight = 30;
+    const lineHeight = 22;
+    const marginLeft = 50;
+    const green = rgb(0.105, 0.682, 0.404); // #1bae67
 
-    page.drawText('Unlikely Leader Report', {
-      x: 50,
+    function drawSectionTitle(title: string) {
+      y -= lineHeight * 1.5;
+      page.drawText(title, { x: marginLeft, y, size: 16, font: boldFont, color: green });
+    }
+
+    function drawList(items: string[]) {
+      items.forEach((item) => {
+        y -= lineHeight;
+        page.drawText(`• ${item}`, { x: marginLeft + 20, y, size: 12, font });
+      });
+    }
+
+    function drawParagraph(text: string) {
+      const words = text.split(' ');
+      let line = '';
+      for (const word of words) {
+        const testLine = line + word + ' ';
+        const { width: testWidth } = font.widthOfTextAtSize(testLine, 12);
+        if (testWidth > 480) {
+          y -= lineHeight;
+          page.drawText(line, { x: marginLeft, y, size: 12, font });
+          line = word + ' ';
+        } else {
+          line = testLine;
+        }
+      }
+      if (line) {
+        y -= lineHeight;
+        page.drawText(line, { x: marginLeft, y, size: 12, font });
+      }
+    }
+
+    // Title
+    page.drawText('Unlikely Leader Archetype Report', {
+      x: marginLeft,
       y,
-      size: 24,
-      font,
-      color: rgb(0.1, 0.2, 0.6),
+      size: 20,
+      font: boldFont,
+      color: green,
     });
 
+    // Metadata
     y -= lineHeight * 2;
-    page.drawText(`Name: ${name}`, { x: 50, y, size: 16, font });
-
+    page.drawText(`Name: ${name}`, { x: marginLeft, y, size: 14, font });
     y -= lineHeight;
-    page.drawText(`Archetype: ${archetype}`, { x: 50, y, size: 16, font });
+    page.drawText(`Archetype: ${archetype}`, { x: marginLeft, y, size: 14, font });
 
-    y -= lineHeight * 2;
-    page.drawText('Affirmations:', { x: 50, y, size: 16, font });
+    // Description
+    drawSectionTitle('Description');
+    drawParagraph(description);
 
-    affirmations.forEach((line: string) => {
-      y -= lineHeight;
-      page.drawText(`• ${line}`, { x: 70, y, size: 14, font });
-    });
+    // Strengths
+    drawSectionTitle('Key Strengths');
+    drawList(strengths);
+
+    // Watch-Outs
+    drawSectionTitle('Watch-Out Fors');
+    drawList(watchOuts);
+
+    // Actions
+    drawSectionTitle('Key Actions to Take');
+    drawList(actions);
+
+    // Affirmations
+    drawSectionTitle('Affirmation');
+    drawList(affirmations);
 
     const pdfBytes = await pdfDoc.save();
 
@@ -47,3 +102,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(500).json({ error: 'Failed to generate PDF' });
   }
 }
+

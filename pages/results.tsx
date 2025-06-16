@@ -8,13 +8,26 @@ const supabase = createClient(
 
 const archetypeDescriptions: Record<string, { description: string; strengths: string[] }> = {
   'Steady Anchor': {
-    description: 'You are the calm in the storm. You lead with steadiness, reliability, and quiet presence. In tense or uncertain moments, others look to you for reassurance, groundedness, and clarity.',
+    description: 'You are the calm in the storm...',
     strengths: [
       'Emotional steadiness',
       'Trust-building through consistency',
       'Grounded under pressure',
       'Supportive and calming presence'
-    ]
+    ],
+    watchOuts: [
+      'Withholding input',
+      'Staying too silent',
+      'Undervaluing your impact'
+    ],
+    actions: [
+      'Speak early in meetings to build presence',
+      'Use emotional awareness tools to spot self-silencing',
+      'Pair calm with clarity by naming tension and offering a path forward'
+    ],
+    affirmations: [
+      'Your calm gives others courage.'
+    ]  
   },
   'Insightful Observer': {
     description: 'You lead by seeing what others don’t. With a deep capacity for reflection and perception, you bring nuance, wisdom, and unexpected insight to complex problems or dynamics.',
@@ -23,7 +36,20 @@ const archetypeDescriptions: Record<string, { description: string; strengths: st
       'Subtle but powerful insights',
       'Ability to spot patterns and blind spots',
       'Wisdom beyond surface-level analysis'
-    ]
+    ],
+    watchOuts: [
+      'Withholding input',
+      'Staying too silent',
+      'Undervaluing your impact'
+    ],
+    actions: [
+      'Speak early in meetings to build presence',
+      'Use emotional awareness tools to spot self-silencing',
+      'Pair calm with clarity by naming tension and offering a path forward'
+    ],
+    affirmations: [
+      'Your power is in how deeply you understand.'
+    ]  
   },
   'Rational Bridge': {
     description: 'You blend logic and empathy—serving as the thoughtful connector between strategy and people. You bring clarity to conflict and are often the person who can help others find common ground.',
@@ -32,7 +58,20 @@ const archetypeDescriptions: Record<string, { description: string; strengths: st
       'Bridging opposing views',
       'Clear communicator with depth',
       'Respected for fairness and reason'
-    ]
+    ],
+    watchOuts: [
+      'Withholding input',
+      'Staying too silent',
+      'Undervaluing your impact'
+    ],
+    actions: [
+      'Speak early in meetings to build presence',
+      'Use emotional awareness tools to spot self-silencing',
+      'Pair calm with clarity by naming tension and offering a path forward'
+    ],
+    affirmations: [
+      'You don’t need a title to lead. Your care is the catalyst.'
+    ]  
   },
   'Quiet Strategist': {
     description: 'You lead with focus, foresight, and intentionality. Your power lies in seeing the big picture and calmly guiding others toward it, often without the need for attention or fanfare.',
@@ -41,7 +80,20 @@ const archetypeDescriptions: Record<string, { description: string; strengths: st
       'Tactical thinking without ego',
       'Calm execution under pressure',
       'Intentional, long-term orientation'
-    ]
+    ],
+    watchOuts: [
+      'Withholding input',
+      'Staying too silent',
+      'Undervaluing your impact'
+    ],
+    actions: [
+      'Speak early in meetings to build presence',
+      'Use emotional awareness tools to spot self-silencing',
+      'Pair calm with clarity by naming tension and offering a path forward'
+    ],
+    affirmations: [
+      'You don’t need the spotlight. You set the direction.'
+    ]  
   },
   'Humble Fire': {
     description: 'You lead from purpose and principle, fueled by a quiet but unshakable conviction. You don’t seek attention—you seek meaning. Your strength lies in authenticity, courage, and values-driven action.',
@@ -50,6 +102,19 @@ const archetypeDescriptions: Record<string, { description: string; strengths: st
       'Courage to act from values',
       'Quiet confidence and heart',
       'Inspiring without performance'
+    ],
+    watchOuts: [
+      'Withholding input',
+      'Staying too silent',
+      'Undervaluing your impact'
+    ],
+    actions: [
+      'Speak early in meetings to build presence',
+      'Use emotional awareness tools to spot self-silencing',
+      'Pair calm with clarity by naming tension and offering a path forward'
+    ],
+    affirmations: [
+      'Your quiet conviction is your power.'
     ]
   }
 };
@@ -124,44 +189,36 @@ const archetypeDescriptions: Record<string, { description: string; strengths: st
       }
     };
 
-      const handleDownloadPDF = async () => {
-        const details = archetypeDescriptions[archetype];
+const handleDownloadPDF = async () => {
+  const details = archetypeDescriptions[archetype];
 
-        const res = await fetch('/api/generate-pdf', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            name: email || 'Unlikely Leader',
-            archetype,
-            description: details?.description || '',
-            strengths: details?.strengths || [],
-            spectrumType: spectrum,
-            spectrumScore,
-            modifierScore,
-            totalScore,
-            affirmations: [
-              'I lead best when I trust who I am.',
-              'My quiet strength is a powerful force.',
-              'I don’t need to perform leadership—I embody it.',
-              'Authenticity is my greatest leadership asset.',
-              'I was always meant to lead—just in my own way.'
-            ]
-          })
-        });
+  const res = await fetch('/api/generate-pdf', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: email || 'Unlikely Leader',
+      archetype,
+      description: details?.description || '',
+      strengths: details?.strengths || [],
+      watchOuts: details?.watchOuts || [],
+      actions: details?.actions || [],
+      affirmations: details?.affirmations || []
+    })
+  });
 
-        if (!res.ok) {
-          alert('Failed to generate PDF. Please try again.');
-          return;
-        }
+  if (!res.ok) {
+    alert('Failed to generate PDF. Please try again.');
+    return;
+  }
 
-        const blob = await res.blob();
-        const url = window.URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `UnlikelyLeader_Report_${archetype.replace(/\s+/g, '')}.pdf`;
-        link.click();
-        window.URL.revokeObjectURL(url);
-      };
+  const blob = await res.blob();
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `UnlikelyLeader_Report_${archetype.replace(/\s+/g, '')}.pdf`;
+  link.click();
+  window.URL.revokeObjectURL(url);
+};
 
   const details = archetypeDescriptions[archetype];
 
