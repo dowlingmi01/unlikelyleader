@@ -1,3 +1,4 @@
+// pages/results.tsx
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
@@ -195,36 +196,42 @@ const archetypeDescriptions: Record<string, {
       }
     };
 
-const handleDownloadPDF = async () => {
-  const details = archetypeDescriptions[archetype];
+    const handleDownloadPDF = async () => {
+      const details = archetypeDescriptions[archetype];
+      console.log('Sending PDF payload:', {
+        archetype,
+        watchOuts: details?.watchOuts,
+        actions: details?.actions,
+        affirmations: details?.affirmations,
+      });
 
-  const res = await fetch('/api/generate-pdf', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: email || 'Unlikely Leader',
-      archetype,
-      description: details?.description || '',
-      strengths: details?.strengths || [],
-      watchOuts: details?.watchOuts || [],
-      actions: details?.actions || [],
-      affirmations: details?.affirmations || []
-    })
-  });
+      const res = await fetch('/api/generate-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: email || 'Unlikely Leader',
+          archetype,
+          description: details?.description || '',
+          strengths: details?.strengths || [],
+          watchOuts: details?.watchOuts || [],
+          actions: details?.actions || [],
+          affirmations: details?.affirmations || []
+        })
+      });
 
-  if (!res.ok) {
-    alert('Failed to generate PDF. Please try again.');
-    return;
-  }
+      if (!res.ok) {
+        alert('Failed to generate PDF. Please try again.');
+        return;
+      }
 
-  const blob = await res.blob();
-  const url = window.URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = `UnlikelyLeader_Report_${archetype.replace(/\s+/g, '')}.pdf`;
-  link.click();
-  window.URL.revokeObjectURL(url);
-};
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `UnlikelyLeader_Report_${archetype.replace(/\s+/g, '')}.pdf`;
+      link.click();
+      window.URL.revokeObjectURL(url);
+    };
 
   const details = archetypeDescriptions[archetype];
 
