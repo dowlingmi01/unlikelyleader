@@ -18,19 +18,19 @@ export default function Navbar() {
           <Link href="/" className="text-[#333333] hover:text-[#1bae67] transition">
             Home
           </Link>
-          <Link href="/about" className="text-[#333333] hover:text-[#1bae67] transition">
+{/*          <Link href="/about" className="text-[#333333] hover:text-[#1bae67] transition">
             About
           </Link>
           <Link href="/services" className="text-[#333333] hover:text-[#1bae67] transition">
             Services
           </Link>
-          <Link href="/assessment" className="text-[#333333] hover:text-[#1bae67] transition">
-            Assessments
+*/}          <Link href="/assessment" className="text-[#333333] hover:text-[#1bae67] transition">
+            Assessment
           </Link>
-          <Link href="/archetypes" className="text-[#333333] hover:text-[#1bae67] transition">
+{/*          <Link href="/archetypes" className="text-[#333333] hover:text-[#1bae67] transition">
             Archetypes
           </Link>
-        </div>
+*/}        </div>
       </div>
     </nav>
   );

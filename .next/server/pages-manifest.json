@@ -1,21 +1,9 @@
 {
   "/_app": "pages/_app.js",
-  "/archetypes": "pages/archetypes.html",
-  "/about": "pages/about.html",
-  "/api/generate-pdf": "pages/api/generate-pdf.js",
-  "/contact": "pages/contact.html",
-  "/": "pages/index.html",
-  "/assessment": "pages/assessment.html",
-  "/keynotes": "pages/keynotes.html",
-  "/quiz": "pages/quiz.html",
-  "/results": "pages/results.html",
-  "/services": "pages/services.html",
-  "/workshops": "pages/workshops.html",
-  "/book": "pages/book.html",
-  "/test": "pages/test.html",
-  "/story": "pages/story.html",
   "/_error": "pages/_error.js",
-  "/pdf-template": "pages/pdf-template.js",
   "/_document": "pages/_document.js",
-  "/404": "pages/404.html"
+  "/": "pages/index.js",
+  "/keynotes": "pages/keynotes.js",
+  "/book": "pages/book.js",
+  "/about": "pages/about.js"
 }
