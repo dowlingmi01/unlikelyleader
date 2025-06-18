@@ -89,61 +89,84 @@ export default function Home() {
             <div className="relative flex items-start">
               <div className="w-1/2 pr-10 px-6 text-right hidden md:block">
                 <h3 className="text-2xl font-bold text-[#1bae67]">The Stereotype</h3>
-                <p className="mt-2 text-[#333]">There’s a stereotype about what a leader looks like. Confident. Charismatic. Commanding. The kind of person who takes up space.</p>
+                <p className="mt-2 text-[#333]">There’s a stereotype about what a leader looks like. Confident. Charismatic. Commanding. Highly educated, street-smart, or both. The kind of person who takes up space.</p>
               </div>
               <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
               <div className="w-1/2 pl-10 px-6 md:hidden">
                 <h3 className="text-2xl font-bold text-[#1bae67]">The Stereotype</h3>
-                <p className="mt-2 text-[#333]">There’s a stereotype about what a leader looks like. Confident. Charismatic. Commanding. The kind of person who takes up space.</p>
+                <p className="mt-2 text-[#333]">There’s a stereotype about what a leader looks like. Confident. Charismatic. Commanding. Highly educated, street-smart, or both. The kind of person who takes up space.</p>
               </div>
             </div>
             <div className="relative flex items-start flex-row-reverse">
               <div className="w-1/2 pl-10 px-6 text-left hidden md:block">
                 <h3 className="text-2xl font-bold text-[#1bae67]">The Myth</h3>
-                <p className="mt-2 text-[#333]">It’s a myth shaped by noise, norms and systemic bias. Loud voices get noticed. Quick hands get picked.</p>
+                <p className="mt-2 text-[#333]">It’s a myth shaped by noise and norms. Systemic bias has reinforced it. Loud voices get noticed. Quick hands get picked.</p>
               </div>
               <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
               <div className="w-1/2 pr-10 md:hidden">
                 <h3 className="text-2xl font-bold text-[#1bae67]">The Myth</h3>
-                <p className="mt-2 text-[#333]">It’s a myth shaped by noise, norms and systemic bias. Loud voices get noticed. Quick hands get picked.</p>
+                <p className="mt-2 text-[#333]">It’s a myth shaped by noise and norms. Systemic bias has reinforced it. Loud voices get noticed. Quick hands get picked.</p>
               </div>
             </div>
             <div className="relative flex items-start">
               <div className="w-1/2 pr-10 px-6 text-right hidden md:block">
                 <h3 className="text-2xl font-bold text-[#1bae67]">The Societal Cost</h3>
-                <p className="mt-2 text-[#333]">Too many capable people are overlooked, depriving society of some its greatest leaders.</p>
+                <p className="mt-2 text-[#333]">Too many capable people are not getting seen, and as a result, society is deprived of some its greatest leaders.</p>
               </div>
               <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
               <div className="w-1/2 pl-10 md:hidden">
                 <h3 className="text-2xl font-bold text-[#1bae67]">The Societal Cost</h3>
-                <p className="mt-2 text-[#333]">Too many capable people are overlooked, depriving society of some its greatest leaders.</p>
+                <p className="mt-2 text-[#333]">Too many capable people are not getting seen, and as a result, society is deprived of some its greatest leaders.</p>
               </div>
             </div>
             <div className="relative flex items-start flex-row-reverse">
               <div className="w-1/2 pl-10 px-6 text-left hidden md:block">
                 <h3 className="text-2xl font-bold text-[#1bae67]">The Individual Cost</h3>
-                <p className="mt-2 text-[#333]">Others quietly disqualify themselves. Not because they lack potential-But because they don't fit a predetermined <em>mold</em>.</p>
+                <p className="mt-2 text-[#333]">And those who don't fit this stereotypical <em>mold?</em> They face a choice: adapt or be overlooked.</p>
               </div>
               <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
               <div className="w-1/2 pr-10 md:hidden">
                 <h3 className="text-2xl font-bold text-[#1bae67]">The Individual Cost</h3>
-                <p className="mt-2 text-[#333]">Others quietly disqualify themselves. Not because they lack potential-But because they don't fit a predetermined <em>mold</em>.</p>
+                <p className="mt-2 text-[#333]">And those who don't fit this stereotypical <em>mold?</em> They face a choice: adapt or be overlooked.</p>
               </div>
             </div>
             <div className="relative flex items-start">
               <div className="w-1/2 pr-10 px-6 text-right hidden md:block">
-                <h3 className="text-2xl font-bold text-[#1bae67]">Weaponization of Perception</h3>
-                <p className="mt-2 text-[#333]">Social media takes this distortion and cranks it up to an extreme.</p>
+                <h3 className="text-2xl font-bold text-[#1bae67]">Social Media Impact</h3>
+                <p className="mt-2 text-[#333]">Social media further amplifies the myth. It distorts reality and rewards those who can perform for their cameras over authenticity.</p>
               </div>
               <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
               <div className="w-1/2 pl-10 md:hidden">
-                <h3 className="text-2xl font-bold text-[#1bae67]">Weaponization of Perception</h3>
-                <p className="mt-2 text-[#333]">Social media takes this distortion and cranks it up to an extreme.</p>
+                <h3 className="text-2xl font-bold text-[#1bae67]">Social Media Impact</h3>
+                <p className="mt-2 text-[#333]">Social media further amplifies the myth. It distorts reality and rewards those who can perform for their cameras over authenticity.</p>
               </div>
             </div>
             <div className="relative flex items-start flex-row-reverse">
               <div className="w-1/2 pl-10 px-6 text-left hidden md:block">
-                <h3 className="text-2xl font-bold text-[#1bae67]">What if we redefine the yardstick?</h3>
+                <h3 className="text-2xl font-bold text-[#1bae67]">Weaponization of Perception</h3>
+                <p className="mt-2 text-[#333]">The deception is relentless, causing too many to doubt their value, mute their instincts, and perform inauthentic versions of themselves.</p>
+              </div>
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
+              <div className="w-1/2 pr-10 md:hidden">
+                <h3 className="text-2xl font-bold text-[#1bae67]">Weaponization of Perception</h3>
+                <p className="mt-2 text-[#333]">The deception is relentless, causing too many to doubt their value, mute their instincts, and perform inauthentic versions of themselves.</p>
+              </div>
+            </div>
+            <div className="relative flex items-start">
+              <div className="w-1/2 pr-10 px-6 text-right hidden md:block">
+                <h3 className="text-2xl font-bold text-[#1bae67]">Are We Using the Right Yardstick?</h3>
+                <p className="mt-2 text-[#333]">Do visibility, loudness, and fitting in make someone a better leader?</p>
+              </div>
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
+              <div className="w-1/2 pl-10 md:hidden">
+                <h3 className="text-2xl font-bold text-[#1bae67]">Are We Using the Right Yardstick?</h3>
+                <p className="mt-2 text-[#333]">Do visibility, loudness, and fitting in make someone a better leader?</p>
+              </div>
+            </div>
+            <div className="relative flex items-start flex-row-reverse">
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
+              <div className="w-1/2 pl-10 px-6 text-left hidden md:block">
+                <h3 className="text-2xl font-bold text-[#1bae67]">It's time to flip the script</h3>
                 <p className="mt-2 text-[#333] font-bold">What if leadership... </p>
                 <ul className="mt-4 space-y-0 list-none">
                   <li className="text-[#333]">Isn't about putting on a show but about lasting impact?</li>
@@ -155,6 +178,18 @@ export default function Home() {
             </div>
           </div>
         </section>
+    <section className="bg-[#F0F2EB] py-10 px-6">
+      <div className="max-w-6xl mx-auto text-center mb-12">
+        <h2 className="text-3xl font-bold text-[#1bae67] mb-4">
+          There is a better way
+        </h2>
+        <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+          With the right mindset and tools, those who’ve been overlooked or underestimated can rise—and not just lead, but lead well.
+        </p>
+      </div>
+    </section>
+    <hr className="border-t-2 border-[#1bae67] w-24 mx-auto my-12" />
+
     {/* EXPANDED BOTTOM SECTION WITH CARDS */}
     <section className="bg-[#F0F2EB] py-20 px-6">
       <div className="max-w-6xl mx-auto text-center mb-12">
