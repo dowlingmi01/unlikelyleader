@@ -20,6 +20,13 @@ export default function PDFTemplate({
 }: Props) {
   return (
     <div className="min-h-screen bg-white p-10 font-sans text-gray-800 max-w-3xl mx-auto">
+      <div className="flex justify-center mb-6">
+        <img
+          src="/images/ul-logo.png"
+          alt="Unlikely Leader Logo"
+          className="h-16 w-auto"
+        />
+      </div>
       <h1 className="text-4xl font-bold text-center text-green-700 mb-4">{archetype}</h1>
       <p className="text-lg text-center mb-6 italic">{description}</p>
 

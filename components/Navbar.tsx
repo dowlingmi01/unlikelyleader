@@ -27,10 +27,10 @@ export default function Navbar() {
 */}          <Link href="/assessment" className="text-[#333333] hover:text-[#1bae67] transition">
             Assessment
           </Link>
-{/*          <Link href="/archetypes" className="text-[#333333] hover:text-[#1bae67] transition">
-            Archetypes
+          <Link href="/keynotes" className="text-[#333333] hover:text-[#1bae67] transition">
+            Keynotes
           </Link>
-*/}        </div>
+        </div>
       </div>
     </nav>
   );

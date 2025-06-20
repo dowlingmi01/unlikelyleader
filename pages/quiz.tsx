@@ -240,17 +240,31 @@ const options = [
         setAnswers(updated);
       };
 
-      const next = () => {
-        if (!answers[currentIndex]) return alert("Please select an answer.");
-        if (currentIndex === questions.length - 1) {
-          const {
-            dominantArchetype,
-            spectrumScore,
-            modifierScore,
-            totalScore,
-            spectrumType
-          } = computeResults(answers);
+    const next = async () => {
+      if (!answers[currentIndex]) return alert("Please select an answer.");
 
+      if (currentIndex === questions.length - 1) {
+        const {
+          dominantArchetype,
+          spectrumScore,
+          modifierScore,
+          totalScore,
+          spectrumType
+        } = computeResults(answers);
+
+        try {
+          await fetch('/api/send-notification', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              type: 'quiz',
+              name: 'Anonymous',
+              email: 'quiz@unlikelyleader.com',
+              result: `${dominantArchetype} | ${spectrumType} (Score: ${totalScore})`
+            }),
+          });
+
+          // Save locally
           localStorage.setItem("quizAnswers", JSON.stringify(answers));
           localStorage.setItem("dominantArchetype", dominantArchetype);
           localStorage.setItem("spectrumScore", spectrumScore.toString());
@@ -259,10 +273,15 @@ const options = [
           localStorage.setItem("spectrumType", spectrumType);
 
           router.push('/results');
-        } else {
-          setCurrentIndex(i => i + 1);
+        } catch (error) {
+          console.error('Failed to send notification:', error);
+          alert('There was a problem submitting your results. Please try again.');
         }
-      };
+      } else {
+        setCurrentIndex(i => i + 1);
+      }
+    };
+
 
       const back = () => setCurrentIndex(i => Math.max(0, i - 1));
 

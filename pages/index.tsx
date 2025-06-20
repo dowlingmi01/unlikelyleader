@@ -103,7 +103,7 @@ export default function Home() {
                 <p className="mt-2 text-[#333]">It’s a myth shaped by noise and norms. Systemic bias has reinforced it. Loud voices get noticed. Quick hands get picked.</p>
               </div>
               <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
-              <div className="w-1/2 pr-10 md:hidden">
+              <div className="block md:hidden w-1/2 px-6 pt-8 text-left">
                 <h3 className="text-2xl font-bold text-[#1bae67]">The Myth</h3>
                 <p className="mt-2 text-[#333]">It’s a myth shaped by noise and norms. Systemic bias has reinforced it. Loud voices get noticed. Quick hands get picked.</p>
               </div>
@@ -125,7 +125,7 @@ export default function Home() {
                 <p className="mt-2 text-[#333]">And those who don't fit this stereotypical <em>mold?</em> They face a choice: adapt or be overlooked.</p>
               </div>
               <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
-              <div className="w-1/2 pr-10 md:hidden">
+              <div className="block md:hidden w-1/2 px-6 pt-8 text-left">
                 <h3 className="text-2xl font-bold text-[#1bae67]">The Individual Cost</h3>
                 <p className="mt-2 text-[#333]">And those who don't fit this stereotypical <em>mold?</em> They face a choice: adapt or be overlooked.</p>
               </div>
@@ -147,7 +147,7 @@ export default function Home() {
                 <p className="mt-2 text-[#333]">The deception is relentless, causing too many to doubt their value, mute their instincts, and perform inauthentic versions of themselves.</p>
               </div>
               <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
-              <div className="w-1/2 pr-10 md:hidden">
+              <div className="block md:hidden w-1/2 px-6 pt-8 text-left">
                 <h3 className="text-2xl font-bold text-[#1bae67]">Weaponization of Perception</h3>
                 <p className="mt-2 text-[#333]">The deception is relentless, causing too many to doubt their value, mute their instincts, and perform inauthentic versions of themselves.</p>
               </div>
