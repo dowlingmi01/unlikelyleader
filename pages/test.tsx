@@ -13,7 +13,6 @@ export default function Test() {
 
       <Navbar />
  
-
         <section className="relative bg-[#F0F2EB] py-20">
           <div className="border-l-4 border-[#1bae67] absolute left-1/2 top-0 h-full -ml-px"></div>
 

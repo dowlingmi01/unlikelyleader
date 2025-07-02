@@ -59,7 +59,7 @@ export default function Home() {
               From Hollywood red carpets to high-growth startups, Michael Dowling spent years chasing leadership myths—until he discovered a better way. A former talent agent, start-up founder, and CEO, he’s led teams across industries and helped others rise by turning their differences into their greatest leadership strengths. Today, he helps aspiring leaders unlock the mindsets and skills to lead with confidence.
             </p>
             <img
-              src="/images/MD.jpeg"
+              src="/images/MD2.jpeg"
               alt="Unlikely Leader Book Cover"
               className="mx-auto mb-6 w-56 h-auto rounded-md shadow-lg"
             />

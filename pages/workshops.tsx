@@ -1,45 +1,42 @@
-// pages/programs.tsx
+// pages/workshops.tsx
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import Head from 'next/head';
+import Footer from '../components/Footer';
 
-const sections = [
+
+const archetypes = [
   {
     id: 'half-day',
-    title: 'HALF DAY',
-    subtitle: 'WORKSHOPS',
-    heading: 'Immediate Impact',
-    content:
+    name: 'HALF DAY',
+    tagline: 'Immediate Impact',
+    image: '/images/archetypes/steady-anchor.png',
+    description:
       'Insert your half-day description here. Describe the purpose, outcomes, and who it’s for.',
   },
   {
-    id: 'full-day',
-    title: 'FULL DAY',
-    subtitle: 'WORKSHOPS',
-    heading: 'Deep Dive',
-    content:
-      'Full-day workshop details go here. This may include agenda, topics covered, and duration.',
+    id: 'insightful-observer',
+    name: 'The Insightful Observer',
+    tagline: 'Thoughtful, perceptive, listens deeply',
+    image: '/images/archetypes/insightful-observer.png',
+    description: 'You notice what others miss. Your quiet insights often unlock solutions no one else saw coming.',
   },
   {
-    id: '9-month',
-    title: '9 Month',
-    subtitle: 'FULLY MANAGED',
-    heading: 'Sustained Growth',
-    content:
-      'Describe the 9-month integrated program. Emphasize ongoing learning and application.',
+    id: 'rational-bridge',
+    name: 'The Rational Bridge',
+    tagline: 'Clear, practical, trusted in tough moments',
+    image: '/images/archetypes/rational-bridge.png',
+    description: 'You’re the one people trust when decisions get tough. You see the path forward and help others follow it with clarity and calm.',
   },
 ];
-
-export default function ProgramsPage() {
-  const [selected, setSelected] = useState('half-day');
-  const activeSection = sections.find((s) => s.id === selected);
+export default function ProgramPage() {
+  const [selected, setSelected] = useState<null | typeof archetypes[0]>(null);
 
   return (
     <>
       <Head>
-        <title>Workshops | Unlikely Leader</title>
-      </Head>    
+        <title>Archetypes | Unlikely Leader</title>
+      </Head>
       <Navbar />
 
       {/* HERO SECTION */}
@@ -53,49 +50,54 @@ export default function ProgramsPage() {
       </section>
       {/*<hr className="border-t border-gray-300 my-8" />*/}
 
-      {/* MAIN INTERACTIVE SECTION */}
-      <div className="bg-[#F0F2EB] text-[#333333] font-sans px-6 py-12">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* LEFT MENU */}
-          <div className="space-y-6">
-            {sections.map((section) => (
-              <div
-                key={section.id}
-                onClick={() => setSelected(section.id)}
-                className={`cursor-pointer ${
-                  selected === section.id
-                    ? 'text-[#1bae67] font-bold'
-                    : 'hover:text-[#1bae67] transition'
-                }`}
-              >
-                <div className="uppercase tracking-wide">{section.title}</div>
-                <div className="text-sm">{section.subtitle}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* VERTICAL DIVIDER + TRIANGLE */}
-          <div className="hidden md:flex justify-center relative">
-            <div className="w-px bg-red-600 h-full"></div>
-          </div>
-
-          {/* RIGHT SIDE CONTENT */}
-          <div>
-            <h2 className="text-2xl font-semibold italic mb-4">
-              {activeSection?.heading}
-            </h2>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              {activeSection?.content}
-            </p>
-            <a
-              href="/contact"
-              className="text-red-600 underline hover:text-red-800"
+      {/* CARDS */}
+      <section className="bg-[#F0F2EB] py-16 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {archetypes.map((archetype) => (
+            <button
+              key={archetype.id}
+              onClick={() => setSelected(archetype)}
+              className="bg-white p-6 rounded-xl shadow hover:shadow-md transition text-center focus:outline-none"
             >
-              Contact us to find out more
-            </a>
+              <img
+                src={archetype.image}
+                alt={`${archetype.name} illustration`}
+                className="w-16 h-16 mx-auto mb-4 object-contain"
+              />
+              <h2 className="text-xl font-bold text-[#1bae67] mb-2">{archetype.name}</h2>
+              <p className="text-[#333333]">{archetype.tagline}</p>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* MODAL */}
+      {selected && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          onClick={() => setSelected(null)}
+        >
+          <div
+            className="bg-white rounded-xl p-8 max-w-md w-full relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setSelected(null)}
+              className="absolute top-3 right-3 text-gray-400 hover:text-black text-xl font-bold"
+            >
+              ×
+            </button>
+            <img
+              src={selected.image}
+              alt={selected.name}
+              className="w-24 h-24 mx-auto mb-4"
+            />
+            <h2 className="text-2xl font-bold text-center text-[#1bae67] mb-2">{selected.name}</h2>
+            <p className="text-center text-gray-600 italic mb-4">{selected.tagline}</p>
+            <p className="text-gray-700 text-sm text-center">{selected.description}</p>
           </div>
         </div>
-      </div>
+      )}
       <Footer />
     </>
   );

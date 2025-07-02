@@ -74,7 +74,7 @@ export default function ArchetypesPage() {
               <img
                 src={archetype.image}
                 alt={`${archetype.name} illustration`}
-                className="w-32 h-32 mx-auto mb-4 object-contain"
+                className="w-16 h-16 mx-auto mb-4 object-contain"
               />
               <h2 className="text-xl font-bold text-[#1bae67] mb-2">{archetype.name}</h2>
               <p className="text-[#333333]">{archetype.tagline}</p>

@@ -56,6 +56,8 @@ export default function ContactPage() {
     <>
       <Head>
         <title>Contact | Unlikely Leader</title>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+
       </Head>
 
       <Navbar />
