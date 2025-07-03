@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { width, height } = page.getSize();
 
     // ✅ Step 1: Load the image from /public/images
-    const logoPath = path.resolve('./public/images/ul-logo.png');
+    const logoPath = path.resolve('./public/images/UL-Logo.jpg');
     const logoImageBytes = fs.readFileSync(logoPath);
     const logoImage = await pdfDoc.embedPng(logoImageBytes); // use embedJpg if it's a JPG
     const logoDims = logoImage.scale(0.1); // adjust scale as needed

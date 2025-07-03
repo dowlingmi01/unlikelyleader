@@ -1,6 +1,12 @@
 // pages/quiz.tsx
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 const questions = [
       "In a group setting, I’m most likely to...",
@@ -121,7 +127,7 @@ const options = [
         "A. Staying grounded in your values, even under pressure",
         "B. Being honest about your doubts and limitations",
         "C. Leading in alignment with your actions, not just your words",
-        "D. Letting people see who you are, even if you don’t have it all figured outg",
+        "D. Letting people see who you are, even if you don’t have it all figured out",
         "E. Leading in a way that reflects your character, not just your role"
       ],
       [ // Question 15
@@ -233,6 +239,8 @@ const options = [
       const router = useRouter();
       const [answers, setAnswers] = useState<string[]>(Array(questions.length).fill(""));
       const [currentIndex, setCurrentIndex] = useState(0);
+      const [showEmailPrompt, setShowEmailPrompt] = useState(false);
+      const [email, setEmail] = useState('');
 
       const handleSelect = (val: string) => {
         const updated = [...answers];
@@ -240,10 +248,30 @@ const options = [
         setAnswers(updated);
       };
 
-    const next = async () => {
-      if (!answers[currentIndex]) return alert("Please select an answer.");
+      const next = () => {
+        if (!answers[currentIndex]) return alert("Please select an answer.");
 
-      if (currentIndex === questions.length - 1) {
+        if (currentIndex === questions.length - 1) {
+          setShowEmailPrompt(true);
+        } else {
+          setCurrentIndex((i) => i + 1);
+        }
+      };
+
+      const back = () => {
+        if (showEmailPrompt) {
+          setShowEmailPrompt(false);
+        } else {
+          setCurrentIndex((i) => Math.max(0, i - 1));
+        }
+      };
+
+      const handleEmailSubmit = async () => {
+        if (!email.includes('@')) {
+          alert('Please enter a valid email address.');
+          return;
+        }
+
         const {
           dominantArchetype,
           spectrumScore,
@@ -259,57 +287,89 @@ const options = [
             body: JSON.stringify({
               type: 'quiz',
               name: 'Anonymous',
-              email: 'quiz@unlikelyleader.com',
-              result: `${dominantArchetype} | ${spectrumType} (Score: ${totalScore})`
+              email,
+              result: `${dominantArchetype} | ${spectrumType} (Score: ${totalScore})`,
             }),
           });
 
-          // Save locally
-          localStorage.setItem("quizAnswers", JSON.stringify(answers));
-          localStorage.setItem("dominantArchetype", dominantArchetype);
-          localStorage.setItem("spectrumScore", spectrumScore.toString());
-          localStorage.setItem("modifierScore", modifierScore.toString());
-          localStorage.setItem("totalScore", totalScore.toString());
-          localStorage.setItem("spectrumType", spectrumType);
+          // Save to Supabase (optional, remove if not needed)
+          await supabase.from('unlikely_quiz').insert({
+            email,
+            answers,
+            dominant_archetype: dominantArchetype,
+            spectrum_type: spectrumType,
+            spectrum_score: spectrumScore,
+            modifier_score: modifierScore,
+            total_score: totalScore,
+          });
+
+          // Save to localStorage
+          localStorage.setItem('email', email);
+          localStorage.setItem('quizAnswers', JSON.stringify(answers));
+          localStorage.setItem('dominantArchetype', dominantArchetype);
+          localStorage.setItem('spectrumScore', spectrumScore.toString());
+          localStorage.setItem('modifierScore', modifierScore.toString());
+          localStorage.setItem('totalScore', totalScore.toString());
+          localStorage.setItem('spectrumType', spectrumType);
 
           router.push('/results');
         } catch (error) {
-          console.error('Failed to send notification:', error);
-          alert('There was a problem submitting your results. Please try again.');
+          console.error('Submission error:', error);
+          alert('There was a problem submitting your results.');
         }
-      } else {
-        setCurrentIndex(i => i + 1);
-      }
-    };
-
-
-      const back = () => setCurrentIndex(i => Math.max(0, i - 1));
+      };
 
       return (
         <div className="max-w-2xl mx-auto p-4 bg-white shadow rounded">
-          <h2 className="text-xl font-bold mb-2">Question {currentIndex + 1}</h2>
-          <p className="mb-4">{questions[currentIndex]}</p>
-          <div className="space-y-2">
-            {options[currentIndex].map(opt => (
-              <label key={opt} className="block">
-                <input
-                  type="radio"
-                  name={`q${currentIndex}`}
-                  value={opt.charAt(0)}
-                  checked={answers[currentIndex] === opt.charAt(0)}
-                  onChange={() => handleSelect(opt.charAt(0))}
-                  className="mr-2"
-                />
-                {opt}
-              </label>
-            ))}
-          </div>
-          <div className="mt-6 flex justify-between">
-            <button onClick={back} className="bg-gray-300 px-4 py-2 rounded">Back</button>
-            <button onClick={next} className="bg-green-600 text-white px-4 py-2 rounded">
-              {currentIndex === questions.length - 1 ? 'Submit' : 'Next'}
-            </button>
-          </div>
+          {!showEmailPrompt ? (
+            <>
+              <h2 className="text-xl font-bold mb-2">Question {currentIndex + 1}</h2>
+              <p className="mb-4">{questions[currentIndex]}</p>
+              <div className="space-y-2">
+                {options[currentIndex].map((opt) => (
+                  <label key={opt} className="block">
+                    <input
+                      type="radio"
+                      name={`q${currentIndex}`}
+                      value={opt.charAt(0)}
+                      checked={answers[currentIndex] === opt.charAt(0)}
+                      onChange={() => handleSelect(opt.charAt(0))}
+                      className="mr-2"
+                    />
+                    {opt}
+                  </label>
+                ))}
+              </div>
+              <div className="mt-6 flex justify-between">
+                <button onClick={back} className="bg-gray-300 px-4 py-2 rounded">Back</button>
+                <button onClick={next} className="bg-green-600 text-white px-4 py-2 rounded">
+                  {currentIndex === questions.length - 1 ? 'Submit' : 'Next'}
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="text-center">
+              <h2 className="text-xl font-bold mb-4">See Your Leadership Archetype</h2>
+              <p className="mb-4 text-gray-700">
+                Enter your email to view your personalized results.
+              </p>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="border border-gray-300 px-4 py-2 rounded w-64 mb-4"
+                placeholder="you@example.com"
+              />
+              <div className="flex justify-center space-x-4">
+                <button onClick={back} className="bg-gray-300 px-4 py-2 rounded">
+                  Back
+                </button>
+                <button onClick={handleEmailSubmit} className="bg-green-600 text-white px-4 py-2 rounded font-semibold">
+                  See My Archetype
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       );
     }
