@@ -138,61 +138,73 @@ export default function ResultsPage() {
   const details = archetypeDescriptions[archetype];
 
   return (
-    <div className="max-w-xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center text-green-600 mb-4">
-        You are a {archetype}
-      </h1>
-      <p className="text-center text-gray-700 mb-6">{details?.description}</p>
+    <div className="max-w-3xl mx-auto px-6 py-12">
+      {/* HERO HEADER */}
+      <div className="text-center mb-10">
+        <h1 className="text-4xl font-bold text-[#1bae67] mb-2">
+          Your Archetype: {archetype}
+        </h1>
+        <p className="text-lg text-gray-700 mb-2">{details?.description}</p>
+{/*        <p className="text-sm text-gray-500">
+          <strong>Leadership Spectrum:</strong> {spectrum} • Score: {totalScore} (Quiz: {spectrumScore}, Reflection: {modifierScore})
+        </p>
+*/}      </div>
 
-      <div className="text-center mb-4">
-        <p className="text-gray-700">
-          Leadership Spectrum: <strong>{spectrum}</strong>
-        </p>
-        <p className="text-sm text-gray-500">
-          Score: {totalScore} (Quiz: {spectrumScore}, Reflection: {modifierScore})
-        </p>
+      {/* STYLED INFO CARDS */}
+      <div className="grid gap-6">
+        {details?.strengths && (
+          <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-3">Key Strengths</h2>
+            <ul className="list-disc list-inside text-gray-700 space-y-1">
+              {details.strengths.map((s, idx) => (
+                <li key={idx}>{s}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {details?.watchOuts && (
+          <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-yellow-500">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-3">Watch-Outs</h2>
+            <ul className="list-disc list-inside text-gray-700 space-y-1">
+              {details.watchOuts.map((s, idx) => (
+                <li key={idx}>{s}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {details?.actions && (
+          <div className="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-3">Key Actions to Take</h2>
+            <ul className="list-disc list-inside text-gray-700 space-y-1">
+              {details.actions.map((s, idx) => (
+                <li key={idx}>{s}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {details?.affirmations && (
+          <div className="bg-[#f0f2eb] rounded-xl shadow-md p-6 border-l-4 border-[#1bae67]">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-3">Affirmation</h2>
+            <p className="italic text-[#333] text-lg">{details.affirmations[0]}</p>
+          </div>
+        )}
       </div>
 
-      {details?.strengths && (
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">Key Strengths</h2>
-          <ul className="list-disc list-inside text-gray-600">
-            {details.strengths.map((s, idx) => (
-              <li key={idx}>{s}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {details?.watchOuts && (
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">Watch-Outs</h2>
-          <ul className="list-disc list-inside text-gray-600">
-            {details.watchOuts.map((s, idx) => (
-              <li key={idx}>{s}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {details?.actions && (
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">Key Actions to Take</h2>
-          <ul className="list-disc list-inside text-gray-600">
-            {details.actions.map((s, idx) => (
-              <li key={idx}>{s}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {details?.affirmations && (
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">Affirmation</h2>
-          <p className="italic text-gray-700">{details.affirmations[0]}</p>
-        </div>
-      )}
+      {/* OPTIONAL CTA */}
+      <div className="text-center mt-12">
+        <p className="text-lg text-gray-700 mb-4">
+          Want to go deeper with your leadership journey? Let's design something together.
+        </p>
+        <a
+          href="/contact"
+          className="inline-block bg-[#1bae67] hover:bg-[#0a9c5d] text-white font-semibold px-6 py-3 rounded-lg transition"
+        >
+          Connect With Me
+        </a>
+      </div>
     </div>
   );
 }
-
