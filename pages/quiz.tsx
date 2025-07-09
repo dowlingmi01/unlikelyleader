@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { createClient } from '@supabase/supabase-js';
+import Link from 'next/link';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -173,6 +174,7 @@ const options = [
         "E. Encourage others to speak up first" // U
       ],
     ];
+
     const spectrumMap: Record<string, number> = {
       A: 1, // Traditional
       B: -1, // Unlikely
@@ -184,11 +186,78 @@ const options = [
     const archetypeMap: Record<string, string> = {
       A: 'Steady Anchor',
       B: 'Insightful Observer',
-      C: 'Rational Bridge',
+      C: 'Relational Bridge',
       D: 'Quiet Strategist',
       E: 'Humble Fire'
     };
-
+    const archetypeDescriptions: Record<string, {
+      description: string;
+      strengths: string[];
+      affirmations: string[];
+    }> = {
+      'Steady Anchor': {
+        description: 'Grounded, calming, and emotionally consistent. You create stability for others—even in chaos.',
+        strengths: [
+          'Emotional steadiness',
+          'Trust-building through consistency',
+          'Grounded under pressure',
+          'Supportive and calming presence'
+        ],
+        affirmations: [
+          'Your calm gives others courage. You don’t need to raise your voice to raise the bar.'
+        ]  
+      },
+      'Insightful Observer': {
+        description: 'You lead by seeing what others don’t. With a deep capacity for reflection and perception, you bring nuance, wisdom, and unexpected insight to complex problems or dynamics.',
+        strengths: [
+          'Perceptive and reflective',
+          'Deep listening',
+          'Subtle but powerful insights',
+          'Ability to spot patterns and blind spots',
+          'Wisdom beyond surface-level analysis'
+        ],
+        affirmations: [
+          'Your power isn’t in how often you speak—it’s in how deeply you understand.'
+        ]  
+      },
+      'Relational Bridge': {
+        description: 'You blend logic and empathy—serving as the thoughtful connector between strategy and people. You bring clarity to conflict and are often the person who can help others find common ground.',
+        strengths: [
+          'Balanced, thoughtful decision-making',
+          'Bridging opposing views',
+          'Clear communicator with depth',
+          'Respected for fairness and reason'
+        ],
+        affirmations: [
+          'You don’t need a title to lead. Your care is the catalyst.'
+        ]  
+      },
+      'Quiet Strategist': {
+        description: 'You’re focused, composed, and purpose-driven. Your leadership shows up in how you organize complexity, make thoughtful decisions, and move work forward with minimal noise.',
+        strengths: [
+          'Planning, decision-making, long-term thinking without ego',
+          'Vision with precision',
+          'Calm execution under pressure',
+          'Intentional, long-term orientation'
+        ],
+        affirmations: [
+          'You don’t need the spotlight. You set the direction.'
+        ]  
+      },
+      'Humble Fire': {
+        description: 'You lead from purpose and principle, fueled by a quiet but unshakable conviction. You don’t seek attention—you seek meaning. Your strength lies in authenticity, courage, and values-driven action.',
+        strengths: [
+          'Purpose-driven leadership',
+          'Courage to act from values',
+          'Quiet confidence and heart',
+          'Moral clarity',
+          'Inspiring without performance'
+        ],
+        affirmations: [
+          'Your quiet conviction is your power.'
+        ]
+      }
+    };
     function computeResults(answers: string[]) {
       let spectrumScore = 0;
       let modifierScore = 0;
@@ -196,7 +265,7 @@ const options = [
       const archetypeTally: Record<string, number> = {
         'Steady Anchor': 0,
         'Insightful Observer': 0,
-        'Rational Bridge': 0,
+        'Relational Bridge': 0,
         'Quiet Strategist': 0,
         'Humble Fire': 0
       };
@@ -239,7 +308,8 @@ const options = [
       const router = useRouter();
       const [answers, setAnswers] = useState<string[]>(Array(questions.length).fill(""));
       const [currentIndex, setCurrentIndex] = useState(0);
-      const [showEmailPrompt, setShowEmailPrompt] = useState(false);
+      const [step, setStep] = useState<'quiz' | 'summary' | 'email'>('quiz');
+      const [resultSummary, setResultSummary] = useState<{ archetype: string; spectrum: string } | null>(null);
       const [email, setEmail] = useState('');
 
       const handleSelect = (val: string) => {
@@ -252,15 +322,20 @@ const options = [
         if (!answers[currentIndex]) return alert("Please select an answer.");
 
         if (currentIndex === questions.length - 1) {
-          setShowEmailPrompt(true);
+          const { dominantArchetype, spectrumType } = computeResults(answers);
+          setResultSummary({ archetype: dominantArchetype, spectrum: spectrumType });
+          setStep('summary');
         } else {
           setCurrentIndex((i) => i + 1);
         }
       };
 
       const back = () => {
-        if (showEmailPrompt) {
-          setShowEmailPrompt(false);
+        if (step === 'email') {
+          setStep('summary');
+        } else if (step === 'summary') {
+          setStep('quiz');
+          setCurrentIndex(questions.length - 1);
         } else {
           setCurrentIndex((i) => Math.max(0, i - 1));
         }
@@ -312,64 +387,110 @@ const options = [
           localStorage.setItem('totalScore', totalScore.toString());
           localStorage.setItem('spectrumType', spectrumType);
 
-          router.push('/results');
+        const slug = dominantArchetype.toLowerCase().replace(/\s+/g, '-');
+        router.push(`/archetypes/${slug}`);
         } catch (error) {
           console.error('Submission error:', error);
           alert('There was a problem submitting your results.');
         }
       };
 
-      return (
-        <div className="max-w-2xl mx-auto p-4 bg-white shadow rounded">
-          {!showEmailPrompt ? (
-            <>
-              <h2 className="text-xl font-bold mb-2">Question {currentIndex + 1}</h2>
-              <p className="mb-4">{questions[currentIndex]}</p>
-              <div className="space-y-2">
-                {options[currentIndex].map((opt) => (
-                  <label key={opt} className="block">
-                    <input
-                      type="radio"
-                      name={`q${currentIndex}`}
-                      value={opt.charAt(0)}
-                      checked={answers[currentIndex] === opt.charAt(0)}
-                      onChange={() => handleSelect(opt.charAt(0))}
-                      className="mr-2"
-                    />
-                    {opt}
-                  </label>
-                ))}
-              </div>
-              <div className="mt-6 flex justify-between">
-                <button onClick={back} className="bg-gray-300 px-4 py-2 rounded">Back</button>
-                <button onClick={next} className="bg-green-600 text-white px-4 py-2 rounded">
-                  {currentIndex === questions.length - 1 ? 'Submit' : 'Next'}
+        return (
+          <div className="max-w-2xl mx-auto p-4 bg-white shadow rounded">
+            {step === 'quiz' && (
+              <>
+                {/* Progress Text */}
+                <div className="flex justify-between items-center mb-2 text-sm text-gray-600">
+                  <span>Question {currentIndex + 1} of {questions.length}</span>
+                  <span>{Math.round(((currentIndex + 1) / questions.length) * 100)}%</span>
+                </div>
+
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 rounded-full h-3 mb-6">
+                  <div
+                    className="bg-[#1bae67] h-3 rounded-full transition-all duration-300 ease-in-out"
+                    style={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
+                  />
+                </div>
+
+                <h2 className="text-xl font-bold mb-2">Question {currentIndex + 1}</h2>
+                <p className="mb-4">{questions[currentIndex]}</p>
+                <div className="space-y-2">
+                  {options[currentIndex].map((opt) => (
+                    <label key={opt} className="block">
+                      <input
+                        type="radio"
+                        name={`q${currentIndex}`}
+                        value={opt.charAt(0)}
+                        checked={answers[currentIndex] === opt.charAt(0)}
+                        onChange={() => handleSelect(opt.charAt(0))}
+                        className="mr-2"
+                      />
+                      {opt}
+                    </label>
+                  ))}
+                </div>
+                <div className="mt-6 flex justify-between">
+                  <button onClick={back} className="bg-gray-300 px-4 py-2 rounded">Back</button>
+                  <button onClick={next} className="bg-green-600 text-white px-4 py-2 rounded">
+                    {currentIndex === questions.length - 1 ? 'See My Archetype' : 'Next'}
+                  </button>
+                </div>
+              </>
+            )}
+
+            {step === 'summary' && resultSummary && (
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-[#1bae67] mb-2">
+                  Your Archetype: {resultSummary.archetype}
+                </h2>
+                <p className="mb-4 text-gray-700">
+                  You align most closely with the <strong>{resultSummary.archetype}</strong>, a leadership style marked by {archetypeDescriptions[resultSummary.archetype]?.description.toLowerCase() || "quiet strength"}.
+                </p>
+                <p className="text-gray-600 mb-6 italic">
+                  Want to explore your strengths, challenges, and growth strategies?
+                </p>
+                <button
+                  onClick={() => setStep('email')}
+                  className="bg-green-600 text-white px-6 py-2 rounded font-semibold"
+                >
+                  Unlock Full Report
                 </button>
+                <div className="mt-4">
+                  <button onClick={back} className="text-gray-500 text-sm underline">
+                    Go Back
+                  </button>
+                </div>
               </div>
-            </>
-          ) : (
-            <div className="text-center">
-              <h2 className="text-xl font-bold mb-4">See Your Leadership Archetype</h2>
-              <p className="mb-4 text-gray-700">
-                Enter your email to view your personalized results.
-              </p>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="border border-gray-300 px-4 py-2 rounded w-64 mb-4"
-                placeholder="you@example.com"
-              />
-              <div className="flex justify-center space-x-4">
-                <button onClick={back} className="bg-gray-300 px-4 py-2 rounded">
-                  Back
-                </button>
-                <button onClick={handleEmailSubmit} className="bg-green-600 text-white px-4 py-2 rounded font-semibold">
-                  See My Archetype
-                </button>
+            )}
+
+            {step === 'email' && (
+              <div className="text-center">
+                <h2 className="text-xl font-bold mb-4">See Your Full Report</h2>
+                <p className="mb-4 text-gray-700">
+                  Enter your email to view your detailed leadership results.
+                </p>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="border border-gray-300 px-4 py-2 rounded w-64 mb-4"
+                  placeholder="you@example.com"
+                />
+                <div className="flex justify-center space-x-4">
+                  <button onClick={back} className="bg-gray-300 px-4 py-2 rounded">
+                    Back
+                  </button>
+                  <button onClick={handleEmailSubmit} className="bg-green-600 text-white px-4 py-2 rounded font-semibold">
+                    View Full Report
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-        </div>
-      );
-    }
+            )}
+          </div>
+        )};
+
+
+    
+
+  
