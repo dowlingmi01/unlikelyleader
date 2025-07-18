@@ -6,8 +6,6 @@ import Link from 'next/link';
 const archetypeDescriptions: Record<string, {
   description: string;
   strengths: string[];
-  watchOuts: string[];
-  actions: string[];
   affirmations: string[];
 }> = {
   'Steady Anchor': {
