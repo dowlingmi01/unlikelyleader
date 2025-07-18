@@ -445,7 +445,7 @@ const options = [
                   Your Archetype: {resultSummary.archetype}
                 </h2>
                 <p className="mb-4 text-gray-700">
-                  You align most closely with the <strong>{resultSummary.archetype}</strong>, a leadership style marked by {archetypeDescriptions[resultSummary.archetype]?.description.toLowerCase() || "quiet strength"}.
+                  You align most closely with the <strong>{resultSummary.archetype}</strong> - {archetypeDescriptions[resultSummary.archetype]?.description.toLowerCase() || "quiet strength"}.
                 </p>
                 <p className="text-gray-600 mb-6 italic">
                   Want to explore your strengths, challenges, and growth strategies?

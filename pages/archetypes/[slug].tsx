@@ -5,6 +5,7 @@ const archetypeContent: Record<string, {
   name: string;
   description: string;
   videoUrl?: string;
+  photoUrl?: string;
   strengths?: string[];
   watchOuts: string[];
   actions?: string[];
@@ -15,6 +16,7 @@ const archetypeContent: Record<string, {
     name: 'Steady Anchor',
     description: 'You bring a quiet steadiness to every space you enter. In moments of chaos or uncertainty, people naturally turn to you—not because you’re the loudest, but because you help others feel safe, grounded, and steady. Your presence alone builds trust. While others may scramble to be heard, your strength lies in listening, staying composed, and creating emotional stability for those around you.',
     videoUrl: 'https://www.youtube.com/embed/qMG1BXo8Asg?si=O8ofq4nz6GGtqdNx',
+    photoUrl: '/images/steady-anchor-archetype.png',
     strengths: [
       'Emotional regulation.',
       'Reliability and consistency',
@@ -43,6 +45,7 @@ const archetypeContent: Record<string, {
   'insightful-observer': {
     name: 'Insightful Observer',
     description: 'You lead through perception, not performance. Highly attuned to nuance and unspoken dynamics, you have a natural ability to read situations deeply and spot patterns others overlook. Your insights help teams anticipate challenges, ask better questions, and make wiser decisions. While you may not always speak first, when you do, your words have weight.',
+    photoUrl: '/images/insightful-observer-archetype.png',
     videoUrl: 'https://www.youtube.com/embed/qMG1BXo8Asg?si=O8ofq4nz6GGtqdNx',
     strengths: [
       'Nuanced perspective-taking',
@@ -64,7 +67,7 @@ const archetypeContent: Record<string, {
       'Keep a daily “pattern journal” to jot down repeated dynamics or undercurrents you notice—then revisit weekly for strategic insights.',
       'Share your perspective early—even if it is not fully polished. Your partial view is often more valuable than others’ certainty.',
       'Use curiosity as a bridge: start with “Have we considered…” or “What might happen if…” to open dialogue.',
-      'Don’t wait for the perfect moment—practice acting on 70% clarity rather than overthinking into silence.'
+      'Don’t wait for the perfect moment—practice acting on 70% clarity rather than overthinking into silence.',
       'Let people know how you process. Say, “I tend to reflect before I speak,” so your pauses build trust, not confusion.'
     ],
     quote: 'Your power is in how deeply you understand.'  
@@ -73,6 +76,7 @@ const archetypeContent: Record<string, {
   'relational-bridge': {
     name: 'Relational Bridge',
     description: 'You lead by making people feel seen, heard, and valued. Your empathy creates psychological safety, and your ability to foster genuine relationships makes you the go-to person for support and trust. You don’t just bring people together—you help them feel like they belong. That human-first approach? It’s what makes you unforgettable as a leader.',
+    photoUrl: '/images/relational-bridge-archetype.png',
     videoUrl: 'https://www.youtube.com/embed/qMG1BXo8Asg?si=O8ofq4nz6GGtqdNx',
     strengths: [
       'Empathy and relational intelligence',
@@ -106,6 +110,7 @@ const archetypeContent: Record<string, {
   'quiet-strategist': {
     name: 'Quiet Strategist',
     description: 'Thoughtful, focused, and quietly driven—you’re the one who keeps things moving with purpose. You’re not here for ego or attention; you’re here to solve problems and build things that matter. Your strategic mindset brings order to chaos and helps others see the path forward. You don’t shout to be heard—your clarity speaks volumes.',
+    photoUrl: '/images/quiet-strategist-archetype.png',
     videoUrl: 'https://www.youtube.com/embed/qMG1BXo8Asg?si=O8ofq4nz6GGtqdNx',
     strengths: [
       'Long-term thinking and vision',
@@ -138,6 +143,7 @@ const archetypeContent: Record<string, {
   'humble-fire': {
     name: 'Humble Fire',
     description: 'You carry a quiet intensity—a deep conviction rooted in your values. You may not always show it on the surface, but there’s a fire in you that burns bright for what matters. You lead with integrity, persistence, and purpose, even when no one’s watching. People may underestimate you—but that only makes your rise more powerful.',
+    photoUrl: '/images/humble-fire-archetype.png',
     videoUrl: 'https://www.youtube.com/embed/qMG1BXo8Asg?si=O8ofq4nz6GGtqdNx',
     strengths: [
       'Moral clarity and deep purpose',
@@ -176,61 +182,83 @@ export default function ArchetypePage() {
     return <p className="p-4 text-center">Archetype not found.</p>;
   }
 
-  return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-[#1bae67] mb-4">{content.name}</h1>
+return (
+  <div className="max-w-3xl mx-auto px-6 py-12">
+    {/* HEADER */}
+    <div className="text-center mb-10">
+      <h1 className="text-4xl font-bold text-[#1bae67] mb-2">{content.name}</h1>
       {content.quote && (
-        <blockquote className="italic border-l-4 border-[#1bae67] pl-4 text-gray-600 my-6">
+        <blockquote className="italic text-2xl text-gray-600 border-l-4 border-[#1bae67] pl-4 mt-4">
           “{content.quote}”
         </blockquote>
       )}
-      <p className="text-lg mb-6">{content.description}</p>
+    </div>
 
-      {content.videoUrl && (
-        <div className="aspect-video mb-6">
-          <iframe
+    {/* PHOTO */}
+    {content.photoUrl && (
+    <div className="-mx-2 mb-10 h-[360px] overflow-hidden">
+        <img
+          src={content.photoUrl}
+          alt="Archetype Image"
+          className="w-full h-full object-cover"
+        />
+    </div>    )}
+    {/* DESCRIPTION */}
+    <p className="text-lg text-gray-800 mb-8 leading-relaxed">{content.description}</p>
+
+    {/* VIDEO */}
+    {content.videoUrl && (
+      <div className="mb-10 rounded-lg overflow-hidden shadow-lg">
+        <div className="aspect-w-16 aspect-h-9">
+{/*          <iframe
             className="w-full h-full"
             src={content.videoUrl}
             title={content.name}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-          ></iframe>
-        </div>
-      )}
-      {content.strengths && (
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Key Strengths</h2>
-          <ul className="list-disc list-inside text-gray-700">
-            {content.strengths.map((s, i) => <li key={i}>{s}</li>)}
+          />
+*/}        </div>
+      </div>
+    )}
+
+    {/* INFO SECTIONS */}
+    {[
+      { title: 'Key Strengths', items: content.strengths },
+      { title: 'Watch Out For', items: content.watchOuts },
+      { title: 'Recommended Actions', items: content.actions },
+      { title: 'Tips for Growth', items: content.tips }
+    ].map(({ title, items }) => (
+      items && items.length > 0 && (
+        <div
+          key={title}
+          className="mb-10 bg-white rounded-xl shadow-md p-6 border-l-4 border-[#1bae67]"
+        >
+          <h2 className="text-2xl font-semibold text-gray-800 mb-4">{title}</h2>
+          <ul className="list-disc list-outside text-gray-700 space-y-2">
+            {items.map((s, i) => <li key={i}>{s}</li>)}
           </ul>
         </div>
-      )}
-      {content.watchOuts && (
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Watch Out For</h2>
-          <ul className="list-disc list-inside text-gray-700">
-            {content.watchOuts.map((s, i) => <li key={i}>{s}</li>)}
-          </ul>
-        </div>
-      )}
-      {content.actions && (
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Recommended Actions</h2>
-          <ul className="list-disc list-inside text-gray-700">
-            {content.actions.map((s, i) => <li key={i}>{s}</li>)}
-          </ul>
-        </div>
-      )}
-      {content.tips && (
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Tips for Growth</h2>
-          <ul className="list-disc list-inside text-gray-700">
-            {content.tips.map((s, i) => <li key={i}>{s}</li>)}
-          </ul>
-        </div>
-      )}
-      <p className="text-md text-gray-600">More resources coming soon...</p>
+      )
+    ))}
+          <div className="text-center mt-12">
+            <p className="text-lg text-gray-700 mb-4">
+              Want to go deeper with your leadership journey? Let's design something together.
+            </p>
+            <a
+              href="/contact"
+              className="inline-block bg-[#1bae67] hover:bg-[#0a9c5d] text-white font-semibold px-6 py-3 rounded-lg transition"
+            >
+              Connect With Me
+            </a>
+          </div>
+    
+
+    {/* Footer Note */}
+    <div className="text-center text-sm text-gray-500 mt-12">
+      More resources coming soon...
     </div>
-  );
+  </div>
+);
+
 }

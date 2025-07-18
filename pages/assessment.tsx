@@ -35,14 +35,6 @@ export default function AssessmentPage() {
           Start the Quiz
         </span>
       </Link>
-
-      <p className="mt-4">
-        <Link href="/archetypes">
-          <span className="text-[#1bae67] font-semibold hover:underline cursor-pointer">
-            Learn More About the Archetypes
-          </span>
-        </Link>
-      </p>
       </section>
     <Footer />
     </>
