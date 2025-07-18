@@ -35,37 +35,41 @@ export default function KeynotesPage() {
           </p>
         </section>
 
-        <section className="mb-16">
+{/*        <section className="mb-16">
           <h2 className="text-2xl font-semibold text-[#1bae67] mb-6">Core Promise</h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
-            <li><strong>Discover:</strong> What’s broken in our leadership filters—and how to fix them</li>
-            <li><strong>Recognize:</strong> Hidden leadership traits in yourself and others</li>
+            <li><strong>Discover:</strong> What’s broken in how we evaluate leadership potential, why we miss the mark, and how to fix them</li>
+            <li><strong>Uncover:</strong> Hidden leadership traits in yourself and others</li>
             <li><strong>Learn:</strong> A repeatable model for leadership growth (the MBO Model)</li>
             <li><strong>Shift:</strong> From old definitions of leadership to future-ready ones</li>
             <li><strong>Apply:</strong> The MBO Model to individual, team, and org-level growth</li>
             <li><strong>Expand:</strong> How leadership is defined and recognized in your culture</li>
           </ul>
         </section>
-
-        <section className="mb-16">
+*/}
+        <section className="mb-6 py-6 px-6">
           <h2 className="text-2xl font-semibold text-[#1bae67] mb-4">Key Concepts</h2>
-          <ul className="list-disc list-inside space-y-2 text-lg">
-            <li><strong>The Leadership Illusion:</strong> The problem with how we evaluate leadership potential</li>
-            <li><strong>The Hidden Talent Crisis:</strong> Why organizations miss their most capable people</li>
-            <li><strong>The Leadership DNA:</strong> 16 traits that matter more than titles or volume</li>
-            <li><strong>The Five Limiting Mindsets:</strong> How to identify and reframe them</li>
+          <div className="pl-4">
+          <ul className="list-disc list-outside space-y-2 text-lg">
+            <li><strong>The Leadership Illusion:</strong> The problem with how we evaluate leadership potential.</li>
+            <li><strong>The Hidden Talent Crisis:</strong> Why organizations overlook some of their most capable people.</li>
+            <li><strong>The Leadership DNA:</strong> 16 traits that matter more than titles or volume.</li>
+            <li><strong>The Five Limiting Mindsets:</strong> Why they impact your outcomes, how to identify them, and how to reframe them to achieve better outcomes. them</li>
             <li><strong>The Five Unlikely Leader Archetypes:</strong> A new lens for understanding leadership diversity</li>
           </ul>
+          </div>
         </section>
 
         <section className="mb-16">
           <h2 className="text-2xl font-semibold text-[#1bae67] mb-4">Keynote Includes</h2>
-          <ul className="list-disc list-inside space-y-2 text-lg">
+          <div className="pl-4">
+          <ul className="list-disc list-outside space-y-1 text-lg">
             <li>60–90 minute keynote (available virtual or in-person)</li>
             <li>Engaging, story-driven presentation with real-world application</li>
             <li>Case examples from real-life Unlikely Leaders</li>
             <li>Interactive moments for audience reflection and activation</li>
           </ul>
+          </div>
         </section>
 
         <section className="mb-16">
@@ -88,17 +92,19 @@ export default function KeynotesPage() {
 
         <section className="mb-16">
           <h2 className="text-2xl font-semibold text-[#1bae67] mb-4">Ideal For</h2>
-          <ul className="list-disc list-inside space-y-2 text-lg">
+          <div className="pl-4">
+          <ul className="list-disc list-outside space-y-2 text-lg">
             <li>Corporate leadership teams</li>
             <li>Employee Resource Groups (ERGs)</li>
             <li>DEI initiatives</li>
             <li>HR & Organizational Development professionals</li>
             <li>Nonprofit and educational institutions</li>
           </ul>
+          </div>
         </section>
 
         <section className="text-center mt-12">
-          <p className="text-xl mb-6">
+          <p className="text-lg mb-6">
             Ready to elevate your team’s leadership potential?<br />
             Let’s talk about how this keynote can spark a shift in your organization.
           </p>
