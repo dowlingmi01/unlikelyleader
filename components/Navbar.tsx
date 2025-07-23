@@ -7,9 +7,9 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link href="/">
           <img
-            src="/images/UL-Logo.jpg"
-            alt="Unlikely Leader Book Cover"
-            className="ml-8 mx-auto mb-0 w-14 h-auto rounded-md"
+            src="/images/UnlikelyLeaderLogoMark.png"
+            alt="Unlikely Leader Logo"
+            className="ml-8 mx-auto mb-0 w-24 h-auto rounded-md"
           />        
         </Link>
 

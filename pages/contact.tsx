@@ -15,12 +15,13 @@ export default function ContactPage() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
+  const source = 'Website';
 
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
 
   const { error } = await supabase.from('contact_messages').insert([
-    { name, email, message },
+    { name, email, message, source },
   ]);
 
   if (error) {
@@ -37,6 +38,7 @@ export default function ContactPage() {
           name,
           email,
           message,
+          source,
         }),
       });
     } catch (notifyError) {

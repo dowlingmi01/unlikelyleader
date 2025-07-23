@@ -243,7 +243,7 @@ return (
     ))}
           <div className="text-center mt-12">
             <p className="text-lg text-gray-700 mb-4">
-              Want to go deeper with your leadership journey? Let's design something together.
+              Want to go deeper with your leadership journey?
             </p>
             <a
               href="/contact"
