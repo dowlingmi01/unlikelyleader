@@ -82,7 +82,7 @@ export default function NsaContactPage() {
                 Great to Connect at 2025 Influence!
               </h1>
               <p className="text-lg md:text-xl max-w-xl">
-                Give me your address and I'll send you a copy of the book when it's ready.
+                Enter your full address below for a copy of the book, or just your email if you want to connect.
               </p>
             </div>
             <div className="flex justify-center">
@@ -117,7 +117,6 @@ export default function NsaContactPage() {
                 className="w-full p-3 border border-gray-300 rounded-lg"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                required
               />
               <div className="flex flex-col md:flex-row gap-4">
                 <input
@@ -126,7 +125,6 @@ export default function NsaContactPage() {
                   className="flex-1 p-3 border border-gray-300 rounded-lg"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  required
                 />
                 <input
                   type="text"
@@ -134,7 +132,6 @@ export default function NsaContactPage() {
                   className="w-20 p-3 border border-gray-300 rounded-lg"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
-                  required
                 />
                 <input
                   type="text"
@@ -142,7 +139,6 @@ export default function NsaContactPage() {
                   className="w-28 p-3 border border-gray-300 rounded-lg"
                   value={zip}
                   onChange={(e) => setZip(e.target.value)}
-                  required
                 />
               </div>
               <textarea
