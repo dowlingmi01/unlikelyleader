@@ -25,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // ✅ Step 1: Load the image from /public/images
     const logoPath = path.resolve('./public/images/UL-Logo.jpg');
     const logoImageBytes = fs.readFileSync(logoPath);
-    const logoImage = await pdfDoc.embedPng(logoImageBytes); // use embedJpg if it's a JPG
+    const logoImage = await pdfDoc.embedJpg(logoImageBytes);
     const logoDims = logoImage.scale(0.1); // adjust scale as needed
 
     // ✅ Step 2: Draw the image at the top center

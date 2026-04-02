@@ -14,7 +14,7 @@ const archetypeContent: Record<string, {
 }> = {
   'steady-anchor': {
     name: 'Steady Anchor',
-    description: 'You bring a quiet steadiness to every space you enter. In moments of chaos or uncertainty, people naturally turn to you—not because you’re the loudest, but because you help others feel safe, grounded, and steady. Your presence alone builds trust. While others may scramble to be heard, your strength lies in listening, staying composed, and creating emotional stability for those around you.',
+    description: "You bring a quiet steadiness to every space you enter. In moments of chaos or uncertainty, people naturally turn to you—not because you're the loudest, but because you help others feel safe, grounded, and steady. Your presence alone builds trust. While others may scramble to be heard, your strength lies in listening, staying composed, and creating emotional stability for those around you.",
     videoUrl: 'https://www.youtube.com/embed/qMG1BXo8Asg?si=O8ofq4nz6GGtqdNx',
     photoUrl: '/images/steady-anchor-archetype.png',
     strengths: [
@@ -30,14 +30,14 @@ const archetypeContent: Record<string, {
     ],
     actions: [
       'Speak early in meetings to signal your presence and build confidence in your contributions.',
-      'Use emotional awareness tools (like journaling or stress-mapping) to track when your silence comes from wisdom-and when it comes from self-doubt',
+      'Use emotional awareness tools (like journaling or stress-mapping) to track when your silence comes from wisdom—and when it comes from self-doubt',
       'Pair your calm with clarity by explicitly naming what others are feeling and offering a steady next step.'
     ],
     tips: [
-      'Schedule regular check-ins with yourself to reflect on how your calm presence is impacting the team—positively and where you might be too reserved.',
+      "Schedule regular check-ins with yourself to reflect on how your calm presence is impacting the team—positively and where you might be too reserved.",
       'Practice assertive communication by preparing a few key phrases you can use to share your ideas with confidence.',
-      'When emotions run high in a group, don’t just absorb—name the emotion or ask a clarifying question to create space for resolution.',
-      'Find a trusted peer or mentor to practice expressing opinions, even (especially) when you’re unsure how they will land.',
+      "When emotions run high in a group, don't just absorb—name the emotion or ask a clarifying question to create space for resolution.",
+      "Find a trusted peer or mentor to practice expressing opinions, even (especially) when you're unsure how they will land.",
       'Remember: Consistency is your superpower—but clarity makes that consistency meaningful to others.'
     ],
     quote: 'Your calm gives others courage.'  
@@ -56,26 +56,26 @@ const archetypeContent: Record<string, {
     watchOuts: [
       'Overanalyzing instead of acting',
       'Fading into the background when clarity is needed',
-      'Assuming others know what you’re thinking'
+      "Assuming others know what you're thinking"
     ],
     actions: [
-      'Set a “speak up” trigger—commit to sharing at least one insight per meeting or discussion.',
-      'Use “I noticed…” language to bring in your observations without needing a dramatic entry.',
-      'Shift from observer to activator by pairing insights with suggestions: “I wonder if we tried…”'
+      'Set a "speak up" trigger—commit to sharing at least one insight per meeting or discussion.',
+      'Use "I noticed..." language to bring in your observations without needing a dramatic entry.',
+      'Shift from observer to activator by pairing insights with suggestions: "I wonder if we tried..."'
     ],
     tips: [
-      'Keep a daily “pattern journal” to jot down repeated dynamics or undercurrents you notice—then revisit weekly for strategic insights.',
-      'Share your perspective early—even if it is not fully polished. Your partial view is often more valuable than others’ certainty.',
-      'Use curiosity as a bridge: start with “Have we considered…” or “What might happen if…” to open dialogue.',
-      'Don’t wait for the perfect moment—practice acting on 70% clarity rather than overthinking into silence.',
-      'Let people know how you process. Say, “I tend to reflect before I speak,” so your pauses build trust, not confusion.'
+      'Keep a daily "pattern journal" to jot down repeated dynamics or undercurrents you notice—then revisit weekly for strategic insights.',
+      "Share your perspective early—even if it is not fully polished. Your partial view is often more valuable than others' certainty.",
+      'Use curiosity as a bridge: start with "Have we considered..." or "What might happen if..." to open dialogue.',
+      "Don't wait for the perfect moment—practice acting on 70% clarity rather than overthinking into silence.",
+      'Let people know how you process. Say, "I tend to reflect before I speak," so your pauses build trust, not confusion.'
     ],
     quote: 'Your power is in how deeply you understand.'  
   },
 
   'relational-bridge': {
     name: 'Relational Bridge',
-    description: 'You lead by making people feel seen, heard, and valued. Your empathy creates psychological safety, and your ability to foster genuine relationships makes you the go-to person for support and trust. You don’t just bring people together—you help them feel like they belong. That human-first approach? It’s what makes you unforgettable as a leader.',
+    description: "You lead by making people feel seen, heard, and valued. Your empathy creates psychological safety, and your ability to foster genuine relationships makes you the go-to person for support and trust. You don't just bring people together—you help them feel like they belong. That human-first approach? It's what makes you unforgettable as a leader.",
     photoUrl: '/images/relational-bridge-archetype.png',
     videoUrl: 'https://www.youtube.com/embed/qMG1BXo8Asg?si=O8ofq4nz6GGtqdNx',
     strengths: [
@@ -87,29 +87,29 @@ const archetypeContent: Record<string, {
     watchOuts: [
       'People-pleasing',
       'Saying yes too often to maintain harmony',
-      'Absorbing others’ emotions at the cost of your own',
+      "Absorbing others' emotions at the cost of your own",
       'Avoiding conflict or tough truths',
       'Avoiding tough feedback'
     ],
     actions: [
       'Set boundaries around emotional labor by distinguishing between being supportive and being responsible.',
-      'Practice compassionate directness—use phrases like, “Because I care, I want to be honest about…”',
-      'Reflect after emotionally intense interactions: What did you take on? What’s yours to carry?'
+      'Practice compassionate directness—use phrases like, "Because I care, I want to be honest about..."',
+      "Reflect after emotionally intense interactions: What did you take on? What's yours to carry?"
     ],
     tips: [
-      'Before saying yes, ask yourself: “Am I the right person to hold this, or am I just the safe one?”',
-      'Create micro-boundaries like scheduling “emotional buffer time” after high-intensity meetings.',
-      'Practice giving feedback in supportive ways, like pairing care with clarity: “I noticed ___, and I believe you’re capable of ___.”',
+      'Before saying yes, ask yourself: "Am I the right person to hold this, or am I just the safe one?"',
+      'Create micro-boundaries like scheduling "emotional buffer time" after high-intensity meetings.',
+      'Practice giving feedback in supportive ways, like pairing care with clarity: "I noticed ___, and I believe you\'re capable of ___."',
       'Use your gift for connection to mediate conflict—not avoid it. You can say hard things with a soft edge.',
-      'Anchor yourself before anchoring others. A quick check-in—“How am I doing emotionally right now?”—can prevent overload. Name it.'
+      'Anchor yourself before anchoring others. A quick check-in—"How am I doing emotionally right now?"—can prevent overload. Name it.'
     ],
-    quote: 'You don’t need a title to lead. Your care is the catalyst.'  
-    },
+    quote: "You don't need a title to lead. Your care is the catalyst."  
+  },
 
 
   'quiet-strategist': {
     name: 'Quiet Strategist',
-    description: 'Thoughtful, focused, and quietly driven—you’re the one who keeps things moving with purpose. You’re not here for ego or attention; you’re here to solve problems and build things that matter. Your strategic mindset brings order to chaos and helps others see the path forward. You don’t shout to be heard—your clarity speaks volumes.',
+    description: "Thoughtful, focused, and quietly driven—you're the one who keeps things moving with purpose. You're not here for ego or attention; you're here to solve problems and build things that matter. Your strategic mindset brings order to chaos and helps others see the path forward. You don't shout to be heard—your clarity speaks volumes.",
     photoUrl: '/images/quiet-strategist-archetype.png',
     videoUrl: 'https://www.youtube.com/embed/qMG1BXo8Asg?si=O8ofq4nz6GGtqdNx',
     strengths: [
@@ -127,22 +127,22 @@ const archetypeContent: Record<string, {
     ],
     actions: [
       'Externalize your roadmap—use visuals, whiteboards, or one-pagers to let others into your process.',
-      'Delegate with clarity, not just tasks but the ‘why’ behind them.',
+      'Delegate with clarity, not just tasks but the "why" behind them.',
       'Practice public recognition: intentionally highlight the work of others in visible forums.'
     ],
     tips: [
       'Share early-stage thinking, not just finished strategies—people want to understand your path, not just your product.',
-      'Schedule regular “visibility pulses”: a monthly email, update, or shoutout that keeps others looped in.',
+      'Schedule regular "visibility pulses": a monthly email, update, or shoutout that keeps others looped in.',
       'Delegate with intention—explain not just the what but the why behind each piece of the puzzle.',
-      'Resist the urge to over-plan. Leave room for others’ contributions to shape the outcome.',
-      'Celebrate progress, not just perfection. Pause to acknowledge small wins—yours and the team’s.'
+      "Resist the urge to over-plan. Leave room for others' contributions to shape the outcome.",
+      "Celebrate progress, not just perfection. Pause to acknowledge small wins—yours and the team's."
     ],
-    quote: 'You don’t need the spotlight. You set the direction.'  
+    quote: "You don't need the spotlight. You set the direction."  
   },
   
   'humble-fire': {
     name: 'Humble Fire',
-    description: 'You carry a quiet intensity—a deep conviction rooted in your values. You may not always show it on the surface, but there’s a fire in you that burns bright for what matters. You lead with integrity, persistence, and purpose, even when no one’s watching. People may underestimate you—but that only makes your rise more powerful.',
+    description: "You carry a quiet intensity—a deep conviction rooted in your values. You may not always show it on the surface, but there's a fire in you that burns bright for what matters. You lead with integrity, persistence, and purpose, even when no one's watching. People may underestimate you—but that only makes your rise more powerful.",
     photoUrl: '/images/humble-fire-archetype.png',
     videoUrl: 'https://www.youtube.com/embed/qMG1BXo8Asg?si=O8ofq4nz6GGtqdNx',
     strengths: [
@@ -153,24 +153,24 @@ const archetypeContent: Record<string, {
     ],
     watchOuts: [
       'Staying invisible when your convictions should be voiced',
-      'Dismissing your influence because it’s not loud',
+      "Dismissing your influence because it's not loud",
       'Burning out from carrying too much, too quietly'
     ],
     actions: [
       'Own your story—share what drives you and why it matters, even briefly.',
       'Set visibility goals—speak at a town hall, write an internal post, or mentor others.',
-      'Build a support circle—you don’t have to hold the torch alone.'
+      "Build a support circle—you don't have to hold the torch alone."
     ],
     tips: [
-      'Set a “speak up” moment each week where you share something meaningful—an insight, belief, or value you’re acting on.',
+      'Set a "speak up" moment each week where you share something meaningful—an insight, belief, or value you\'re acting on.',
       'Use storytelling to convey your conviction—people resonate with emotion wrapped in experience.',
-      'Let others see your fire: describe not just what you’re doing, but what’s fueling it.',
+      "Let others see your fire: describe not just what you're doing, but what's fueling it.",
       'Watch for signs of burnout: rest is part of resilience, not its opposite.',
-      'When advocating for change, connect it to values and people—not just problems. That’s where your quiet power shines.'
+      "When advocating for change, connect it to values and people—not just problems. That's where your quiet power shines."
     ],
-    quote: 'Your calm gives others courage.'  
-    },
-  };
+    quote: 'Your quiet conviction is your power.'  
+  },
+};
 
 export default function ArchetypePage() {
   const router = useRouter();
@@ -189,7 +189,7 @@ return (
       <h1 className="text-4xl font-bold text-[#1bae67] mb-2">{content.name}</h1>
       {content.quote && (
         <blockquote className="italic text-2xl text-gray-600 border-l-4 border-[#1bae67] pl-4 mt-4">
-          “{content.quote}”
+          &quot;{content.quote}&quot;
         </blockquote>
       )}
     </div>

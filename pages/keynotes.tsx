@@ -486,18 +486,18 @@ export default function KeynotesPage() {
           </div>
         </section>
 
-        {/* Testimonial placeholder */}
+        {/* What to expect */}
         <section className="px-6 py-20 bg-[#333333] text-white">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-sm uppercase tracking-[0.18em] text-[#96CEA0] font-semibold mb-5">
-              What These Talks Deliver
+              What to Expect
             </p>
             <blockquote className="text-2xl md:text-4xl font-semibold leading-relaxed">
-              “A compelling blend of insight, story, and practical application that challenges
-              people to rethink what leadership looks like—and what better leadership requires.”
+              "A compelling blend of insight, story, and practical application that challenges
+              people to rethink what leadership looks like—and what better leadership requires."
             </blockquote>
             <p className="mt-6 text-white/70 text-sm md:text-base">
-              Add client testimonial, endorsement, or event feedback here
+              Thoughtful, research-backed ideas delivered with energy and purpose
             </p>
           </div>
         </section>

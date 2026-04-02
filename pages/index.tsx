@@ -1,10 +1,16 @@
 // pages/index.tsx
+import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Head from 'next/head';
 import Link from 'next/link';
 import SocialLinks from '../components/SocialLinks';
-// import { Instagram, Linkedin, Youtube } from 'lucide-react';
+import { createClient } from '@supabase/supabase-js';
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 const problemCards = [
   {
@@ -61,6 +67,33 @@ const engagementPaths = [
 ];
 
 export default function HomePage() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.includes('@')) {
+      return;
+    }
+
+    setStatus('loading');
+
+    try {
+      // Save to Supabase
+      const { error } = await supabase.from('email_subscribers').insert([
+        { email, source: 'homepage' },
+      ]);
+
+      if (error) throw error;
+
+      setStatus('success');
+      setEmail('');
+    } catch (err) {
+      console.error('Subscription error:', err);
+      setStatus('error');
+    }
+  };
+
   return (
     <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">
       <Head>
@@ -306,7 +339,7 @@ export default function HomePage() {
               </div>
 
               <div className="bg-[#F0F2EB] rounded-[1.5rem] p-6 border border-[#e5eadf]">
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleEmailSubmit}>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium mb-2 text-[#333333]">
                       Email address
@@ -315,21 +348,38 @@ export default function HomePage() {
                       id="email"
                       type="email"
                       placeholder="Enter your email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="w-full rounded-xl border border-[#cfd8cb] bg-white px-4 py-3 text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#1bae67]"
+                      required
+                      disabled={status === 'loading'}
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition shadow-sm"
+                    disabled={status === 'loading'}
+                    className="w-full bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition shadow-sm disabled:opacity-60"
                   >
-                    Get Launch Updates
+                    {status === 'loading' ? 'Subscribing...' : 'Get Launch Updates'}
                   </button>
                 </form>
 
-                <p className="mt-4 text-sm text-[#666666] leading-relaxed">
-                  Occasional updates only. No spam.
-                </p>
+                {status === 'success' && (
+                  <p className="mt-4 text-sm text-[#1bae67] font-medium leading-relaxed">
+                    Thank you! You're on the list.
+                  </p>
+                )}
+                {status === 'error' && (
+                  <p className="mt-4 text-sm text-red-600 leading-relaxed">
+                    Something went wrong. Please try again.
+                  </p>
+                )}
+                {status === 'idle' && (
+                  <p className="mt-4 text-sm text-[#666666] leading-relaxed">
+                    Occasional updates only. No spam.
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -369,15 +419,12 @@ export default function HomePage() {
         {/* Meet Michael */}
         <section className="px-6 py-20 bg-white">
           <div className="max-w-6xl mx-auto grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
-            <div className="rounded-[2rem] bg-[#F0F2EB] border border-[#e5eadf] min-h-[420px] flex items-center justify-center p-8 text-center">
-              <div>
-                <p className="text-sm uppercase tracking-[0.16em] text-[#1bae67] font-semibold mb-3">
-                  Image Placeholder
-                </p>
-                <p className="text-[#4a4a4a] text-lg leading-relaxed max-w-xs">
-                  Add an author / speaker image of Michael here
-                </p>
-              </div>
+            <div className="rounded-[2rem] bg-[#F0F2EB] border border-[#e5eadf] overflow-hidden">
+              <img
+                src="/images/MD2.jpeg"
+                alt="Michael Dowling - Author and Speaker"
+                className="w-full h-full object-cover min-h-[420px]"
+              />
             </div>
 
             <div>
@@ -449,21 +496,13 @@ export default function HomePage() {
                     );
                   }
 
-                  const content = (
-                    <div className="bg-white border border-[#e5eadf] rounded-[1.75rem] p-7 shadow-sm h-full hover:shadow-md transition">
-                      <h3 className="text-2xl font-semibold mb-3">{item.title}</h3>
-                      <p className="text-[#555] leading-relaxed mb-6">{item.description}</p>
-                      <span className="text-[#1bae67] font-semibold">{item.cta} →</span>
-                    </div>
-                  );
-
-                  return item.external ? (
-                    <a key={item.title} href={item.href} target="_blank" rel="noreferrer">
-                      {content}
-                    </a>
-                  ) : (
-                    <Link key={item.title} href={item.href}>
-                      {content}
+                  return (
+                    <Link key={item.title} href={item.href!}>
+                      <div className="bg-white border border-[#e5eadf] rounded-[1.75rem] p-7 shadow-sm h-full hover:shadow-md transition">
+                        <h3 className="text-2xl font-semibold mb-3">{item.title}</h3>
+                        <p className="text-[#555] leading-relaxed mb-6">{item.description}</p>
+                        <span className="text-[#1bae67] font-semibold">{item.cta} →</span>
+                      </div>
                     </Link>
                   );
                 })}
