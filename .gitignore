@@ -42,3 +42,4 @@ supabase/migrations/.temp/
 
 # Mac extended attributes
 *.DS_Store
+*.tsbuildinfo
