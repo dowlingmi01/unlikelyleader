@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="bg-[#F0F2EB] border-t border-[#e5eadf] px-6 py-14">
       <div className="max-w-6xl mx-auto grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
         <div>
-          <p className="text-lg font-semibold text-[#333333]">Unlikely Leader</p>
+          <p className="text-lg font-semibold text-[#333333]">The Unlikely Leader</p>
           <p className="mt-3 text-sm text-[#736B70] max-w-md leading-relaxed">
             Challenging outdated leadership myths and offering a more grounded,
             human vision of leadership.
@@ -30,7 +30,7 @@ export default function Footer() {
           </div>
 
           <p className="text-xs text-[#736B70]">
-            © 2026 Unlikely Leader. All rights reserved.
+            © 2026 TheUnlikely Leader. All rights reserved.
           </p>
         </div>
       </div>

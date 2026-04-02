@@ -39,7 +39,7 @@ const engagementPaths = [
   {
     title: 'The Book',
     description:
-      'Explore the ideas behind Unlikely Leader and follow the path to the July 2026 launch.',
+      'Explore the ideas behind The Unlikely Leader and follow the path to the July 2026 launch.',
     cta: 'About the Book',
     href: '/contact',
   },
@@ -150,7 +150,7 @@ export default function HomePage() {
                 <div className="aspect-[4/5] rounded-[1.5rem] bg-[#dfe8db] overflow-hidden relative">
                   {/* Replace this placeholder with your real image */}
                 <img
-                  src="/images/MD-Photo3.jpeg"
+                  src="/images/MDBookPhoto.jpeg"
                   alt="Michael Dowling"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
@@ -234,7 +234,7 @@ export default function HomePage() {
                 Leadership is not about performing a role. It is about how you build, regulate, decide, and elevate others.
               </h2>
               <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-2xl">
-                <span className="italic">Unlikely Leader</span> offers a different vision—one that values
+                <span className="italic">The Unlikely Leader</span> offers a different vision—one that values
                 self-awareness over self-promotion, steadiness over spectacle, substance over performance,
                 and impact over image.
               </p>
@@ -275,7 +275,7 @@ export default function HomePage() {
                   A new book for people who have felt underestimated by traditional leadership narratives
                 </h2>
                 <p className="text-lg md:text-xl text-[#555] leading-relaxed max-w-2xl">
-                  <span className="italic">Unlikely Leader</span> explores how outdated leadership ideas shape
+                  <span className="italic">The Unlikely Leader</span> explores how outdated leadership ideas shape
                   who gets seen, who gets chosen, and who gets left behind. It offers
                   a more honest path forward—one rooted in self-awareness, resilience,
                   character, and impact.
@@ -306,7 +306,7 @@ export default function HomePage() {
                   Coming Soon
                 </p>
                 <h3 className="text-3xl font-semibold mb-4 italic">
-                  Unlikely Leader
+                  The Unlikely Leader: Breaking the Bias That Keeps Greater Leaders Invisible
                 </h3>
                 <p className="text-white/85 leading-relaxed mb-6">
                   A book about the people who have been underestimated, the myths that have held them back, and the leadership the future actually needs.
@@ -330,11 +330,11 @@ export default function HomePage() {
                   Stay Connected
                 </p>
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
-                  Be the first to hear about the launch of <span className="italic">Unlikely Leader</span>
+                  Be the first to hear about the launch of <span className="italic">The Unlikely Leader</span>
                 </h2>
                 <p className="text-lg text-[#555] leading-relaxed max-w-2xl">
                   Get updates on the July 2026 book launch, keynote appearances, leadership insights,
-                  and new ways to engage with the ideas behind <span className="italic">Unlikely Leader</span>.
+                  and new ways to engage with the ideas behind <span className="italic">The Unlikely Leader</span>.
                 </p>
               </div>
 
@@ -464,7 +464,7 @@ export default function HomePage() {
                   Continue the Journey
                 </p>
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
-                  Multiple ways to engage with the ideas behind Unlikely Leader
+                  Multiple ways to engage with the ideas behind The Unlikely Leader
                 </h2>
                 <p className="text-lg text-[#555] leading-relaxed">
                   Whether you are following the book launch, looking for a keynote,
