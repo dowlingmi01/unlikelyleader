@@ -24,12 +24,13 @@ export default function Navbar() {
           <Link href="/services" className="text-[#333333] hover:text-[#1bae67] transition">
             Services
           </Link>
-*/}          <Link href="/assessment" className="text-[#333333] hover:text-[#1bae67] transition">
-            Assessment
-          </Link>
+*/}
           <Link href="/keynotes" className="text-[#333333] hover:text-[#1bae67] transition">
             Keynotes
           </Link>
+          {/* <Link href="/assessment" className="text-[#333333] hover:text-[#1bae67] transition">
+            Assessment
+          </Link> */}
         </div>
       </div>
     </nav>

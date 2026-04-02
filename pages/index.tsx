@@ -150,7 +150,7 @@ export default function HomePage() {
                 <div className="aspect-[4/5] rounded-[1.5rem] bg-[#dfe8db] overflow-hidden relative">
                   {/* Replace this placeholder with your real image */}
                 <img
-                  src="/images/MDBookPhoto.jpeg"
+                  src="/images/MD-Photo3.jpeg"
                   alt="Michael Dowling"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
