@@ -1,248 +1,533 @@
 // pages/index.tsx
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Link from 'next/link';
 import Head from 'next/head';
+import Link from 'next/link';
+import SocialLinks from '../components/SocialLinks';
+// import { Instagram, Linkedin, Youtube } from 'lucide-react';
 
-export default function Home() {
+const problemCards = [
+  {
+    title: 'The Stereotype',
+    description:
+      'We have been taught to associate leadership with visibility, charisma, certainty, and command. The people who take up space are often assumed to be the ones best equipped to lead.',
+  },
+  {
+    title: 'The Myth',
+    description:
+      'That image of leadership has been reinforced by culture, systems, and bias. It shapes who gets noticed, promoted, trusted, and encouraged to rise.',
+  },
+  {
+    title: 'The Cost',
+    description:
+      'Organizations miss capable people. Individuals doubt their potential. Too many future leaders either perform their way into belonging or quietly opt out altogether.',
+  },
+  {
+    title: 'The Better Way',
+    description:
+      'Leadership is not about performance. It is about substance, judgment, self-awareness, resilience, and the ability to elevate others. It is time to widen the lens.',
+  },
+];
+
+const engagementPaths = [
+  {
+    title: 'The Book',
+    description:
+      'Explore the ideas behind Unlikely Leader and follow the path to the July 2026 launch.',
+    cta: 'About the Book',
+    href: '/contact',
+  },
+  {
+    title: 'Keynotes',
+    description:
+      'Bring these ideas to your conference, leadership event, or company gathering through signature keynote talks.',
+    cta: 'View Keynotes',
+    href: '/keynotes',
+  },
+  // {
+  //   title: 'The Collective Rise',
+  //   description:
+  //     'Go deeper through leadership development experiences designed to build foundational mindsets and skills.',
+  //   cta: 'Learn More',
+  //   href: 'https://www.thecollectiverise.com',
+  //   external: true,
+  // },
+  {
+    title: 'Follow the Conversation',
+    description:
+      'Engage with Michael on social media for leadership insights, book updates, and behind-the-scenes reflections.',
+    social: true,
+  },
+];
+
+export default function HomePage() {
   return (
-    <>
+    <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">
       <Head>
-        <title>Home | Unlikely Leader</title>
+        <title>Unlikely Leader</title>
+        <meta
+          name="description"
+          content="The Unlikely Leader redefines what it means to lead by challenging outdated leadership myths and helping overlooked leaders rise from who they truly are."
+        />
       </Head>
 
-    <Navbar/>
-    <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">
-      {/* HERO SECTION */}
-      <section className="text-center py-20 px-6 bg-white">
-        <h1 className="text-4xl md:text-5xl font-bold text-[#1bae67] mb-4">
-          Redefining What It Means to Lead
-        </h1>
-        <p className="text-lg md:text-2xl font-bold max-w-2xl mx-auto mb-6 text-[#333333]">
-          We’ve been told who gets to lead—and who doesn’t. 
-        </p>
-        <p className="text-lg md:text-xl max-w-2xl mx-auto mb-6 text-[#333333]">
-        <em>Unlikely Leader</em> flips the script on outdated myths and empowers the overlooked to rise by leading from who they truly are, not by performing someone else’s version of leadership. 
-        </p>
-      </section>
-      <section className="bg-[#F0F2EB] py-16 px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
-          {/* BOOK */}
-          <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
-{/*            <img
-              src="/images/UL-Dowling-hardcover.png"
-              alt="Unlikely Leader Book Cover"
-              className="mx-auto mb-6 w-32 h-auto rounded-md"
-            />
-*/}         <h2 className="text-2xl font-bold mb-2 text-[#1bae67]">About the Book</h2>
-            <p className="text-[#333333] mb-4">
-              The world is changing. So are the people we look to for guidance. Today’s most effective leaders aren’t defined by their job titles or how many people report to them. They’re defined by their substance. By the values they embody, the questions they ask, and the space they create for others to grow. And often, they’re the people you least expect. These are the <em>Unlikely Leaders</em>.
-            </p>
-            <img
-              src="/images/UL-Dowling-hardcover.png"
-              alt="Unlikely Leader Book Cover"
-              className="mx-auto mb-6 w-56 h-auto rounded-md shadow-lg"
-            />
-{/*            <p className="mt-4">
-              <Link href="/book">
-                <span className="text-[#1bae67] font-semibold hover:underline cursor-pointer">Learn More →</span>
-              </Link>
-              </p>
-*/}
-            <h3 className="text-2xl font-bold mb-2 text-[#1bae67]">Coming Soon</h3>
-          </div>
+      <Navbar />
 
-          {/* KEYNOTES */}
-          <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition">
-            <h2 className="text-2xl font-bold mb-2 text-[#1bae67]">About the Author</h2>
-            <p className="text-[#333333] mb-4">
-              From Hollywood red carpets to high-growth startups, Michael Dowling spent years chasing leadership myths—until he discovered a better way. A former talent agent, start-up founder, and CEO, he’s led teams across industries and helped others rise by turning their differences into their greatest leadership strengths. Today, he helps aspiring leaders unlock the mindsets and skills to lead with confidence.
-            </p>
-            <img
-              src="/images/MD-Photo3.jpeg"
-              alt="Unlikely Leader Book Cover"
-              className="mx-auto mb-6 w-56 h-auto rounded-md shadow-lg"
-            />
-            <a
-              href="https://www.linkedin.com/in/dowlingmichael/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#1bae67] font-semibold hover:underline"
-            >
-              Learn More About Michael →
-            </a>          
+      <main>
+        {/* Hero */}
+        <section className="px-6 py-24 md:py-28">
+          <div className="max-w-6xl mx-auto grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+            <div>
+              <p className="text-sm md:text-base uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-5">
+                Book Launching July 2026
+              </p>
+
+              <h1 className="text-5xl md:text-7xl font-bold leading-[1.02] text-[#333333] max-w-4xl">
+                Some of our best leaders have been overlooked.
+                <span className="block mt-2">It’s time to change the story.</span>
+              </h1>
+
+              <p className="mt-7 text-lg md:text-xl leading-relaxed text-[#4a4a4a] max-w-2xl">
+                <span className="italic">The Unlikely Leader</span> challenges the outdated myths that shape
+                who gets seen, trusted, and promoted—and offers a more grounded, human
+                vision of leadership rooted in self-awareness, resilience, character, and impact.
+              </p>
+
+              <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                <a href="#vision">
+                  <span className="inline-block bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
+                    Explore the Vision
+                  </span>
+                </a>
+
+                <Link href="/keynotes">
+                  <span className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-6 py-3 rounded-xl hover:bg-white transition cursor-pointer">
+                    View Keynotes
+                  </span>
+                </Link>
+              </div>
+
+              <p className="mt-6 text-sm text-[#666666]">
+                By Michael Dowling — Author, Speaker, Leadership Advisor
+              </p>
             </div>
-        </div>
-      </section>
-      <section className="text-center py-10 px-6 bg-[#F0F2EB]">
-        <h1 className="text-4xl md:text-5xl font-bold text-[#1bae67] mb-4">
-          The story we've been told
-        </h1>
-        <p className="text-lg md:text-2xl font-bold max-w-2xl mx-auto mb-6 text-[#333333]">
-          What if everything we've been taught about leadership is wrong? 
-        </p>
-      </section>
-        <section className="relative bg-[#F0F2EB] py-20">
-          <div className="border-l-4 border-[#1bae67] absolute left-1/2 top-0 h-full -ml-px"></div>
-          <div className="max-w-6xl mx-auto space-y-56">
-            {/* Left Block */}
-            <div className="relative flex items-start">
-              <div className="w-1/2 pr-10 px-6 text-right hidden md:block">
-                <h3 className="text-2xl font-bold text-[#1bae67]">The Stereotype</h3>
-                <p className="mt-2 text-[#333]">There’s a stereotype about what a leader looks like. Confident. Charismatic. Commanding. Highly educated, street-smart, or both. The kind of person who takes up space.</p>
+
+            <div className="relative">
+              <div className="rounded-[2rem] bg-white border border-[#e5eadf] shadow-lg p-4">
+                <div className="aspect-[4/5] rounded-[1.5rem] bg-[#dfe8db] overflow-hidden relative">
+                  {/* Replace this placeholder with your real image */}
+                <img
+                  src="/images/MD-Photo3.jpeg"
+                  alt="Michael Dowling"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+
+                  <div className="absolute bottom-6 left-6 bg-white/92 rounded-2xl px-5 py-4 shadow-md max-w-xs">
+                    <p className="text-xs uppercase tracking-[0.14em] text-[#1bae67] font-semibold mb-1">
+                      Unlikely Leader
+                    </p>
+                    <p className="font-semibold text-[#333333]">Coming July 2026</p>
+                  </div>
+                </div>
               </div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
-              <div className="w-1/2 pl-10 px-6 md:hidden">
-                <h3 className="text-2xl font-bold text-[#1bae67]">The Stereotype</h3>
-                <p className="mt-2 text-[#333]">There’s a stereotype about what a leader looks like. Confident. Charismatic. Commanding. Highly educated, street-smart, or both. The kind of person who takes up space.</p>
-              </div>
-            </div>
-            <div className="relative flex items-start flex-row-reverse">
-              <div className="w-1/2 pl-10 px-6 text-left hidden md:block">
-                <h3 className="text-2xl font-bold text-[#1bae67]">The Myth</h3>
-                <p className="mt-2 text-[#333]">It’s a myth shaped by noise and norms. Systemic bias has reinforced it. Loud voices get noticed. Quick hands get picked.</p>
-              </div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
-              <div className="block md:hidden w-1/2 px-6 pt-8 text-left">
-                <h3 className="text-2xl font-bold text-[#1bae67]">The Myth</h3>
-                <p className="mt-2 text-[#333]">It’s a myth shaped by noise and norms. Systemic bias has reinforced it. Loud voices get noticed. Quick hands get picked.</p>
-              </div>
-            </div>
-            <div className="relative flex items-start">
-              <div className="w-1/2 pr-10 px-6 text-right hidden md:block">
-                <h3 className="text-2xl font-bold text-[#1bae67]">The Societal Cost</h3>
-                <p className="mt-2 text-[#333]">Too many capable people are not getting seen, and as a result, society is deprived of some its greatest leaders.</p>
-              </div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
-              <div className="w-1/2 pl-10 md:hidden">
-                <h3 className="text-2xl font-bold text-[#1bae67]">The Societal Cost</h3>
-                <p className="mt-2 text-[#333]">Too many capable people are not getting seen, and as a result, society is deprived of some its greatest leaders.</p>
-              </div>
-            </div>
-            <div className="relative flex items-start flex-row-reverse">
-              <div className="w-1/2 pl-10 px-6 text-left hidden md:block">
-                <h3 className="text-2xl font-bold text-[#1bae67]">The Individual Cost</h3>
-                <p className="mt-2 text-[#333]">And those who don't fit this stereotypical <em>mold?</em> They face a choice: adapt or be overlooked.</p>
-              </div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
-              <div className="block md:hidden w-1/2 px-6 pt-8 text-left">
-                <h3 className="text-2xl font-bold text-[#1bae67]">The Individual Cost</h3>
-                <p className="mt-2 text-[#333]">And those who don't fit this stereotypical <em>mold?</em> They face a choice: adapt or be overlooked.</p>
-              </div>
-            </div>
-            <div className="relative flex items-start">
-              <div className="w-1/2 pr-10 px-6 text-right hidden md:block">
-                <h3 className="text-2xl font-bold text-[#1bae67]">Social Media Impact</h3>
-                <p className="mt-2 text-[#333]">Social media further amplifies the myth. It distorts reality and rewards those who can perform for their cameras over authenticity.</p>
-              </div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
-              <div className="w-1/2 pl-10 md:hidden">
-                <h3 className="text-2xl font-bold text-[#1bae67]">Social Media Impact</h3>
-                <p className="mt-2 text-[#333]">Social media further amplifies the myth. It distorts reality and rewards those who can perform for their cameras over authenticity.</p>
-              </div>
-            </div>
-            <div className="relative flex items-start flex-row-reverse">
-              <div className="w-1/2 pl-10 px-6 text-left hidden md:block">
-                <h3 className="text-2xl font-bold text-[#1bae67]">Weaponization of Perception</h3>
-                <p className="mt-2 text-[#333]">The deception is relentless, causing too many to doubt their value, mute their instincts, and perform inauthentic versions of themselves.</p>
-              </div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
-              <div className="block md:hidden w-1/2 px-6 pt-8 text-left">
-                <h3 className="text-2xl font-bold text-[#1bae67]">Weaponization of Perception</h3>
-                <p className="mt-2 text-[#333]">The deception is relentless, causing too many to doubt their value, mute their instincts, and perform inauthentic versions of themselves.</p>
-              </div>
-            </div>
-            <div className="relative flex items-start">
-              <div className="w-1/2 pr-10 px-6 text-right hidden md:block">
-                <h3 className="text-2xl font-bold text-[#1bae67]">Are We Using the Right Yardstick?</h3>
-                <p className="mt-2 text-[#333]">Do visibility, loudness, and fitting in make someone a better leader?</p>
-              </div>
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
-              <div className="w-1/2 pl-10 md:hidden">
-                <h3 className="text-2xl font-bold text-[#1bae67]">Are We Using the Right Yardstick?</h3>
-                <p className="mt-2 text-[#333]">Do visibility, loudness, and fitting in make someone a better leader?</p>
-              </div>
-            </div>
-            <div className="relative flex items-start flex-row-reverse">
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#1bae67] rounded-full z-10"></div>
-              <div className="w-1/2 pl-10 px-6 text-left hidden md:block">
-                <h3 className="text-2xl font-bold text-[#1bae67]">It's time to flip the script</h3>
-                <p className="mt-2 text-[#333] font-bold">What if leadership... </p>
-                <ul className="mt-4 space-y-0 list-none">
-                  <li className="text-[#333]">Isn't about putting on a show but about lasting impact?</li>
-                  <li className="text-[#333]">Isn't about dominance but about connection?</li>
-                  <li className="text-[#333]">Isn't about attracting attention but about elevating others?</li>
-                  <li className="text-[#333]">Isn't about unattainable popular ideas but about true understanding?</li>
-                </ul>
+
+              <div className="hidden md:block absolute -bottom-6 -left-6 bg-[#333333] text-white rounded-2xl px-5 py-4 shadow-lg max-w-xs">
+                <p className="text-sm uppercase tracking-[0.16em] text-white/70">The Core Belief</p>
+                <p className="font-semibold mt-1">
+                  Leadership is not absent. It is being overlooked.
+                </p>
               </div>
             </div>
           </div>
         </section>
-    <section className="bg-[#F0F2EB] py-10 px-6">
-      <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-3xl font-bold text-[#1bae67] mb-4">
-          There is a better way
-        </h2>
-        <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-          With the right mindset and tools, those who’ve been overlooked or underestimated can rise—and not just lead, but lead well.
-        </p>
-      </div>
-    </section>
-    <hr className="border-t-2 border-[#1bae67] w-24 mx-auto my-12" />
 
-    {/* EXPANDED BOTTOM SECTION WITH CARDS */}
-    <section className="bg-[#F0F2EB] py-20 px-6">
-      <div className="max-w-6xl mx-auto text-center mb-12">
-        <h2 className="text-3xl font-bold text-[#333333] mb-4">
-          Continue the Journey
-        </h2>
-        <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-          Explore more ways to grow leadership from the inside out—whether you're just beginning or looking to deepen your impact.
-        </p>
-      </div>
+        {/* Section 2: The leadership story we've been told */}
+        <section id="vision" className="px-6 pb-20">
+          <div className="max-w-6xl mx-auto bg-white border border-[#e5eadf] rounded-[2rem] shadow-sm p-8 md:p-12">
+            <div className="max-w-3xl mb-10">
+              <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+                The Leadership Story We’ve Been Told
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-5">
+                We have been taught to look for leadership in the wrong places.
+              </h2>
+              <p className="text-lg leading-relaxed text-[#555]">
+                For generations, leadership has been associated with confidence, charisma,
+                certainty, dominance, and visibility. The people who speak first, take up
+                space, and project authority are often assumed to be the ones best equipped
+                to lead.
+              </p>
+              <p className="text-lg leading-relaxed text-[#555] mt-5">
+                But that definition is too narrow for the complexity of modern work—and too
+                shallow for the kind of leadership the future requires. It shapes who gets
+                recognized, who gets promoted, and who quietly concludes that leadership must
+                belong to someone else.
+              </p>
+            </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {/* CARD 1 */}
-        <div className="bg-white rounded-2xl shadow-md p-6 text-left hover:shadow-lg transition">
-          <h3 className="text-xl font-bold text-[#1bae67] mb-2">Custom Keynotes</h3>
-          <p className="text-gray-700 mb-4">
-            Book Michael for an inspiring, story-driven keynote tailored to your audience and leadership goals.
-          </p>
-          <a href="/keynotes" className="text-[#1bae67] font-semibold hover:underline">
-            Learn More →
-          </a>
-        </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="rounded-2xl bg-[#F0F2EB] p-6">
+                <h3 className="text-xl font-semibold mb-3">The Stereotype</h3>
+                <p className="text-[#555] leading-relaxed">
+                  We confuse leadership with presence, polish, certainty, and volume.
+                </p>
+              </div>
 
-        {/* CARD 2 */}
-        <div className="bg-white rounded-2xl shadow-md p-6 text-left hover:shadow-lg transition">
-          <h3 className="text-xl font-bold text-[#1bae67] mb-2">The Collective Rise</h3>
-          <p className="text-gray-700 mb-4">
-            Join our leadership development cohorts for a 9-month experience that builds foundational leadership mindsets and skills.
-          </p>
-            <a
-              href="https://www.thecollectiverise.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#1bae67] font-semibold hover:underline"
-            >
-              Learn More →
-            </a>          
-        </div>
+              <div className="rounded-2xl bg-[#F0F2EB] p-6">
+                <h3 className="text-xl font-semibold mb-3">The Blind Spot</h3>
+                <p className="text-[#555] leading-relaxed">
+                  When the definition is too narrow, capable leaders are overlooked before they ever have the chance to rise.
+                </p>
+              </div>
 
-        {/* CARD 3 */}
-        <div className="bg-white rounded-2xl shadow-md p-6 text-left hover:shadow-lg transition">
-          <h3 className="text-xl font-bold text-[#1bae67] mb-2">Start with a Quiz</h3>
-          <p className="text-gray-700 mb-4">
-            Not sure where to start? Discover your leadership archetype with our 2-minute Unlikely Leader Quiz.
-          </p>
-          <a href="/quiz" className="text-[#1bae67] font-semibold hover:underline">
-            Take the Quiz →
-          </a>
-        </div>
-      </div>
-    </section>      
-    <Footer />
+              <div className="rounded-2xl bg-[#F0F2EB] p-6">
+                <h3 className="text-xl font-semibold mb-3">The Consequence</h3>
+                <p className="text-[#555] leading-relaxed">
+                  Organizations miss talent. People doubt themselves. Leadership pipelines become distorted.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* A wider lens */}
+        <section className="px-6 py-20 bg-[#333333] text-white">
+          <div className="max-w-6xl mx-auto grid gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-start">
+            <div>
+              <p className="text-sm uppercase tracking-[0.18em] text-[#96CEA0] font-semibold mb-4">
+                A Wider Lens on Leadership
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-6">
+                Leadership is not about performing a role. It is about how you build, regulate, decide, and elevate others.
+              </h2>
+              <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-2xl">
+                <span className="italic">Unlikely Leader</span> offers a different vision—one that values
+                self-awareness over self-promotion, steadiness over spectacle, substance over performance,
+                and impact over image.
+              </p>
+              <p className="text-lg text-white/80 leading-relaxed mt-5 max-w-2xl">
+                This is not a softer definition of leadership. It is a more accurate one.
+                And in a world shaped by burnout, complexity, and AI-driven change, it may also be the more necessary one.
+              </p>
+            </div>
+
+            <div className="grid gap-4">
+              <div className="rounded-[1.5rem] bg-white/10 border border-white/10 p-6 backdrop-blur-sm">
+                <p className="text-sm uppercase tracking-[0.14em] text-white/60 mb-2">Rooted In</p>
+                <p className="text-xl font-semibold">Self-awareness, resilience, character, and impact</p>
+              </div>
+
+              <div className="rounded-[1.5rem] bg-white/10 border border-white/10 p-6 backdrop-blur-sm">
+                <p className="text-sm uppercase tracking-[0.14em] text-white/60 mb-2">Challenges</p>
+                <p className="text-xl font-semibold">Outdated myths about who looks like a leader</p>
+              </div>
+
+              <div className="rounded-[1.5rem] bg-white/10 border border-white/10 p-6 backdrop-blur-sm">
+                <p className="text-sm uppercase tracking-[0.14em] text-white/60 mb-2">Invites</p>
+                <p className="text-xl font-semibold">A more grounded, human, future-ready way to lead</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Book launch */}
+        <section className="px-6 py-20">
+          <div className="max-w-6xl mx-auto bg-white border border-[#e5eadf] rounded-[2rem] shadow-sm p-8 md:p-12">
+            <div className="grid gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+              <div>
+                <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+                  Book Launch • July 2026
+                </p>
+                <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-5">
+                  A new book for people who have felt underestimated by traditional leadership narratives
+                </h2>
+                <p className="text-lg md:text-xl text-[#555] leading-relaxed max-w-2xl">
+                  <span className="italic">Unlikely Leader</span> explores how outdated leadership ideas shape
+                  who gets seen, who gets chosen, and who gets left behind. It offers
+                  a more honest path forward—one rooted in self-awareness, resilience,
+                  character, and impact.
+                </p>
+
+                <div className="mt-8 grid sm:grid-cols-2 gap-4 max-w-2xl">
+                  <div className="rounded-2xl bg-[#F0F2EB] p-5">
+                    <p className="text-sm text-[#666] mb-1">What it challenges</p>
+                    <p className="font-semibold">The myth that leaders must look a certain way</p>
+                  </div>
+                  <div className="rounded-2xl bg-[#F0F2EB] p-5">
+                    <p className="text-sm text-[#666] mb-1">What it offers</p>
+                    <p className="font-semibold">A more inclusive, grounded vision of leadership</p>
+                  </div>
+                </div>
+
+                <div className="mt-8">
+                  <Link href="/contact">
+                    <span className="inline-block bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
+                      Inquire About the Book
+                    </span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="rounded-[2rem] bg-[#333333] text-white p-8 md:p-10">
+                <p className="text-sm uppercase tracking-[0.14em] text-[#96CEA0] font-semibold mb-3">
+                  Coming Soon
+                </p>
+                <h3 className="text-3xl font-semibold mb-4 italic">
+                  Unlikely Leader
+                </h3>
+                <p className="text-white/85 leading-relaxed mb-6">
+                  A book about the people who have been underestimated, the myths that have held them back, and the leadership the future actually needs.
+                </p>
+                <div className="rounded-2xl bg-white/10 p-5">
+                  <p className="text-sm uppercase tracking-[0.14em] text-white/60 mb-2">
+                    Expected Release
+                  </p>
+                  <p className="font-semibold">July 2026</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* Email signup */}
+        <section className="px-6 py-20">
+          <div className="max-w-5xl mx-auto bg-white border border-[#e5eadf] rounded-[2rem] shadow-sm p-8 md:p-12">
+            <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+              <div>
+                <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+                  Stay Connected
+                </p>
+                <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
+                  Be the first to hear about the launch of <span className="italic">Unlikely Leader</span>
+                </h2>
+                <p className="text-lg text-[#555] leading-relaxed max-w-2xl">
+                  Get updates on the July 2026 book launch, keynote appearances, leadership insights,
+                  and new ways to engage with the ideas behind <span className="italic">Unlikely Leader</span>.
+                </p>
+              </div>
+
+              <div className="bg-[#F0F2EB] rounded-[1.5rem] p-6 border border-[#e5eadf]">
+                <form className="space-y-4">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2 text-[#333333]">
+                      Email address
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email"
+                      className="w-full rounded-xl border border-[#cfd8cb] bg-white px-4 py-3 text-[#333333] focus:outline-none focus:ring-2 focus:ring-[#1bae67]"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition shadow-sm"
+                  >
+                    Get Launch Updates
+                  </button>
+                </form>
+
+                <p className="mt-4 text-sm text-[#666666] leading-relaxed">
+                  Occasional updates only. No spam.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Problem / reframe
+        <section className="px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="max-w-3xl mb-10">
+              <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+                The Story We’ve Been Told
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
+                We do not just have a leadership myth. We have a leadership blind spot.
+              </h2>
+              <p className="text-lg text-[#555] leading-relaxed">
+                The Unlikely Leader names the false narrative many people have absorbed:
+                that leadership belongs to a certain kind of person. The book and this
+                body of work exist to challenge that belief.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+              {problemCards.map((card) => (
+                <div
+                  key={card.title}
+                  className="bg-white border border-[#e5eadf] rounded-[1.75rem] p-7 shadow-sm"
+                >
+                  <h3 className="text-2xl font-semibold mb-3">{card.title}</h3>
+                  <p className="text-[#555] leading-relaxed">{card.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section> */}
+
+        {/* Meet Michael */}
+        <section className="px-6 py-20 bg-white">
+          <div className="max-w-6xl mx-auto grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+            <div className="rounded-[2rem] bg-[#F0F2EB] border border-[#e5eadf] min-h-[420px] flex items-center justify-center p-8 text-center">
+              <div>
+                <p className="text-sm uppercase tracking-[0.16em] text-[#1bae67] font-semibold mb-3">
+                  Image Placeholder
+                </p>
+                <p className="text-[#4a4a4a] text-lg leading-relaxed max-w-xs">
+                  Add an author / speaker image of Michael here
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+                Meet Michael
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-5">
+                A career spent recognizing human potential in places others might miss
+              </h2>
+              <p className="text-lg text-[#555] leading-relaxed mb-5">
+                Michael Dowling is an author, speaker, and leadership advisor whose work
+                challenges traditional assumptions about what leadership looks like and who
+                gets recognized. Drawing from his experience as a former talent agent,
+                founder, CEO, and executive coach, he helps audiences rethink leadership
+                through the lenses of self-awareness, resilience, character, and impact.
+              </p>
+              <p className="text-lg text-[#555] leading-relaxed mb-8">
+                His message is both deeply personal and broadly relevant: some of our best
+                leaders have been overlooked not because they lack capability, but because
+                we have been using the wrong yardstick.
+              </p>
+
+              <Link href="/keynotes">
+                <span className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-6 py-3 rounded-xl hover:bg-[#F0F2EB] transition cursor-pointer">
+                  Explore Michael’s Speaking
+                </span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+          {/* Ways to engage */}
+          <section className="px-6 pt-24 pb-28 md:pt-28 md:pb-32">
+            <div className="max-w-6xl mx-auto">
+              <div className="max-w-3xl mb-10">
+                <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+                  Continue the Journey
+                </p>
+                <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
+                  Multiple ways to engage with the ideas behind Unlikely Leader
+                </h2>
+                <p className="text-lg text-[#555] leading-relaxed">
+                  Whether you are following the book launch, looking for a keynote,
+                  exploring deeper leadership development, or connecting through social
+                  media, this work is designed to meet people at different points in
+                  their journey.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {engagementPaths.map((item) => {
+                  if (item.social) {
+                    return (
+                      <div
+                        key={item.title}
+                        className="bg-white border border-[#e5eadf] rounded-[1.75rem] p-7 shadow-sm h-full"
+                      >
+                        <h3 className="text-2xl font-semibold mb-3">{item.title}</h3>
+                        <p className="text-[#555] leading-relaxed mb-6">{item.description}</p>
+
+                        <div className="mt-4">
+                          <p className="text-sm uppercase tracking-[0.14em] text-[#666666] mb-3">
+                            Connect on
+                          </p>
+
+                          <SocialLinks colorClassName="text-[#1bae67]" />
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  const content = (
+                    <div className="bg-white border border-[#e5eadf] rounded-[1.75rem] p-7 shadow-sm h-full hover:shadow-md transition">
+                      <h3 className="text-2xl font-semibold mb-3">{item.title}</h3>
+                      <p className="text-[#555] leading-relaxed mb-6">{item.description}</p>
+                      <span className="text-[#1bae67] font-semibold">{item.cta} →</span>
+                    </div>
+                  );
+
+                  return item.external ? (
+                    <a key={item.title} href={item.href} target="_blank" rel="noreferrer">
+                      {content}
+                    </a>
+                  ) : (
+                    <Link key={item.title} href={item.href}>
+                      {content}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+        {/* Speaking bridge */}
+        <section className="px-6 py-20 bg-[#333333] text-white">
+          <div className="max-w-5xl mx-auto text-center">
+            <p className="text-sm uppercase tracking-[0.18em] text-[#96CEA0] font-semibold mb-4">
+              Signature Keynotes
+            </p>
+            <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-5">
+              Bring these ideas to your audience through story-driven, high-impact speaking
+            </h2>
+            <p className="text-lg md:text-xl text-white/85 leading-relaxed max-w-3xl mx-auto">
+              Michael’s keynote talks challenge outdated leadership assumptions, explore
+              why we keep overlooking some of our best people, and offer practical,
+              memorable ideas for the future of leadership.
+            </p>
+
+            <div className="mt-8">
+              <Link href="/keynotes">
+                <span className="inline-block bg-[#1bae67] text-white font-semibold px-7 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
+                  View Signature Keynotes
+                </span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA
+        <section className="px-6 py-20">
+          <div className="max-w-5xl mx-auto text-center bg-white border border-[#e5eadf] rounded-[2rem] p-10 md:p-14 shadow-sm">
+            <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+              Stay Connected
+            </p>
+            <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-5">
+              A new vision of leadership is coming into focus
+            </h2>
+            <p className="text-lg md:text-xl text-[#555] leading-relaxed max-w-3xl mx-auto">
+              Follow the journey to the July 2026 launch of The Unlikely Leader, explore keynote
+              opportunities, or begin by discovering your own leadership archetype.
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+              <Link href="/assessment">
+                <span className="inline-block bg-[#1bae67] text-white font-semibold px-7 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
+                  Take the Quiz
+                </span>
+              </Link>
+
+              <Link href="/contact">
+                <span className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-7 py-3 rounded-xl hover:bg-[#F0F2EB] transition cursor-pointer">
+                  Contact Michael
+                </span>
+              </Link>
+            </div>
+          </div>
+        </section> */}
+      </main>
+
+      <Footer />
     </div>
-    </>
   );
 }

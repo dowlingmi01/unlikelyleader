@@ -1,13 +1,39 @@
 // components/Footer.tsx
 import Link from 'next/link';
+import SocialLinks from './SocialLinks';
 
 export default function Footer() {
   return (
-      <footer className="text-center text-sm text-[#736B70] py-8 px-4 bg-white">
-        © 2025 Unlikely Leader | 
-        <Link href="/privacy" className="hover:underline"> Privacy Policy</Link> | 
-        <Link href="/contact" className="hover:underline"> Contact</Link>
-      </footer>
+    <footer className="bg-[#F0F2EB] border-t border-[#e5eadf] px-6 py-14">
+      <div className="max-w-6xl mx-auto grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
+        <div>
+          <p className="text-lg font-semibold text-[#333333]">Unlikely Leader</p>
+          <p className="mt-3 text-sm text-[#736B70] max-w-md leading-relaxed">
+            Challenging outdated leadership myths and offering a more grounded,
+            human vision of leadership.
+          </p>
+        </div>
 
-    );
+        <div className="flex flex-col items-start md:items-end gap-5">
+          <SocialLinks colorClassName="text-[#736B70]" />
+
+          <div className="flex flex-wrap gap-4 text-sm text-[#736B70]">
+            <Link href="/privacy" className="hover:text-[#1bae67] transition">
+              Privacy Policy
+            </Link>
+            <Link href="/contact" className="hover:text-[#1bae67] transition">
+              Contact
+            </Link>
+            <Link href="/keynotes" className="hover:text-[#1bae67] transition">
+              Keynotes
+            </Link>
+          </div>
+
+          <p className="text-xs text-[#736B70]">
+            © 2026 Unlikely Leader. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
 }

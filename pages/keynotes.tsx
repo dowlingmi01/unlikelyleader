@@ -4,117 +4,536 @@ import Link from 'next/link';
 import Footer from '../components/Footer';
 import Head from 'next/head';
 
+const signatureKeynotes = [
+  {
+    title: 'We Don’t Have a Leadership Problem. We Have a Recognition Problem.',
+    theme: 'Leadership is being overlooked—not absent.',
+    featured: true,
+    concepts: [
+      'Why organizations keep overlooking some of their most capable people',
+      'How outdated leadership stereotypes distort hiring, promotion, and succession decisions',
+      'The hidden strengths of “unlikely leaders,” including discernment, steadiness, and trust-building',
+    ],
+    gains: [
+      'A new lens for recognizing leadership potential',
+      'Greater awareness of leadership bias in talent decisions',
+      'A more inclusive and future-ready understanding of what leadership looks like',
+    ],
+    audiences: [
+      'Leadership conferences',
+      'Executive teams',
+      'HR / Talent / L&D',
+      'Emerging leader programs',
+    ],
+  },
+  {
+    title: 'Stop Managing Time. Start Managing Pressure.',
+    theme: 'Most dysfunction is not a time problem—it is a pressure problem.',
+    featured: false,
+    concepts: [
+      'Why overwhelm is often self-generated through poor internal systems',
+      'How reactive habits, unclear priorities, and decision friction create burnout',
+      'What leaders can do to reduce pressure without lowering performance',
+    ],
+    gains: [
+      'A practical framework for reducing reactivity',
+      'Tools for identifying and removing unnecessary friction',
+      'A better way to lead with clarity, focus, and steadiness',
+    ],
+    audiences: [
+      'People managers',
+      'Mid-level managers',
+      'High-growth teams',
+      'Operations and frontline leaders',
+    ],
+  },
+  {
+    title: 'The Confidence Illusion.',
+    theme: 'We confuse visibility, certainty, and charisma with capability.',
+    featured: false,
+    concepts: [
+      'Why confidence is one of the most overvalued traits in leadership',
+      'How organizations mistake presence for substance',
+      'The risks of rewarding certainty over judgment and character',
+    ],
+    gains: [
+      'A sharper way to evaluate leadership effectiveness',
+      'Language for challenging confidence bias in promotion decisions',
+      'A more grounded model of executive presence and credibility',
+    ],
+    audiences: [
+      'Senior leaders',
+      'HR / Talent teams',
+      'Promotion decision-makers',
+      'Leadership development audiences',
+    ],
+  },
+  {
+    title: 'AI Is Changing Work. It Should Change Who Leads.',
+    theme: 'Capability without integrity may be the biggest leadership risk of the next decade.',
+    featured: false,
+    concepts: [
+      'Why AI is changing not just work, but the kind of leaders organizations need',
+      'The widening gap between technical capability and ethical maturity',
+      'Why judgment, discernment, and integrity are becoming strategic advantages',
+    ],
+    gains: [
+      'A clearer view of leadership risk in an AI-shaped workplace',
+      'A framework for thinking about ethical intelligence',
+      'A stronger case for pairing innovation with responsibility',
+    ],
+    audiences: [
+      'Executive teams',
+      'Boards',
+      'Innovation and strategy leaders',
+      'Future-of-work and AI conference audiences',
+    ],
+  },
+];
+
+const audienceGroups = [
+  'Executive Teams',
+  'HR / Talent / L&D',
+  'Emerging Leaders',
+  'Women’s Leadership Events',
+  'ERGs & Leadership Communities',
+  'Future of Work Conferences',
+  'Strategy & Innovation Teams',
+  'Culture & Organizational Development',
+];
+
+const speakingFormats = [
+  {
+    title: '45–60 Minute Keynote',
+    description:
+      'A concise, high-impact keynote designed for conferences, summits, and company-wide events.',
+  },
+  {
+    title: '60–90 Minute Keynote',
+    description:
+      'A deeper keynote experience with more storytelling, practical insight, and audience activation.',
+  },
+  {
+    title: 'Keynote + Workshop',
+    description:
+      'Extend the keynote into a facilitated learning experience that helps audiences apply the concepts.',
+  },
+  {
+    title: 'Leadership Offsite Session',
+    description:
+      'Designed for executive teams and leadership groups who want a more focused strategic conversation.',
+  },
+];
+
+const workshopOptions = [
+  {
+    title: 'Redefining Leadership Potential',
+    description:
+      'Unlock hidden talent with a better lens for evaluating potential, readiness, and leadership strength.',
+  },
+  {
+    title: 'Unlocking Leadership Potential',
+    description:
+      'Introduce a practical framework for understanding how mindset shapes behavior and outcomes.',
+  },
+  {
+    title: 'Archetypes in Motion',
+    description:
+      'Help leaders understand and embrace different ways of leading, contributing, and influencing.',
+  },
+];
+
 export default function KeynotesPage() {
+  const featuredKeynote = signatureKeynotes.find((k) => k.featured);
+  const supportingKeynotes = signatureKeynotes.filter((k) => !k.featured);
+
   return (
     <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">
       <Head>
         <title>Keynotes | Unlikely Leader</title>
+        <meta
+          name="description"
+          content="Michael Dowling delivers practical, thought-provoking keynote talks on leadership, pressure, confidence bias, and ethical intelligence in an AI-driven world."
+        />
       </Head>
 
       <Navbar />
-      <main className="max-w-5xl mx-auto px-6 py-16">
-        <section className="mb-16 text-center background-white">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#1bae67] mb-4">
-            Keynotes
-          </h1>
-          <p className="text-lg font-bold md:text-xl">
-            Redefining Leadership from the Inside Out
-          </p>
-        </section>
 
-        <section className="mb-16">
-          <blockquote className="italic text-xl text-center text-gray-600 border-l-4 border-[#1bae67] pl-4 mb-8">
-            “Leadership isn’t about personality—it’s about presence. And presence begins with self-awareness.”
-          </blockquote>
-          <h2 className="text-2xl font-semibold text-[#1bae67] mb-4">Overview</h2>
-          <p className="text-lg">
-            Some of your most powerful leaders are being overlooked—not because they lack talent,
-            but because they don’t fit the stereotypical mold. In this keynote and the workshops
-            that follow, Michael Dowling challenges outdated leadership paradigms and introduces
-            a transformational model designed to help “Unlikely Leaders” rise.
-          </p>
-        </section>
+      <main>
+        {/* Hero */}
+        <section className="px-6 py-20 md:py-24">
+          <div className="max-w-6xl mx-auto grid gap-12 md:grid-cols-2 md:items-center">
+            <div>
+              <p className="text-sm md:text-base uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-5">
+                Keynote Speaker • Leadership • Future of Work
+              </p>
 
-{/*        <section className="mb-16">
-          <h2 className="text-2xl font-semibold text-[#1bae67] mb-6">Core Promise</h2>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
-            <li><strong>Discover:</strong> What’s broken in how we evaluate leadership potential, why we miss the mark, and how to fix them</li>
-            <li><strong>Uncover:</strong> Hidden leadership traits in yourself and others</li>
-            <li><strong>Learn:</strong> A repeatable model for leadership growth (the MBO Model)</li>
-            <li><strong>Shift:</strong> From old definitions of leadership to future-ready ones</li>
-            <li><strong>Apply:</strong> The MBO Model to individual, team, and org-level growth</li>
-            <li><strong>Expand:</strong> How leadership is defined and recognized in your culture</li>
-          </ul>
-        </section>
-*/}
-        <section className="mb-6 py-6 px-6">
-          <h2 className="text-2xl font-semibold text-[#1bae67] mb-4">Key Concepts</h2>
-          <div className="pl-4">
-          <ul className="list-disc list-outside space-y-2 text-lg">
-            <li><strong>The Leadership Illusion:</strong> The problem with how we evaluate leadership potential.</li>
-            <li><strong>The Hidden Talent Crisis:</strong> Why organizations overlook some of their most capable people.</li>
-            <li><strong>The Leadership DNA:</strong> 16 traits that matter more than titles or volume.</li>
-            <li><strong>The Five Limiting Mindsets:</strong> Why they impact your outcomes, how to identify them, and how to reframe them to achieve better outcomes. them</li>
-            <li><strong>The Five Unlikely Leader Archetypes:</strong> A new lens for understanding leadership diversity</li>
-          </ul>
-          </div>
-        </section>
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight text-[#333333]">
+                Redefining Leadership for a World That Keeps Overlooking Its Best People
+              </h1>
 
-        <section className="mb-16">
-          <h2 className="text-2xl font-semibold text-[#1bae67] mb-4">Keynote Includes</h2>
-          <div className="pl-4">
-          <ul className="list-disc list-outside space-y-1 text-lg">
-            <li>60–90 minute keynote (available virtual or in-person)</li>
-            <li>Engaging, story-driven presentation with real-world application</li>
-            <li>Case examples from real-life Unlikely Leaders</li>
-            <li>Interactive moments for audience reflection and activation</li>
-          </ul>
-          </div>
-        </section>
+              <p className="mt-6 text-lg md:text-xl leading-relaxed text-[#4a4a4a] max-w-xl">
+                Michael Dowling delivers practical, thought-provoking keynotes that
+                challenge outdated leadership assumptions and help organizations
+                recognize, develop, and elevate the leaders they’ve been missing.
+              </p>
 
-        <section className="mb-16">
-          <h2 className="text-2xl font-semibold text-[#1bae67] mb-6">Workshop Options</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-2">Redefining Leadership Potential</h3>
-              <p className="text-base">Unlock Hidden Talent with a Better 9-Box Assessment.</p>
+              <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                <Link href="/contact">
+                  <span className="inline-block bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
+                    Request Speaking Info
+                  </span>
+                </Link>
+
+                <a href="#signature-keynotes">
+                  <span className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-6 py-3 rounded-xl hover:bg-white transition cursor-pointer">
+                    Explore Keynotes
+                  </span>
+                </a>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-3 text-sm">
+                {['Conferences', 'Corporate Events', 'Leadership Offsites', 'HR / Talent / L&D'].map(
+                  (item) => (
+                    <span
+                      key={item}
+                      className="bg-white border border-[#d9e3d6] px-4 py-2 rounded-full text-[#555]"
+                    >
+                      {item}
+                    </span>
+                  )
+                )}
+              </div>
             </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-2">Unlocking Leadership Potential</h3>
-              <p className="text-base">Introducing the Mindset-Behavior-Outcome Model.</p>
-            </div>
-            <div className="bg-white rounded-lg shadow p-6">
-              <h3 className="text-xl font-semibold mb-2">Archetypes in Motion</h3>
-              <p className="text-base">Understand and embrace unique leadership approaches.</p>
+
+            <div className="relative">
+              <div className="rounded-[2rem] bg-white shadow-xl border border-[#e8ece3] p-8 md:p-10">
+                <div className="aspect-[4/5] rounded-[1.5rem] bg-gradient-to-br from-[#1bae67] via-[#96CEA0] to-[#0AB0BD] p-8 flex flex-col justify-between text-white overflow-hidden">
+                  <div className="w-16 h-16 rounded-full border border-white/40 bg-white/10 backdrop-blur-sm" />
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.18em] text-white/85 mb-3">
+                      Signature Talks
+                    </p>
+                    <h2 className="text-2xl md:text-3xl font-semibold leading-tight">
+                      Leadership recognition, pressure, confidence bias, and ethical intelligence
+                    </h2>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-sm">
+                      <p className="text-sm text-white/80">Practical</p>
+                      <p className="font-semibold">Actionable ideas</p>
+                    </div>
+                    <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-sm">
+                      <p className="text-sm text-white/80">Story-Driven</p>
+                      <p className="font-semibold">Memorable delivery</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hidden md:block absolute -bottom-6 -left-6 bg-[#333333] text-white rounded-2xl px-5 py-4 shadow-lg">
+                <p className="text-sm uppercase tracking-[0.16em] text-white/70">Overall Theme</p>
+                <p className="font-semibold mt-1">
+                  Leadership is not absent. It is being unrecognized.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="mb-16">
-          <h2 className="text-2xl font-semibold text-[#1bae67] mb-4">Ideal For</h2>
-          <div className="pl-4">
-          <ul className="list-disc list-outside space-y-2 text-lg">
-            <li>Corporate leadership teams</li>
-            <li>Employee Resource Groups (ERGs)</li>
-            <li>DEI initiatives</li>
-            <li>HR & Organizational Development professionals</li>
-            <li>Nonprofit and educational institutions</li>
-          </ul>
+        {/* Why this matters now */}
+        <section className="px-6 pb-20">
+          <div className="max-w-6xl mx-auto bg-white border border-[#e5eadf] rounded-[2rem] shadow-sm p-8 md:p-12">
+            <div className="max-w-3xl">
+              <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+                Why These Talks Matter Now
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-5">
+                Organizations do not just have a leadership pipeline problem. They have a recognition problem.
+              </h2>
+              <p className="text-lg leading-relaxed text-[#555]">
+                In a workplace shaped by burnout, complexity, and AI-driven change,
+                companies need leaders with judgment, steadiness, self-awareness,
+                and integrity—not just visibility, certainty, or charisma.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 mt-10">
+              <div className="rounded-2xl bg-[#F0F2EB] p-6">
+                <h3 className="text-xl font-semibold mb-3">Recognition Bias</h3>
+                <p className="text-[#555] leading-relaxed">
+                  We often overlook capable leaders because they do not match the stereotype of what leadership is supposed to look like.
+                </p>
+              </div>
+              <div className="rounded-2xl bg-[#F0F2EB] p-6">
+                <h3 className="text-xl font-semibold mb-3">Pressure Overload</h3>
+                <p className="text-[#555] leading-relaxed">
+                  Many leadership and performance issues are not about time. They are about poorly managed pressure, friction, and reactivity.
+                </p>
+              </div>
+              <div className="rounded-2xl bg-[#F0F2EB] p-6">
+                <h3 className="text-xl font-semibold mb-3">Ethical Complexity</h3>
+                <p className="text-[#555] leading-relaxed">
+                  As AI increases capability and speed, discernment, integrity, and values-aligned judgment matter more than ever.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
-        <section className="text-center mt-12">
-          <p className="text-lg mb-6">
-            Ready to elevate your team’s leadership potential?<br />
-            Let’s talk about how this keynote can spark a shift in your organization.
-          </p>
-          <Link href="/contact">
-            <span className="inline-block bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-lg hover:bg-[#088f97] transition cursor-pointer">
-              Contact Us to Learn More
-            </span>
-          </Link>
+        {/* Signature keynotes */}
+        <section id="signature-keynotes" className="px-6 py-20 bg-[#333333] text-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="max-w-3xl mb-12">
+              <p className="text-sm uppercase tracking-[0.18em] text-[#96CEA0] font-semibold mb-4">
+                Signature Keynotes
+              </p>
+              <h2 className="text-3xl md:text-5xl font-bold leading-tight">
+                Talks designed to challenge assumptions and create meaningful momentum
+              </h2>
+            </div>
+
+            {featuredKeynote && (
+              <div className="bg-white text-[#333333] rounded-[2rem] shadow-2xl p-8 md:p-10 mb-10">
+                <div className="flex flex-wrap items-center gap-3 mb-5">
+                  <span className="inline-flex px-3 py-1 rounded-full bg-[#1bae67] text-white text-sm font-semibold">
+                    Flagship Keynote
+                  </span>
+                  <span className="inline-flex px-3 py-1 rounded-full bg-[#F0F2EB] text-[#333333] text-sm font-medium">
+                    {featuredKeynote.theme}
+                  </span>
+                </div>
+
+                <h3 className="text-3xl md:text-4xl font-bold leading-tight mb-8">
+                  {featuredKeynote.title}
+                </h3>
+
+                <div className="grid md:grid-cols-3 gap-8">
+                  <div>
+                    <h4 className="text-lg font-semibold mb-3 text-[#1bae67]">
+                      What this keynote explores
+                    </h4>
+                    <ul className="space-y-3 text-[#555] leading-relaxed">
+                      {featuredKeynote.concepts.map((item) => (
+                        <li key={item}>• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold mb-3 text-[#1bae67]">
+                      What audiences gain
+                    </h4>
+                    <ul className="space-y-3 text-[#555] leading-relaxed">
+                      {featuredKeynote.gains.map((item) => (
+                        <li key={item}>• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 className="text-lg font-semibold mb-3 text-[#1bae67]">
+                      Best for
+                    </h4>
+                    <ul className="space-y-3 text-[#555] leading-relaxed">
+                      {featuredKeynote.audiences.map((item) => (
+                        <li key={item}>• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {supportingKeynotes.map((keynote) => (
+                <div
+                  key={keynote.title}
+                  className="bg-white/8 border border-white/10 rounded-[1.75rem] p-7 backdrop-blur-sm"
+                >
+                  <p className="text-sm uppercase tracking-[0.14em] text-[#96CEA0] font-semibold mb-3">
+                    {keynote.theme}
+                  </p>
+                  <h3 className="text-2xl font-semibold leading-snug mb-5">
+                    {keynote.title}
+                  </h3>
+
+                  <div className="space-y-5 text-white/88">
+                    <div>
+                      <h4 className="text-sm uppercase tracking-[0.14em] text-white/60 mb-2">
+                        Core concepts
+                      </h4>
+                      <ul className="space-y-2 text-sm leading-relaxed">
+                        {keynote.concepts.map((item) => (
+                          <li key={item}>• {item}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="text-sm uppercase tracking-[0.14em] text-white/60 mb-2">
+                        Audience gains
+                      </h4>
+                      <ul className="space-y-2 text-sm leading-relaxed">
+                        {keynote.gains.map((item) => (
+                          <li key={item}>• {item}</li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h4 className="text-sm uppercase tracking-[0.14em] text-white/60 mb-2">
+                        Best for
+                      </h4>
+                      <p className="text-sm leading-relaxed">
+                        {keynote.audiences.join(' • ')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Audience fit */}
+        <section className="px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="max-w-3xl mb-10">
+              <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+                Who These Talks Are For
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
+                Designed for audiences navigating growth, change, and leadership complexity
+              </h2>
+              <p className="text-lg text-[#555] leading-relaxed">
+                These talks resonate with organizations that want to rethink leadership,
+                reduce unproductive pressure, and better prepare people to lead in a more
+                complex future.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {audienceGroups.map((group) => (
+                <div
+                  key={group}
+                  className="bg-white border border-[#e5eadf] rounded-2xl px-5 py-6 shadow-sm"
+                >
+                  <p className="font-semibold text-lg">{group}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Formats */}
+        <section className="px-6 py-20 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="max-w-3xl mb-10">
+              <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+                Speaking Formats
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
+                Flexible formats for conferences, offsites, and leadership events
+              </h2>
+              <p className="text-lg text-[#555] leading-relaxed">
+                Available in person or virtual, with options designed to fit keynote stages,
+                company gatherings, leadership retreats, and deeper development experiences.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+              {speakingFormats.map((format) => (
+                <div
+                  key={format.title}
+                  className="rounded-[1.5rem] border border-[#e5eadf] bg-[#F0F2EB] p-6"
+                >
+                  <h3 className="text-xl font-semibold mb-3">{format.title}</h3>
+                  <p className="text-[#555] leading-relaxed">{format.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Workshops */}
+        <section className="px-6 py-20">
+          <div className="max-w-6xl mx-auto">
+            <div className="max-w-3xl mb-10">
+              <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+                Extend the Conversation
+              </p>
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
+                Optional workshops for organizations that want to go deeper
+              </h2>
+              <p className="text-lg text-[#555] leading-relaxed">
+                Pair a keynote with a workshop to help leaders apply the ideas in a more
+                practical, reflective, and team-based format.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {workshopOptions.map((workshop) => (
+                <div
+                  key={workshop.title}
+                  className="bg-white rounded-[1.75rem] shadow-sm border border-[#e5eadf] p-7"
+                >
+                  <h3 className="text-2xl font-semibold mb-3">{workshop.title}</h3>
+                  <p className="text-[#555] leading-relaxed">{workshop.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonial placeholder */}
+        <section className="px-6 py-20 bg-[#333333] text-white">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-sm uppercase tracking-[0.18em] text-[#96CEA0] font-semibold mb-5">
+              What These Talks Deliver
+            </p>
+            <blockquote className="text-2xl md:text-4xl font-semibold leading-relaxed">
+              “A compelling blend of insight, story, and practical application that challenges
+              people to rethink what leadership looks like—and what better leadership requires.”
+            </blockquote>
+            <p className="mt-6 text-white/70 text-sm md:text-base">
+              Add client testimonial, endorsement, or event feedback here
+            </p>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="px-6 py-20">
+          <div className="max-w-5xl mx-auto text-center bg-white border border-[#e5eadf] rounded-[2rem] p-10 md:p-14 shadow-sm">
+            <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+              Booking & Inquiries
+            </p>
+            <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-5">
+              Bring a keynote that challenges assumptions and changes how people lead
+            </h2>
+            <p className="text-lg md:text-xl text-[#555] leading-relaxed max-w-3xl mx-auto">
+              Whether you’re planning a conference, leadership summit, offsite, or team
+              development experience, these talks are designed to provoke fresh thinking
+              and create lasting momentum.
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+              <Link href="/contact">
+                <span className="inline-block bg-[#1bae67] text-white font-semibold px-7 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
+                  Request Speaking Info
+                </span>
+              </Link>
+
+              <Link href="/contact">
+                <span className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-7 py-3 rounded-xl hover:bg-[#F0F2EB] transition cursor-pointer">
+                  Contact Michael
+                </span>
+              </Link>
+            </div>
+          </div>
         </section>
       </main>
+
       <Footer />
     </div>
   );
