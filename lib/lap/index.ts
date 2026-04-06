@@ -1,3 +1,6 @@
+export { LAP_ARCHETYPE_DETAILS, getLapArchetypeDetail } from './archetypeDetails';
+export type { LapArchetypeDetail } from './archetypeDetails';
+export { LAP_RESULTS_SNAPSHOT_KEY } from './constants';
 export {
   calculateLapScores,
 } from './calculateLapScores';
@@ -22,3 +25,4 @@ export {
   LAP_ARCHETYPES,
   LAP_QUESTION_COUNT,
 } from './types';
+export { parseLapScoresSnapshot } from './parseSnapshot';

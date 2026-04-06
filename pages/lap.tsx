@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import Head from 'next/head';
+import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import {
@@ -9,6 +10,7 @@ import {
   LAP_DIMENSION_POLE_LABELS,
   LAP_QUESTIONS,
   LAP_QUESTION_COUNT,
+  LAP_RESULTS_SNAPSHOT_KEY,
 } from '../lib/lap';
 import type { LapDimensionKey, LapResponseValue, LapScoresResult } from '../lib/lap';
 
@@ -48,6 +50,15 @@ export default function LapPage() {
   const [lapScores, setLapScores] = useState<LapScoresResult | null>(null);
   const [email, setEmail] = useState('');
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!lapScores) return;
+    try {
+      localStorage.setItem(LAP_RESULTS_SNAPSHOT_KEY, JSON.stringify(lapScores));
+    } catch {
+      /* ignore quota / private mode */
+    }
+  }, [lapScores]);
 
   const q = LAP_QUESTIONS[currentIndex];
 
@@ -119,7 +130,6 @@ export default function LapPage() {
       if (error) throw error;
 
       localStorage.setItem('lap_email', email);
-      localStorage.setItem('lap_results_snapshot', JSON.stringify(lapScores));
 
       setStep('done');
     } catch (e) {
@@ -272,6 +282,12 @@ export default function LapPage() {
               </ul>
 
               <div className="text-center">
+                <Link
+                  href="/lap/results"
+                  className="inline-block w-full sm:w-auto mb-4 bg-white border-2 border-[#1bae67] text-[#1bae67] hover:bg-[#1bae67]/5 font-semibold px-8 py-3 rounded-lg transition"
+                >
+                  View detailed archetype profile
+                </Link>
                 <p className="text-gray-700 mb-4">
                   Save your results and get a copy on file—we&apos;ll follow up with resources
                   that fit your profile.
@@ -338,12 +354,20 @@ export default function LapPage() {
                 <strong>{lapScores.primaryLapArchetype}</strong>, secondary:{' '}
                 <strong>{lapScores.secondaryLapArchetype}</strong>.
               </p>
-              <a
-                href="/contact"
-                className="inline-block bg-[#1bae67] hover:bg-[#15995a] text-white font-semibold px-6 py-3 rounded-lg transition"
-              >
-                Connect with Michael
-              </a>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center mb-6">
+                <Link
+                  href="/lap/results"
+                  className="inline-block bg-[#1bae67] hover:bg-[#15995a] text-white font-semibold px-8 py-3 rounded-lg transition w-full sm:w-auto"
+                >
+                  View full archetype details
+                </Link>
+                <a
+                  href="/contact"
+                  className="inline-block bg-white border-2 border-[#1bae67] text-[#1bae67] hover:bg-[#1bae67]/5 font-semibold px-8 py-3 rounded-lg transition w-full sm:w-auto"
+                >
+                  Connect with Michael
+                </a>
+              </div>
             </div>
           )}
         </div>
