@@ -19,9 +19,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const emailResponse = await resend.emails.send({
       from: 'no-reply@theunlikelyleader.com', // must match verified sender
       to: 'michaeldowling440@gmail.com',         // your receiving email
-      subject: type === 'quiz' ? 'New Quiz Submission' : 'New Contact Form Submission',
+      subject:
+        type === 'quiz'
+          ? 'New Quiz Submission'
+          : type === 'lap'
+            ? 'New LAP Submission'
+            : 'New Contact Form Submission',
       html: `
-        <h3>${type === 'quiz' ? 'Quiz Submission' : 'Contact Message'}</h3>
+        <h3>${
+          type === 'quiz'
+            ? 'Quiz Submission'
+            : type === 'lap'
+              ? 'Leadership Archetype Profile (LAP)'
+              : 'Contact Message'
+        }</h3>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         ${message ? `<p><strong>Message:</strong> ${message}</p>` : ''}
