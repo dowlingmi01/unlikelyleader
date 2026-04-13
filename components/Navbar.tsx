@@ -28,9 +28,9 @@ export default function Navbar() {
           <Link href="/keynotes" className="text-[#333333] hover:text-[#1bae67] transition">
             Keynotes
           </Link>
-          {/* <Link href="/assessment" className="text-[#333333] hover:text-[#1bae67] transition">
+          <Link href="/assessment" className="text-[#333333] hover:text-[#1bae67] transition">
             Assessment
-          </Link> */}
+          </Link>
         </div>
       </div>
     </nav>

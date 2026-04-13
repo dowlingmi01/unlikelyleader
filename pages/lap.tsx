@@ -182,8 +182,8 @@ export default function LapPage() {
                   </p>
                   <p>{q.promptA}</p>
                 </div>
-                <div className="rounded-lg bg-gray-50 border border-gray-200 p-4">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
+                <div className="rounded-lg bg-[#f0f7f4] border border-gray-200 p-4">
+                  <p className="text-xs font-semibold text-[#1bae67] uppercase tracking-wide mb-1">
                     B
                   </p>
                   <p>{q.promptB}</p>
