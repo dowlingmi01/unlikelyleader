@@ -18,15 +18,11 @@ export default function Navbar() {
           <Link href="/" className="text-[#333333] hover:text-[#1bae67] transition">
             Home
           </Link>
-{/*          <Link href="/about" className="text-[#333333] hover:text-[#1bae67] transition">
-            About
-          </Link>
-          <Link href="/services" className="text-[#333333] hover:text-[#1bae67] transition">
-            Services
-          </Link>
-*/}
           <Link href="/keynotes" className="text-[#333333] hover:text-[#1bae67] transition">
             Keynotes
+          </Link>
+          <Link href="/workshops" className="text-[#333333] hover:text-[#1bae67] transition">
+            Workshops
           </Link>
           <Link href="/assessment" className="text-[#333333] hover:text-[#1bae67] transition">
             Assessment

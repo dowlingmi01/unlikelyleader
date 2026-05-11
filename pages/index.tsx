@@ -293,11 +293,13 @@ export default function HomePage() {
                 </div>
 
                 <div className="mt-8">
-                  <Link href="/contact">
+                  <span className="text-lg text-[#1bae67] font-semibold mb-4">Follow Michael's writing journey</span>
+                  <SocialLinks colorClassName="text-[#736B70]" />
+                  {/* <Link href="/contact">
                     <span className="inline-block bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
                       Inquire About the Book
                     </span>
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
 
@@ -535,7 +537,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Final CTA
+        {/* Final CTA */}
         <section className="px-6 py-20">
           <div className="max-w-5xl mx-auto text-center bg-white border border-[#e5eadf] rounded-[2rem] p-10 md:p-14 shadow-sm">
             <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
@@ -552,7 +554,7 @@ export default function HomePage() {
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
               <Link href="/assessment">
                 <span className="inline-block bg-[#1bae67] text-white font-semibold px-7 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
-                  Take the Quiz
+                  Take the Assessment
                 </span>
               </Link>
 
@@ -563,7 +565,7 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
-        </section> */}
+        </section> */
       </main>
 
       <Footer />

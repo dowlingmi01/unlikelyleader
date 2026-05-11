@@ -106,40 +106,17 @@ const speakingFormats = [
   {
     title: '45–60 Minute Keynote',
     description:
-      'A concise, high-impact keynote designed for conferences, summits, and company-wide events.',
+      'For conferences, summits, and company-wide events.',
   },
   {
     title: '60–90 Minute Keynote',
     description:
-      'A deeper keynote experience with more storytelling, practical insight, and audience activation.',
-  },
-  {
-    title: 'Keynote + Workshop',
-    description:
-      'Extend the keynote into a facilitated learning experience that helps audiences apply the concepts.',
+      'For deeper storytelling and audience activation.',
   },
   {
     title: 'Leadership Offsite Session',
     description:
-      'Designed for executive teams and leadership groups who want a more focused strategic conversation.',
-  },
-];
-
-const workshopOptions = [
-  {
-    title: 'Redefining Leadership Potential',
-    description:
-      'Unlock hidden talent with a better lens for evaluating potential, readiness, and leadership strength.',
-  },
-  {
-    title: 'Unlocking Leadership Potential',
-    description:
-      'Introduce a practical framework for understanding how mindset shapes behavior and outcomes.',
-  },
-  {
-    title: 'Archetypes in Motion',
-    description:
-      'Help leaders understand and embrace different ways of leading, contributing, and influencing.',
+      'For smaller strategic conversations.',
   },
 ];
 
@@ -212,20 +189,23 @@ export default function KeynotesPage() {
                   <div className="w-16 h-16 rounded-full border border-white/40 bg-white/10 backdrop-blur-sm" />
                   <div>
                     <p className="text-sm uppercase tracking-[0.18em] text-white/85 mb-3">
-                      Signature Talks
+                      The Question We Need to Be Asking
                     </p>
                     <h2 className="text-2xl md:text-3xl font-semibold leading-tight">
-                      Leadership recognition, pressure, confidence bias, and ethical intelligence
+                    Why do we keep missing some of the best leaders in the room? 
+                    </h2>
+                    <h2 className="text-xl md:text-2xl font-semibold leading-tight text-[#333333]">
+                    And why do so many of them struggle to see it in themselves?
                     </h2>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-sm">
-                      <p className="text-sm text-white/80">Practical</p>
-                      <p className="font-semibold">Actionable ideas</p>
+                      <p className="text-sm text-white/80">Recognition Shift</p>
+                      <p className="font-semibold">Practical Tools</p>
                     </div>
                     <div className="rounded-2xl bg-white/15 p-4 backdrop-blur-sm">
-                      <p className="text-sm text-white/80">Story-Driven</p>
-                      <p className="font-semibold">Memorable delivery</p>
+                      <p className="text-sm text-white/80">See leadership differently</p>
+                      <p className="font-semibold">Turn insight into action</p>
                     </div>
                   </div>
                 </div>
@@ -249,7 +229,10 @@ export default function KeynotesPage() {
                 Why These Talks Matter Now
               </p>
               <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-5">
-                Organizations do not just have a leadership pipeline problem. They have a recognition problem.
+                Organizations do not just have a leadership pipeline problem. They have a {' '} 
+              <span className="text-3xl md:text-4xl font-bold leading-tight mb-5 text-[#1bae67]">
+                recognition problem.
+              </span>
               </h2>
               <p className="text-lg leading-relaxed text-[#555]">
                 In a workplace shaped by burnout, complexity, and AI-driven change,
@@ -456,36 +439,30 @@ export default function KeynotesPage() {
           </div>
         </section>
 
-        {/* Workshops */}
-        <section className="px-6 py-20">
-          <div className="max-w-6xl mx-auto">
-            <div className="max-w-3xl mb-10">
-              <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
-                Extend the Conversation
-              </p>
-              <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
-                Optional workshops for organizations that want to go deeper
-              </h2>
-              <p className="text-lg text-[#555] leading-relaxed">
-                Pair a keynote with a workshop to help leaders apply the ideas in a more
-                practical, reflective, and team-based format.
-              </p>
-            </div>
+      {/* Workshop bridge */}
+      <section className="px-6 py-20">
+        <div className="max-w-5xl mx-auto bg-white border border-[#e5eadf] rounded-[2rem] p-8 md:p-12 shadow-sm">
+          <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
+            Go Deeper
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
+            Turn the keynote into practice
+          </h2>
+          <p className="text-lg text-[#555] leading-relaxed max-w-3xl">
+            Keynotes create the shift. Workshops help leaders practice it. For organizations
+            that want to go deeper, MBOS-based workshops help participants apply the ideas
+            to real leadership challenges.
+          </p>
 
-            <div className="grid md:grid-cols-3 gap-6">
-              {workshopOptions.map((workshop) => (
-                <div
-                  key={workshop.title}
-                  className="bg-white rounded-[1.75rem] shadow-sm border border-[#e5eadf] p-7"
-                >
-                  <h3 className="text-2xl font-semibold mb-3">{workshop.title}</h3>
-                  <p className="text-[#555] leading-relaxed">{workshop.description}</p>
-                </div>
-              ))}
-            </div>
+          <div className="mt-8">
+            <Link href="/workshops">
+              <span className="inline-block bg-[#1bae67] text-white font-semibold px-7 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
+                Explore Workshops
+              </span>
+            </Link>
           </div>
-        </section>
-
+        </div>
+      </section>
         {/* What to expect */}
         <section className="px-6 py-20 bg-[#333333] text-white">
           <div className="max-w-4xl mx-auto text-center">
