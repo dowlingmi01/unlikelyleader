@@ -10,14 +10,14 @@ const signatureKeynotes = [
     theme: 'Leadership is being overlooked—not absent.',
     featured: true,
     concepts: [
-      'Why organizations keep overlooking some of their most capable people',
-      'How outdated leadership stereotypes distort hiring, promotion, and succession decisions',
-      'The hidden strengths of “unlikely leaders,” including discernment, steadiness, and trust-building',
+      'The 3 Traps that cause organizations to overlook capable leaders: the Performance Trap, the Presence Trap, and the Potential Trap',
+      'Why traditional leadership signals often reward visibility, confidence, and polish while missing steadiness, discernment, trust-building, and follow-through',
+      'How to recognize “unlikely leaders” by looking beyond who appears ready and paying closer attention to how people create impact',
     ],
     gains: [
-      'A new lens for recognizing leadership potential',
-      'Greater awareness of leadership bias in talent decisions',
-      'A more inclusive and future-ready understanding of what leadership looks like',
+      'A practical lens for spotting the leadership potential your organization may already be missing',
+      'A clearer way to challenge bias in promotion, succession, and talent development decisions',
+      'Actionable shifts for broadening leadership recognition without lowering the bar for leadership excellence',
     ],
     audiences: [
       'Leadership conferences',
@@ -48,18 +48,18 @@ const signatureKeynotes = [
     ],
   },
   {
-    title: 'The Confidence Illusion.',
-    theme: 'We confuse visibility, certainty, and charisma with capability.',
+    title: 'The Signal Problem.',
+    theme: 'Organizations keep mistaking visibility, certainty, and charisma for leadership capacity.',
     featured: false,
     concepts: [
-      'Why confidence is one of the most overvalued traits in leadership',
-      'How organizations mistake presence for substance',
-      'The risks of rewarding certainty over judgment and character',
+      'Why the most visible leadership signals are not always the most predictive',
+      'How organizations mistake presence for substance, confidence for readiness, and certainty for judgment',
+      'The risks of rewarding the people who look like leaders while overlooking the people already doing the work of leadership',
     ],
     gains: [
-      'A sharper way to evaluate leadership effectiveness',
-      'Language for challenging confidence bias in promotion decisions',
-      'A more grounded model of executive presence and credibility',
+      'A sharper way to evaluate leadership potential and effectiveness',
+      'Language for challenging signal bias in hiring, promotion, and succession decisions',
+      'A more grounded model of executive presence, credibility, and leadership capacity',
     ],
     audiences: [
       'Senior leaders',
@@ -69,18 +69,18 @@ const signatureKeynotes = [
     ],
   },
   {
-    title: 'AI Is Changing Work. It Should Change Who Leads.',
-    theme: 'Capability without integrity may be the biggest leadership risk of the next decade.',
+    title: 'The Discernment Gap.',
+    theme: 'When AI has the answer, leaders still need the judgment.',
     featured: false,
     concepts: [
-      'Why AI is changing not just work, but the kind of leaders organizations need',
-      'The widening gap between technical capability and ethical maturity',
-      'Why judgment, discernment, and integrity are becoming strategic advantages',
+      'Why AI is changing not just how work gets done, but what human leadership is for',
+      'How faster answers can create worse decisions when leaders lack discernment',
+      'Why judgment, integrity, self-awareness, and ethical maturity are becoming strategic advantages',
     ],
     gains: [
       'A clearer view of leadership risk in an AI-shaped workplace',
-      'A framework for thinking about ethical intelligence',
-      'A stronger case for pairing innovation with responsibility',
+      'A practical lens for separating information, intelligence, and judgment',
+      'A stronger case for developing leaders who can pair innovation with responsibility',
     ],
     audiences: [
       'Executive teams',

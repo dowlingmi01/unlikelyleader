@@ -119,7 +119,7 @@ const mbosModel = [
   {
     label: 'Shift',
     description:
-      'The intentional pause that helps you choose a more effective mindset and response.',
+      'The intentional pause that helps you interrupt the default pattern and choose a better response.',
   },
 ];
 
@@ -250,15 +250,16 @@ export default function WorkshopsPage() {
                 Leadership Workshops • MBOS Practice Labs • Team Development
               </p>
 
-              <h1 className="text-4xl md:text-6xl font-bold leading-tight text-[#333333]">
-                Help Leaders Practice the Moment Between Reaction and Response
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight text-[#333333]">
+              Tools Don't Fail Because They're Bad. They Fail Because People Don't Understand Why They Keep Getting Stuck.
               </h1>
 
-              <p className="mt-6 text-lg md:text-xl leading-relaxed text-[#4a4a4a] max-w-xl">
-                MBOS workshops help leaders recognize the mindset patterns driving their behavior,
-                interrupt default reactions, and practice more intentional responses to the leadership
-                challenges they face every day.
-              </p>
+              <p className="mt-6 text-lg md:text-lg leading-relaxed text-[#4a4a4a] max-w-xl">
+              Communication scripts, feedback models, prioritization tools, and decision frameworks can all help. 
+              But in real leadership moments, people don’t respond from a neutral place. 
+              They respond from pressure, emotion, fear, urgency, defensiveness, or the need to prove themselves.
+              The MBOS Framework helps leaders recognize the mindset driving their behavior, interrupt automatic reactions, 
+              and practice more intentional responses that create better outcomes.</p>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <a href="#workshop-tracks">
@@ -275,7 +276,7 @@ export default function WorkshopsPage() {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3 text-sm">
-                {['Leadership Teams', 'New Managers', 'High-Potential Employees', 'HR / Talent / L&D'].map(
+                {['Leadership Teams', 'New & Emerging Managers', 'High-Potential Employees', 'HR / Talent / L&D'].map(
                   (item) => (
                     <span
                       key={item}
@@ -292,10 +293,11 @@ export default function WorkshopsPage() {
               <div className="rounded-[2rem] bg-white shadow-xl border border-[#e8ece3] p-8 md:p-10">
                 <div className="mb-6">
                   <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-3">
-                    The MBOS Model
+                    Mindset-Behavior-Outcome-Shift
                   </p>
-                  <h2 className="text-2xl md:text-3xl font-bold leading-tight">
-                    Mindset drives behavior. Behavior creates outcomes. Shift changes the loop.
+                  <h2 className="text-2xl md:text-2xl font-bold leading-tight">
+                    Mindset drives behavior. Behavior creates outcomes. Shift changes the loop. {' '}
+                    {/* <span className="text-2xl md:text-2xl leading-tight">To use a tool effectively, leaders first need to understand the internal pattern driving their response.</span> */}
                   </h2>
                 </div>
 
