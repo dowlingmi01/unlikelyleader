@@ -317,7 +317,7 @@ export default function HomePage() {
                   <p className="text-sm uppercase tracking-[0.14em] text-white/60 mb-2">
                     Expected Release
                   </p>
-                  <p className="font-semibold">July 2026</p>
+                  <p className="font-semibold">August 11, 2026</p>
                 </div>
               </div>
             </div>
