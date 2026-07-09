@@ -13,11 +13,33 @@ type SupabaseInsertPayload = {
   old_record: null;
 };
 
-function isAuthorized(req: NextApiRequest, secret: string) {
-  const auth = req.headers.authorization;
-  const headerSecret = req.headers['x-webhook-secret'];
+function normalizeSecret(value: string | string[] | undefined) {
+  const raw = Array.isArray(value) ? value[0] : value;
+  return raw?.trim();
+}
 
-  return auth === `Bearer ${secret}` || headerSecret === secret;
+function secretsMatch(provided: string | undefined, expected: string) {
+  if (!provided) return false;
+
+  const normalizedProvided = provided.trim();
+  const normalizedExpected = expected.trim();
+
+  if (normalizedProvided === normalizedExpected) return true;
+
+  const bearerMatch = normalizedProvided.match(/^Bearer\s+(.+)$/i);
+  return bearerMatch?.[1]?.trim() === normalizedExpected;
+}
+
+function isAuthorized(req: NextApiRequest, secret: string) {
+  const auth = normalizeSecret(req.headers.authorization);
+  const headerSecret = normalizeSecret(req.headers['x-webhook-secret']);
+  const querySecret = normalizeSecret(req.query.secret);
+
+  return (
+    secretsMatch(auth, secret) ||
+    secretsMatch(headerSecret, secret) ||
+    secretsMatch(querySecret, secret)
+  );
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
