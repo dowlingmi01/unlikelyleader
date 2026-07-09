@@ -79,12 +79,19 @@ export default function HomePage() {
     setStatus('loading');
 
     try {
-      // Save to Supabase
       const { error } = await supabase.from('email_subscribers').insert([
         { email, source: 'homepage' },
       ]);
 
-      if (error) throw error;
+      if (error) {
+        // Email already on the list (unique constraint) — treat as success
+        if (error.code === '23505') {
+          setStatus('success');
+          setEmail('');
+          return;
+        }
+        throw error;
+      }
 
       setStatus('success');
       setEmail('');
