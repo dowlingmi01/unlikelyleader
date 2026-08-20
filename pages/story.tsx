@@ -1,13 +1,12 @@
-// pages/index.tsx
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Link from 'next/link';
-import Head from 'next/head';
+import Seo from '../components/Seo';
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-export default function Home() {
+export default function StoryPage() {
   useEffect(() => {
     AOS.init({
       once: true,
@@ -18,10 +17,11 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>Home | Unlikely Leader</title>
-        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-      </Head>
+      <Seo
+        title="The Story | Unlikely Leader"
+        description="There's a stereotype about what a leader looks like. Explore the Unlikely Leader story and why overlooked leaders are ready to rise."
+        path="/story"
+      />
 
       <Navbar />
       <div className="bg-[#F0F2EB] text-[#333333] font-sans">

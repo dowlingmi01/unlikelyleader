@@ -1,13 +1,15 @@
-import Head from 'next/head';
+import Seo from '../components/Seo';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 export default function PrivacyPolicy() {
   return (
     <>
-      <Head>
-        <title>Privacy Policy | Unlikely Leader</title>
-      </Head>
+      <Seo
+        title="Privacy Policy | Unlikely Leader"
+        description="How Unlikely Leader collects, uses, and protects your information when you interact with our website."
+        path="/privacy"
+      />
 
       <Navbar />
 

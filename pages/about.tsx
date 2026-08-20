@@ -1,16 +1,20 @@
 import Navbar from '../components/Navbar';
 import Link from 'next/link';
+import Seo from '../components/Seo';
 import Footer from '../components/Footer';
-import Head from 'next/head';
 import TwoColumnSection from '../components/TwoColumnSection';
+import { personJsonLd } from '../lib/jsonLd';
 
 
 export default function AboutPage() {
   return (
     <>
-      <Head>
-        <title>About | Unlikely Leader</title>
-      </Head>
+      <Seo
+        title="About | Unlikely Leader"
+        description="Meet Michael Dowling and the story behind Unlikely Leader — challenging outdated leadership myths and elevating overlooked leaders."
+        path="/about"
+        jsonLd={personJsonLd()}
+      />
       <Navbar />
       <section className="text-center py-10 px-6 bg-[#F0F2EB]">
         <h1 className="text-4xl md:text-5xl font-bold text-[#1bae67] mb-4">
@@ -211,9 +215,9 @@ export default function AboutPage() {
         <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">
       {/* HERO SECTION */}
       <section className="text-center py-8 px-6 bg-white">
-        <h1 className="text-4xl md:text-5xl font-bold text-[#1bae67] mb-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#1bae67] mb-4">
           About 
-        </h1>
+        </h2>
 {/*        <p className="text-lg md:text-xl max-w-2xl mx-auto mb-6 text-[#333333]">
           Discover the power of quiet strength, overlooked potential, and authentic leadership.
           Based on the bestselling book <em>Unlikely Leader</em>.
@@ -287,12 +291,13 @@ export default function AboutPage() {
 
         {/* CARD 2 */}
         <div className="bg-white rounded-2xl shadow-md p-6 text-left hover:shadow-lg transition">
-          <h3 className="text-xl font-bold text-[#1bae67] mb-2">The Collective Rise</h3>
+          <h3 className="text-xl font-bold text-[#1bae67] mb-2">Workshops</h3>
           <p className="text-gray-700 mb-4">
-            Join our leadership development cohorts for a 9-month experience that builds foundational leadership mindsets and skills.
+            Bring Unlikely Leader ideas into your organization through practical workshops and
+            leadership development experiences.
           </p>
-          <a href="/collective-rise" className="text-[#1bae67] font-semibold hover:underline">
-            Join the Program →
+          <a href="/workshops" className="text-[#1bae67] font-semibold hover:underline">
+            Explore Workshops →
           </a>
         </div>
 

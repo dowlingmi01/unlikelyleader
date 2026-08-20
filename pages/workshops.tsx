@@ -2,7 +2,7 @@
 import Navbar from '../components/Navbar';
 import Link from 'next/link';
 import Footer from '../components/Footer';
-import Head from 'next/head';
+import Seo from '../components/Seo';
 
 const workshopTracks = [
   {
@@ -231,13 +231,11 @@ const customChallengeGroups = [
 export default function WorkshopsPage() {
   return (
     <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">
-      <Head>
-        <title>Workshops | Unlikely Leader</title>
-        <meta
-          name="description"
-          content="MBOS leadership workshops and practice series help leaders recognize default patterns, interrupt reactive behavior, and practice more intentional responses to real workplace challenges."
-        />
-      </Head>
+      <Seo
+        title="Workshops | Unlikely Leader"
+        description="MBOS leadership workshops and practice series help leaders recognize default patterns, interrupt reactive behavior, and practice more intentional responses to real workplace challenges."
+        path="/workshops"
+      />
 
       <Navbar />
 

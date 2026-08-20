@@ -1,8 +1,10 @@
 // pages/assessment.tsx
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Head from 'next/head';
+import Seo from '../components/Seo';
 import Link from 'next/link';
+import { ASSESSMENT_FAQS, faqJsonLd } from '../lib/jsonLd';
+import { trackEvent } from '../lib/analytics';
 
 const insightCards = [
   {
@@ -53,13 +55,12 @@ const audience = [
 export default function AssessmentPage() {
   return (
     <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">
-      <Head>
-        <title>Leadership Assessment | Unlikely Leader</title>
-        <meta
-          name="description"
-          content="Take the Leadership Assessment to better understand your leadership style, hidden strengths, and growth opportunities."
-        />
-      </Head>
+      <Seo
+        title="Leadership Assessment | Unlikely Leader"
+        description="Take the Leadership Assessment to better understand your leadership style, hidden strengths, and growth opportunities."
+        path="/assessment"
+        jsonLd={faqJsonLd(ASSESSMENT_FAQS)}
+      />
 
       <Navbar />
 
@@ -83,7 +84,7 @@ export default function AssessmentPage() {
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Link href="/lap">
+                <Link href="/lap" onClick={() => trackEvent('lap_start', { location: 'assessment_hero' })}>
                   <span className="inline-block bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
                     Take the Assessment
                   </span>
@@ -243,7 +244,7 @@ export default function AssessmentPage() {
             </p>
 
             <div className="mt-8">
-              <Link href="/lap">
+              <Link href="/lap" onClick={() => trackEvent('lap_start', { location: 'assessment_footer' })}>
                 <span className="inline-block bg-[#1bae67] text-white font-semibold px-7 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
                   Take the Assessment
                 </span>

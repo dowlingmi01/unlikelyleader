@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
-import Link from 'next/link';
 import Footer from '../components/Footer';
-import Head from 'next/head';
+import Seo from '../components/Seo';
 import { createClient } from '@supabase/supabase-js';
+import { trackEvent } from '../lib/analytics';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabase =
+  supabaseUrl && supabaseAnonKey
+    ? createClient(supabaseUrl, supabaseAnonKey)
+    : null;
 
 export default function ContactPage() {
   const [name, setName] = useState('');
@@ -19,6 +21,12 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
+
+  if (!supabase) {
+    setStatus('Something went wrong. Please try again.');
+    console.error('Supabase is not configured.');
+    return;
+  }
 
   const { error } = await supabase.from('contact_messages').insert([
     { name, email, message, source },
@@ -45,6 +53,7 @@ export default function ContactPage() {
       console.error('Notification failed:', notifyError);
     }
 
+    trackEvent('contact_submit', { source: 'website' });
     setStatus('Message sent successfully!');
     setName('');
     setEmail('');
@@ -56,11 +65,11 @@ export default function ContactPage() {
 
   return (
     <>
-      <Head>
-        <title>Contact | Unlikely Leader</title>
-        <link rel="icon" type="image/png" href="/favicon.png" />
-
-      </Head>
+      <Seo
+        title="Contact | Unlikely Leader"
+        description="Get in touch with Michael Dowling and the Unlikely Leader team about keynotes, workshops, the book, or partnership opportunities."
+        path="/contact"
+      />
 
       <Navbar />
       <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">

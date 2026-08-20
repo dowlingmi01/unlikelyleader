@@ -2,7 +2,8 @@
 import Navbar from '../components/Navbar';
 import Link from 'next/link';
 import Footer from '../components/Footer';
-import Head from 'next/head';
+import Seo from '../components/Seo';
+import { trackEvent } from '../lib/analytics';
 
 const signatureKeynotes = [
   {
@@ -126,13 +127,11 @@ export default function KeynotesPage() {
 
   return (
     <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">
-      <Head>
-        <title>Keynotes | Unlikely Leader</title>
-        <meta
-          name="description"
-          content="Michael Dowling delivers practical, thought-provoking keynote talks on leadership, pressure, confidence bias, and ethical intelligence in an AI-driven world."
-        />
-      </Head>
+      <Seo
+        title="Keynotes | Unlikely Leader"
+        description="Michael Dowling delivers practical, thought-provoking keynote talks on leadership, pressure, confidence bias, and ethical intelligence in an AI-driven world."
+        path="/keynotes"
+      />
 
       <Navbar />
 
@@ -156,7 +155,7 @@ export default function KeynotesPage() {
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Link href="/contact">
+                <Link href="/contact" onClick={() => trackEvent('keynote_cta', { location: 'keynotes_hero' })}>
                   <span className="inline-block bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
                     Request Speaking Info
                   </span>

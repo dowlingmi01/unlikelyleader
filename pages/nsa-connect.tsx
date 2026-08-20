@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import Image from 'next/image';
 import Navbar from '../components/Navbar';
-import Link from 'next/link';
 import Footer from '../components/Footer';
-import Head from 'next/head';
+import Seo from '../components/Seo';
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabase =
+  supabaseUrl && supabaseAnonKey
+    ? createClient(supabaseUrl, supabaseAnonKey)
+    : null;
 
 export default function NsaContactPage() {
   const [name, setName] = useState('');
@@ -23,6 +25,11 @@ export default function NsaContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!supabase) {
+      setStatus('Something went wrong. Please try again.');
+      console.error('Supabase is not configured.');
+      return;
+    }
     const { error } = await supabase.from('contact_messages').insert([
       { name, email, address, city, state, zip, message, source },
     ]);
@@ -67,10 +74,12 @@ export default function NsaContactPage() {
 
   return (
     <>
-      <Head>
-        <title>Contact | Unlikely Leader</title>
-        <link rel="icon" type="image/png" href="/favicon.png" />
-      </Head>
+      <Seo
+        title="NSA Connect | Unlikely Leader"
+        description="Connect with Michael Dowling and Unlikely Leader — share your details to stay in touch after Influence."
+        path="/nsa-connect"
+        noindex
+      />
 
       <Navbar />
       <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">
@@ -86,7 +95,13 @@ export default function NsaContactPage() {
               </p>
             </div>
             <div className="flex justify-center">
-              <img src="/images/UL-Dowling-hardcover.png" alt="Book Preview" className="rounded-xl w-full max-w-sm shadow-lg" />
+              <Image
+                src="/images/UL-Dowling-hardcover.png"
+                alt="The Unlikely Leader book"
+                width={384}
+                height={512}
+                className="rounded-xl w-full max-w-sm shadow-lg h-auto"
+              />
             </div>
           </div>
         </section>

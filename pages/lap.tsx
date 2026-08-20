@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import Head from 'next/head';
+import Seo from '../components/Seo';
 import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -14,10 +14,12 @@ import {
 } from '../lib/lap';
 import type { LapDimensionKey, LapResponseValue, LapScoresResult } from '../lib/lap';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabase =
+  supabaseUrl && supabaseAnonKey
+    ? createClient(supabaseUrl, supabaseAnonKey)
+    : null;
 
 const LAP_DIMENSION_ORDER: LapDimensionKey[] = [
   'extroverted_introverted',
@@ -102,6 +104,10 @@ export default function LapPage() {
 
     setSubmitting(true);
     try {
+      if (!supabase) {
+        throw new Error('Supabase is not configured');
+      }
+
       await fetch('/api/send-notification', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -144,13 +150,11 @@ export default function LapPage() {
 
   return (
     <>
-      <Head>
-        <title>Leadership Archetype Profile | Unlikely Leader</title>
-        <meta
-          name="description"
-          content="Twenty questions. Five dimensions. Your leadership archetype profile."
-        />
-      </Head>
+      <Seo
+        title="Leadership Archetype Profile | Unlikely Leader"
+        description="Twenty questions. Five dimensions. Your leadership archetype profile."
+        path="/lap"
+      />
       <Navbar />
 
       <main className="min-h-screen bg-[#fafafa] py-10 px-4">

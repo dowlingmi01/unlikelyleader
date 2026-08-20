@@ -1,15 +1,17 @@
 import Navbar from '../components/Navbar';
-import Link from 'next/link';
 import Footer from '../components/Footer';
-import Head from 'next/head';
+import Seo from '../components/Seo';
 import TwoColumnSection from '../components/TwoColumnSection';
 
-export default function AboutPage() {
+export default function ServicesPage() {
   return (
     <>
-      <Head>
-        <title>About | Unlikely Leader</title>
-      </Head>
+      <Seo
+        title="Services | Unlikely Leader"
+        description="Leadership services from Unlikely Leader — keynotes, workshops, and development experiences."
+        path="/services"
+        noindex
+      />
 
       <Navbar />
       <section className="bg-white py-20 px-6">

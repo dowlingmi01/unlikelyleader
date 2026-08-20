@@ -2,15 +2,26 @@
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Head from 'next/head';
+import Seo from '../components/Seo';
 import Link from 'next/link';
+import Image from 'next/image';
 import SocialLinks from '../components/SocialLinks';
 import { createClient } from '@supabase/supabase-js';
+import {
+  bookJsonLd,
+  organizationJsonLd,
+  personJsonLd,
+  websiteJsonLd,
+} from '../lib/jsonLd';
+import { trackEvent } from '../lib/analytics';
+import { BOOK_AMAZON_URL } from '../lib/site';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabase =
+  supabaseUrl && supabaseAnonKey
+    ? createClient(supabaseUrl, supabaseAnonKey)
+    : null;
 
 const problemCards = [
   {
@@ -39,9 +50,10 @@ const engagementPaths = [
   {
     title: 'The Book',
     description:
-      'Explore the ideas behind The Unlikely Leader and follow the path to the July 2026 launch.',
-    cta: 'About the Book',
-    href: '/contact',
+      'Explore the ideas behind The Unlikely Leader — now available wherever books are sold.',
+    cta: 'Get the Book',
+    href: BOOK_AMAZON_URL,
+    external: true,
   },
   {
     title: 'Keynotes',
@@ -78,6 +90,12 @@ export default function HomePage() {
 
     setStatus('loading');
 
+    if (!supabase) {
+      console.error('Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.');
+      setStatus('error');
+      return;
+    }
+
     try {
       const { error } = await supabase.from('email_subscribers').insert([
         { email, source: 'homepage' },
@@ -88,6 +106,7 @@ export default function HomePage() {
         if (error.code === '23505') {
           setStatus('success');
           setEmail('');
+          trackEvent('email_subscribe', { source: 'homepage', duplicate: true });
           return;
         }
         throw error;
@@ -95,6 +114,7 @@ export default function HomePage() {
 
       setStatus('success');
       setEmail('');
+      trackEvent('email_subscribe', { source: 'homepage' });
     } catch (err) {
       console.error('Subscription error:', err);
       setStatus('error');
@@ -103,13 +123,12 @@ export default function HomePage() {
 
   return (
     <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">
-      <Head>
-        <title>Unlikely Leader</title>
-        <meta
-          name="description"
-          content="The Unlikely Leader redefines what it means to lead by challenging outdated leadership myths and helping overlooked leaders rise from who they truly are."
-        />
-      </Head>
+      <Seo
+        title="Unlikely Leader"
+        description="The Unlikely Leader redefines what it means to lead by challenging outdated leadership myths and helping overlooked leaders rise from who they truly are."
+        path="/"
+        jsonLd={[organizationJsonLd(), personJsonLd(), websiteJsonLd(), bookJsonLd()]}
+      />
 
       <Navbar />
 
@@ -118,10 +137,6 @@ export default function HomePage() {
         <section className="px-6 py-24 md:py-28">
           <div className="max-w-6xl mx-auto grid gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-center">
             <div>
-              <p className="text-sm md:text-base uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-5">
-                Book Launching July 2026
-              </p>
-
               <h1 className="text-5xl md:text-7xl font-bold leading-[1.02] text-[#333333] max-w-4xl">
                 Some of our best leaders have been overlooked.
                 <span className="block mt-2">It’s time to change the story.</span>
@@ -134,9 +149,14 @@ export default function HomePage() {
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <a href="#vision">
+                <a
+                  href={BOOK_AMAZON_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent('book_click', { location: 'hero' })}
+                >
                   <span className="inline-block bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
-                    Explore the Vision
+                    Get the Book
                   </span>
                 </a>
 
@@ -155,18 +175,28 @@ export default function HomePage() {
             <div className="relative">
               <div className="rounded-[2rem] bg-white border border-[#e5eadf] shadow-lg p-4">
                 <div className="aspect-[4/5] rounded-[1.5rem] bg-[#dfe8db] overflow-hidden relative">
-                  {/* Replace this placeholder with your real image */}
-                <img
-                  src="/images/MD-Photo3.jpeg"
-                  alt="Michael Dowling"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                  <Image
+                    src="/images/MD-Photo3.jpeg"
+                    alt="Michael Dowling"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 480px"
+                    priority
+                  />
 
                   <div className="absolute bottom-6 left-6 bg-white/92 rounded-2xl px-5 py-4 shadow-md max-w-xs">
                     <p className="text-xs uppercase tracking-[0.14em] text-[#1bae67] font-semibold mb-1">
                       Unlikely Leader
                     </p>
-                    <p className="font-semibold text-[#333333]">Coming July 2026</p>
+                    <a
+                      href={BOOK_AMAZON_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-[#333333] hover:text-[#1bae67] transition"
+                      onClick={() => trackEvent('book_click', { location: 'hero_overlay' })}
+                    >
+                      Available Now
+                    </a>
                   </div>
                 </div>
               </div>
@@ -275,9 +305,6 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto bg-white border border-[#e5eadf] rounded-[2rem] shadow-sm p-8 md:p-12">
             <div className="grid gap-10 md:grid-cols-[1.1fr_0.9fr] md:items-center">
               <div>
-                <p className="text-sm uppercase tracking-[0.18em] text-[#1bae67] font-semibold mb-4">
-                  Book Launch • July 2026
-                </p>
                 <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-5">
                   A new book for people who have felt underestimated by traditional leadership narratives
                 </h2>
@@ -300,7 +327,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="mt-8">
-                  <span className="text-lg text-[#1bae67] font-semibold mb-4">Follow Michael's writing journey</span>
+                  <span className="text-lg text-[#1bae67] font-semibold mb-4">Follow Michael</span>
                   <SocialLinks colorClassName="text-[#736B70]" />
                   {/* <Link href="/contact">
                     <span className="inline-block bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
@@ -311,21 +338,21 @@ export default function HomePage() {
               </div>
 
               <div className="rounded-[2rem] bg-[#333333] text-white p-8 md:p-10">
-                <p className="text-sm uppercase tracking-[0.14em] text-[#96CEA0] font-semibold mb-3">
-                  Coming Soon
-                </p>
                 <h3 className="text-3xl font-semibold mb-4 italic">
                   The Unlikely Leader: Breaking the Bias That Keeps Greater Leaders Invisible
                 </h3>
                 <p className="text-white/85 leading-relaxed mb-6">
                   A book about the people who have been underestimated, the myths that have held them back, and the leadership the future actually needs.
                 </p>
-                <div className="rounded-2xl bg-white/10 p-5">
-                  <p className="text-sm uppercase tracking-[0.14em] text-white/60 mb-2">
-                    Expected Release
-                  </p>
-                  <p className="font-semibold">August 11, 2026</p>
-                </div>
+                <a
+                  href={BOOK_AMAZON_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block rounded-2xl bg-white/10 p-5 hover:bg-white/15 transition"
+                  onClick={() => trackEvent('book_click', { location: 'book_card' })}
+                >
+                  <p className="font-semibold text-lg text-[#96CEA0]">Available Now</p>
+                </a>
               </div>
             </div>
           </div>
@@ -339,10 +366,10 @@ export default function HomePage() {
                   Stay Connected
                 </p>
                 <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
-                  Be the first to hear about the launch of <span className="italic">The Unlikely Leader</span>
+                  Stay close to the ideas behind <span className="italic">The Unlikely Leader</span>
                 </h2>
                 <p className="text-lg text-[#555] leading-relaxed max-w-2xl">
-                  Get updates on the July 2026 book launch, keynote appearances, leadership insights,
+                  Get updates on the book, keynote appearances, leadership insights,
                   and new ways to engage with the ideas behind <span className="italic">The Unlikely Leader</span>.
                 </p>
               </div>
@@ -428,11 +455,13 @@ export default function HomePage() {
         {/* Meet Michael */}
         <section className="px-6 py-20 bg-white">
           <div className="max-w-6xl mx-auto grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
-            <div className="rounded-[2rem] bg-[#F0F2EB] border border-[#e5eadf] overflow-hidden">
-              <img
+            <div className="relative rounded-[2rem] bg-[#F0F2EB] border border-[#e5eadf] overflow-hidden min-h-[420px]">
+              <Image
                 src="/images/MD2.jpeg"
                 alt="Michael Dowling - Author and Speaker"
-                className="w-full h-full object-cover min-h-[420px]"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 480px"
               />
             </div>
 
@@ -476,7 +505,7 @@ export default function HomePage() {
                   Multiple ways to engage with the ideas behind The Unlikely Leader
                 </h2>
                 <p className="text-lg text-[#555] leading-relaxed">
-                  Whether you are following the book launch, looking for a keynote,
+                  Whether you are reading the book, looking for a keynote,
                   exploring deeper leadership development, or connecting through social
                   media, this work is designed to meet people at different points in
                   their journey.
@@ -505,7 +534,26 @@ export default function HomePage() {
                     );
                   }
 
-                  return (
+                  return item.external ? (
+                    <a
+                      key={item.title}
+                      href={item.href!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block"
+                      onClick={() => {
+                        if (item.title === 'The Book') {
+                          trackEvent('book_click', { location: 'engagement_paths' });
+                        }
+                      }}
+                    >
+                      <div className="bg-white border border-[#e5eadf] rounded-[1.75rem] p-7 shadow-sm h-full hover:shadow-md transition">
+                        <h3 className="text-2xl font-semibold mb-3">{item.title}</h3>
+                        <p className="text-[#555] leading-relaxed mb-6">{item.description}</p>
+                        <span className="text-[#1bae67] font-semibold">{item.cta} →</span>
+                      </div>
+                    </a>
+                  ) : (
                     <Link key={item.title} href={item.href!}>
                       <div className="bg-white border border-[#e5eadf] rounded-[1.75rem] p-7 shadow-sm h-full hover:shadow-md transition">
                         <h3 className="text-2xl font-semibold mb-3">{item.title}</h3>
@@ -551,10 +599,10 @@ export default function HomePage() {
               Stay Connected
             </p>
             <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-5">
-              A new vision of leadership is coming into focus
+              A new vision of leadership is here
             </h2>
             <p className="text-lg md:text-xl text-[#555] leading-relaxed max-w-3xl mx-auto">
-              Follow the journey to the July 2026 launch of The Unlikely Leader, explore keynote
+              Get <span className="italic">The Unlikely Leader</span>, explore keynote
               opportunities, or begin by discovering your own leadership archetype.
             </p>
 

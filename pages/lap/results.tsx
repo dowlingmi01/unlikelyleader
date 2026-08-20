@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
+import Seo from '../../components/Seo';
 import {
   formatLapDimensionInterpretation,
   getLapArchetypeDetail,
@@ -11,6 +11,15 @@ import {
   parseLapScoresSnapshot,
 } from '../../lib/lap';
 import type { LapArchetype, LapDimensionKey, LapScoresResult } from '../../lib/lap';
+
+const RESULTS_SEO = (
+  <Seo
+    title="Your LAP Results | Unlikely Leader"
+    description="Your Leadership Archetype Profile — primary and secondary archetypes in detail."
+    path="/lap/results"
+    noindex
+  />
+);
 
 const LAP_DIMENSION_ORDER: LapDimensionKey[] = [
   'extroverted_introverted',
@@ -144,9 +153,7 @@ export default function LapResultsPage() {
   if (scores === undefined) {
     return (
       <>
-        <Head>
-          <title>Your LAP Results | Unlikely Leader</title>
-        </Head>
+        {RESULTS_SEO}
         <Navbar />
         <main className="min-h-[50vh] flex items-center justify-center px-4">
           <p className="text-gray-600">Loading your profile…</p>
@@ -159,9 +166,7 @@ export default function LapResultsPage() {
   if (scores === null) {
     return (
       <>
-        <Head>
-          <title>Your LAP Results | Unlikely Leader</title>
-        </Head>
+        {RESULTS_SEO}
         <Navbar />
         <main className="min-h-[60vh] flex flex-col items-center justify-center px-4 text-center max-w-lg mx-auto">
           <h1 className="text-2xl font-bold text-gray-900 mb-3">No saved profile</h1>
@@ -186,15 +191,7 @@ export default function LapResultsPage() {
 
   return (
     <>
-      <Head>
-        <title>
-          {scores.primaryLapArchetype} & {scores.secondaryLapArchetype} | LAP Results
-        </title>
-        <meta
-          name="description"
-          content="Your Leadership Archetype Profile — primary and secondary archetypes in detail."
-        />
-      </Head>
+      {RESULTS_SEO}
       <Navbar />
 
       <main className="min-h-screen bg-[#fafafa] py-10 px-4">

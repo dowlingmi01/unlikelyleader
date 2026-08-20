@@ -1,5 +1,6 @@
 // pages/pdf-template.tsx
 import { GetServerSideProps } from 'next';
+import Seo from '../components/Seo';
 
 interface Props {
   archetype: string;
@@ -19,6 +20,13 @@ export default function PDFTemplate({
   affirmations,
 }: Props) {
   return (
+    <>
+    <Seo
+      title={`${archetype} | PDF | Unlikely Leader`}
+      description="Unlikely Leader PDF report template."
+      path="/pdf-template"
+      noindex
+    />
     <div className="min-h-screen bg-white p-10 font-sans text-gray-800 max-w-3xl mx-auto">
       <div className="flex justify-center mb-6">
         <img
@@ -35,6 +43,7 @@ export default function PDFTemplate({
       <Section title="Key Actions to Take" items={actions} />
       <Section title="Affirmations" items={affirmations} />
     </div>
+    </>
   );
 }
 

@@ -1,7 +1,7 @@
 // pages/how-it-works.tsx
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Head from 'next/head';
+import Seo from '../components/Seo';
 import Link from 'next/link';
 import {
     Target,
@@ -13,6 +13,8 @@ import {
     Anchor,
     MapPinned,
   } from 'lucide-react';
+import { faqJsonLd, HOW_IT_WORKS_FAQS } from '../lib/jsonLd';
+import { trackEvent } from '../lib/analytics';
 
 const archetypes = [
         {
@@ -62,13 +64,12 @@ const archetypes = [
 export default function HowItWorksPage() {
   return (
     <div className="bg-[#F0F2EB] text-[#333333] min-h-screen font-sans">
-      <Head>
-        <title>How It Works | Leadership Assessment</title>
-        <meta
-          name="description"
-          content="Explore the eight archetypes behind the Leadership Assessment and understand how the model helps reveal different ways of leading."
-        />
-      </Head>
+      <Seo
+        title="How It Works | Leadership Assessment"
+        description="Explore the eight archetypes behind the Leadership Assessment and understand how the model helps reveal different ways of leading."
+        path="/how-it-works"
+        jsonLd={faqJsonLd(HOW_IT_WORKS_FAQS)}
+      />
 
       <Navbar />
 
@@ -90,7 +91,7 @@ export default function HowItWorksPage() {
             </p>
 
             <div className="mt-8">
-              <Link href="/lap">
+              <Link href="/lap" onClick={() => trackEvent('lap_start', { location: 'how_it_works' })}>
                 <span className="inline-block bg-[#1bae67] text-white font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
                   Take the Assessment
                 </span>

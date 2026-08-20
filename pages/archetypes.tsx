@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import Image from 'next/image';
 import Navbar from '../components/Navbar';
-import Head from 'next/head';
+import Seo from '../components/Seo';
 import Footer from '../components/Footer';
 
 
@@ -20,10 +21,10 @@ const archetypes = [
     description: 'You notice what others miss. Your quiet insights often unlock solutions no one else saw coming.',
   },
   {
-    id: 'rational-bridge',
-    name: 'The Rational Bridge',
+    id: 'relational-bridge',
+    name: 'The Relational Bridge',
     tagline: 'Clear, practical, trusted in tough moments',
-    image: '/images/archetypes/rational-bridge.png',
+    image: '/images/archetypes/relational-bridge.png',
     description: 'You’re the one people trust when decisions get tough. You see the path forward and help others follow it with clarity and calm.',
   },
   {
@@ -47,9 +48,11 @@ export default function ArchetypesPage() {
 
   return (
     <>
-      <Head>
-        <title>Archetypes | Unlikely Leader</title>
-      </Head>
+      <Seo
+        title="Archetypes | Unlikely Leader"
+        description="Meet the Unlikely Leader archetypes — unique leadership styles rooted in authenticity, emotional intelligence, and quiet strength."
+        path="/archetypes"
+      />
       <Navbar />
 
       {/* HERO */}
@@ -71,9 +74,11 @@ export default function ArchetypesPage() {
               onClick={() => setSelected(archetype)}
               className="bg-white p-6 rounded-xl shadow hover:shadow-md transition text-center focus:outline-none"
             >
-              <img
+              <Image
                 src={archetype.image}
                 alt={`${archetype.name} illustration`}
+                width={64}
+                height={64}
                 className="w-16 h-16 mx-auto mb-4 object-contain"
               />
               <h2 className="text-xl font-bold text-[#1bae67] mb-2">{archetype.name}</h2>
@@ -99,10 +104,12 @@ export default function ArchetypesPage() {
             >
               ×
             </button>
-            <img
+            <Image
               src={selected.image}
               alt={selected.name}
-              className="w-24 h-24 mx-auto mb-4"
+              width={96}
+              height={96}
+              className="w-24 h-24 mx-auto mb-4 object-contain"
             />
             <h2 className="text-2xl font-bold text-center text-[#1bae67] mb-2">{selected.name}</h2>
             <p className="text-center text-gray-600 italic mb-4">{selected.tagline}</p>

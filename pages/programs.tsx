@@ -1,8 +1,7 @@
-// pages/workshops.tsx
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Head from 'next/head';
+import Seo from '../components/Seo';
 
 const sections = [
   {
@@ -37,9 +36,12 @@ export default function ProgramsPage() {
 
   return (
     <>
-      <Head>
-        <title>Workshops | Unlikely Leader</title>
-      </Head>    
+      <Seo
+        title="Programs | Unlikely Leader"
+        description="Leadership workshops and programs from Unlikely Leader — half-day, full-day, and longer development experiences."
+        path="/programs"
+        noindex
+      />    
       <Navbar />
 
       {/* HERO SECTION */}

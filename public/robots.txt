@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Personalized / utility pages — not for search results
+Disallow: /results
+Disallow: /lap/results
+Disallow: /pdf-template
+Disallow: /api/
+
+Sitemap: https://www.theunlikelyleader.com/sitemap.xml

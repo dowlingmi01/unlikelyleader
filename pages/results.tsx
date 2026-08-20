@@ -1,6 +1,7 @@
 // pages/results.tsx
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Seo from '../components/Seo';
 
 
 const archetypeDescriptions: Record<string, {
@@ -91,12 +92,29 @@ export default function ResultsPage() {
     setTotalScore(parseInt(localStorage.getItem('totalScore') || '0', 10));
   }, []);
   if (!archetype) {
-    return <p className="text-center mt-12">Loading your archetype...</p>;
+    return (
+      <>
+        <Seo
+          title="Your Results | Unlikely Leader"
+          description="Your Unlikely Leader quiz results."
+          path="/results"
+          noindex
+        />
+        <p className="text-center mt-12">Loading your archetype...</p>
+      </>
+    );
   }
 
   const details = archetypeDescriptions[archetype];
 
   return (
+    <>
+    <Seo
+      title="Your Results | Unlikely Leader"
+      description="Your Unlikely Leader quiz results and leadership archetype profile."
+      path="/results"
+      noindex
+    />
     <div className="max-w-3xl mx-auto px-6 py-12">
       {/* HERO HEADER */}
       <div className="text-center mb-10">
@@ -161,5 +179,7 @@ export default function ResultsPage() {
         </>
       )}
     </div>
-  )};
+    </>
+  );
+}
 
