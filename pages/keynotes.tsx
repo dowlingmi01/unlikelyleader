@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Footer from '../components/Footer';
 import Seo from '../components/Seo';
 import { trackEvent } from '../lib/analytics';
+import EmailLink from '../components/EmailLink';
 
 const signatureKeynotes = [
   {
@@ -161,11 +162,13 @@ export default function KeynotesPage() {
                   </span>
                 </Link>
 
-                <a href="#signature-keynotes">
-                  <span className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-6 py-3 rounded-xl hover:bg-white transition cursor-pointer">
-                    Explore Keynotes
-                  </span>
-                </a>
+                <EmailLink
+                  location="keynotes_hero"
+                  subject="Speaking Inquiry — Unlikely Leader"
+                  className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-6 py-3 rounded-xl hover:bg-white transition text-center"
+                >
+                  Email Michael
+                </EmailLink>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3 text-sm">
@@ -494,17 +497,19 @@ export default function KeynotesPage() {
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/contact">
+              <Link href="/contact" onClick={() => trackEvent('keynote_cta', { location: 'keynotes_footer' })}>
                 <span className="inline-block bg-[#1bae67] text-white font-semibold px-7 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
                   Request Speaking Info
                 </span>
               </Link>
 
-              <Link href="/contact">
-                <span className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-7 py-3 rounded-xl hover:bg-[#F0F2EB] transition cursor-pointer">
-                  Contact Michael
-                </span>
-              </Link>
+              <EmailLink
+                location="keynotes_footer"
+                subject="Speaking Inquiry — Unlikely Leader"
+                className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-7 py-3 rounded-xl hover:bg-[#F0F2EB] transition text-center"
+              >
+                Email Michael
+              </EmailLink>
             </div>
           </div>
         </section>

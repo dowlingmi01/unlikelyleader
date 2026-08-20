@@ -5,6 +5,7 @@ import TwoColumnSection from '../components/TwoColumnSection';
 import { bookJsonLd } from '../lib/jsonLd';
 import { BOOK_AMAZON_URL } from '../lib/site';
 import { trackEvent } from '../lib/analytics';
+import EmailLink from '../components/EmailLink';
 
 export default function BookPage() {
   return (
@@ -67,9 +68,18 @@ export default function BookPage() {
                 Book Michael for an inspiring, story-driven keynote tailored to your audience and
                 leadership goals.
               </p>
-              <a href="/keynotes" className="text-[#1bae67] font-semibold hover:underline">
-                Learn More →
-              </a>
+              <div className="flex flex-col gap-2">
+                <a href="/keynotes" className="text-[#1bae67] font-semibold hover:underline">
+                  Learn More →
+                </a>
+                <EmailLink
+                  location="book_page_keynotes"
+                  subject="Speaking Inquiry — Unlikely Leader"
+                  className="text-[#1bae67] font-semibold hover:underline"
+                >
+                  Email about speaking →
+                </EmailLink>
+              </div>
             </div>
 
             <div className="bg-white rounded-2xl shadow-md p-6 text-left hover:shadow-lg transition">

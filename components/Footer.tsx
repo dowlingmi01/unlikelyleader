@@ -1,6 +1,8 @@
 // components/Footer.tsx
 import Link from 'next/link';
 import SocialLinks from './SocialLinks';
+import EmailLink from './EmailLink';
+import { CONTACT_EMAIL } from '../lib/site';
 
 export default function Footer() {
   return (
@@ -24,6 +26,14 @@ export default function Footer() {
             <Link href="/contact" className="hover:text-[#1bae67] transition">
               Contact
             </Link>
+            <EmailLink
+              location="footer"
+              subject="Unlikely Leader Inquiry"
+              className="hover:text-[#1bae67] transition"
+              showAddress
+            >
+              {CONTACT_EMAIL}
+            </EmailLink>
             <Link href="/keynotes" className="hover:text-[#1bae67] transition">
               Keynotes
             </Link>

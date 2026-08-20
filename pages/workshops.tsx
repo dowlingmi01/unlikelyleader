@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 import Seo from '../components/Seo';
+import EmailLink from '../components/EmailLink';
 
 const workshopTracks = [
   {
@@ -266,11 +267,13 @@ export default function WorkshopsPage() {
                   </span>
                 </a>
 
-                <Link href="/contact">
-                  <span className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-6 py-3 rounded-xl hover:bg-white transition cursor-pointer">
-                    Ask About Custom Workshops
-                  </span>
-                </Link>
+                <EmailLink
+                  location="workshops_hero"
+                  subject="Workshop Inquiry — Unlikely Leader"
+                  className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-6 py-3 rounded-xl hover:bg-white transition text-center"
+                >
+                  Email Michael
+                </EmailLink>
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3 text-sm">
@@ -645,12 +648,19 @@ export default function WorkshopsPage() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-auto">
+                <div className="mt-auto flex flex-col sm:flex-row gap-3">
                   <Link href="/contact">
                     <span className="inline-block bg-[#1bae67] text-white font-semibold px-7 py-3 rounded-xl hover:opacity-90 transition cursor-pointer shadow-sm">
                       Discuss a Workshop Track
                     </span>
                   </Link>
+                  <EmailLink
+                    location="workshops_footer"
+                    subject="Workshop Inquiry — Unlikely Leader"
+                    className="inline-block border border-[#1bae67] text-[#1bae67] font-semibold px-7 py-3 rounded-xl hover:bg-white transition text-center"
+                  >
+                    Email Michael
+                  </EmailLink>
                 </div>
               </div>
 

@@ -15,6 +15,7 @@ import {
 } from '../lib/jsonLd';
 import { trackEvent } from '../lib/analytics';
 import { BOOK_AMAZON_URL } from '../lib/site';
+import EmailLink from '../components/EmailLink';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -618,9 +619,17 @@ export default function HomePage() {
                   Contact Michael
                 </span>
               </Link>
+
+              <EmailLink
+                location="home_final_cta"
+                subject="Unlikely Leader Inquiry"
+                className="inline-block text-[#1bae67] font-semibold px-7 py-3 hover:opacity-90 transition text-center"
+              >
+                Email Michael →
+              </EmailLink>
             </div>
           </div>
-        </section> */
+        </section>
       </main>
 
       <Footer />

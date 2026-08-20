@@ -4,6 +4,8 @@ import Footer from '../components/Footer';
 import Seo from '../components/Seo';
 import { createClient } from '@supabase/supabase-js';
 import { trackEvent } from '../lib/analytics';
+import EmailLink from '../components/EmailLink';
+import { CONTACT_EMAIL } from '../lib/site';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -76,7 +78,18 @@ export default function ContactPage() {
         <section className="text-center py-20 px-6 bg-white">
           <h1 className="text-4xl md:text-5xl font-bold text-[#1bae67] mb-4">Contact Us</h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-6">
-            Have questions, ideas, or want to connect? We'd love to hear from you.
+            Have questions, ideas, or want to connect? We&apos;d love to hear from you.
+          </p>
+          <p className="text-base text-[#555] max-w-2xl mx-auto">
+            Prefer email?{' '}
+            <EmailLink
+              location="contact_page"
+              subject="Unlikely Leader Inquiry"
+              className="text-[#1bae67] font-semibold underline hover:opacity-90"
+              showAddress
+            >
+              {CONTACT_EMAIL}
+            </EmailLink>
           </p>
         </section>
 

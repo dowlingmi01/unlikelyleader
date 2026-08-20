@@ -3,7 +3,8 @@ export type AnalyticsEvent =
   | 'contact_submit'
   | 'lap_start'
   | 'book_click'
-  | 'keynote_cta';
+  | 'keynote_cta'
+  | 'email_click';
 
 declare global {
   interface Window {

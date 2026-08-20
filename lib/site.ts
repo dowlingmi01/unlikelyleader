@@ -14,3 +14,15 @@ export const DEFAULT_OG_IMAGE = '/images/og-default.png';
 /** Amazon product page for The Unlikely Leader. */
 export const BOOK_AMAZON_URL =
   'https://www.amazon.com/Unlikely-Leader-Breaking-Leaders-Invisible/dp/1997739100';
+
+/** Public contact email for speaking and inquiries. */
+export const CONTACT_EMAIL = 'michael@thecollectiverise.com';
+
+/** Build a mailto URL with optional subject/body. */
+export function mailtoUrl(options?: { subject?: string; body?: string }): string {
+  const params = new URLSearchParams();
+  if (options?.subject) params.set('subject', options.subject);
+  if (options?.body) params.set('body', options.body);
+  const query = params.toString();
+  return `mailto:${CONTACT_EMAIL}${query ? `?${query}` : ''}`;
+}
